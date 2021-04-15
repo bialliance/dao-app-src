@@ -33,20 +33,20 @@
 </template>
 
 <script>
-export default {
-    name: "DaoViewScreen",
-    data() {
-        return {
-            items: [
-                { title: "Home", icon: "mdi-home" },
-                { title: "Tokens", icon: "mdi-coins" },
-                { title: "Voting", icon: "mdi-vote" },
-                { title: "Finance", icon: "mdi-finance" },
-                { title: "Agent", icon: "mdi-robot" }
-            ],
-            right: null,
-            address: this.$route.params.address
-        };
+    export default {
+        name: 'DaoViewScreen',
+        data() {
+            return {
+                items: [
+                    { title: 'Home', icon: 'mdi-home' },
+                    { title: 'Tokens', icon: 'mdi-coins' },
+                    { title: 'Voting', icon: 'mdi-vote' },
+                    { title: 'Finance', icon: 'mdi-finance' },
+                    { title: 'Agent', icon: 'mdi-robot' },
+                ],
+                right: null,
+                address: this.$route.params.address,
+            }
+        },
     }
-};
 </script>
