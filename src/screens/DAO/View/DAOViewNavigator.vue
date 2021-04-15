@@ -1,36 +1,52 @@
 <template>
-    <v-container fluid>
-        <v-row>
+    <v-container :class="{'fill-height': !dao}">
+        <v-row v-if="dao">
             <v-col cols="3">
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-content>
-                            <v-list-item-title class="title">
-                                DAO
-                            </v-list-item-title>
-                            <v-list-item-subtitle>
-                                {{ daoAddress }}
-                            </v-list-item-subtitle>
-                        </v-list-item-content>
-                    </v-list-item>
-
-                    <v-list dense rounded>
-                        <v-list-item v-for="app in apps" :key="app.title" link>
-                            <v-list-item-icon>
-                                <v-icon v-text="`$${app.icon}`" />
-                            </v-list-item-icon>
-
+                <div>
+                    <v-list>
+                        <v-list-item>
                             <v-list-item-content>
-                                <v-list-item-title>
-                                    {{ app.title }}
+                                <v-list-item-title class="title">
+                                    {{ dao.title }}
                                 </v-list-item-title>
+                                <v-list-item-subtitle>
+                                    {{ dao.address }}
+                                </v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-                </v-list>
+
+                    <v-divider />
+
+                    <v-list>
+                        <v-list dense rounded>
+                            <template v-for="app in dao.apps">
+                                <v-list-item
+                                    :key="app.title"
+                                    :to="{name: 'DAOApp', params: {appAddress: app.address}}"
+                                >
+                                    <v-list-item-icon>
+                                        <v-icon v-text="`$${app.icon}`" />
+                                    </v-list-item-icon>
+
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            {{ app.title }}
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </template>
+                        </v-list>
+                    </v-list>
+                </div>
             </v-col>
             <v-col cols="9">
                 <router-view />
+            </v-col>
+        </v-row>
+        <v-row v-else justify="center">
+            <v-col cols="auto">
+                <v-progress-circular indeterminate color="white" />
             </v-col>
         </v-row>
     </v-container>
@@ -38,22 +54,30 @@
 
 <script>
     export default {
-        name: 'DaoNavigator',
+        name: 'DAOViewNavigator',
 
         data: () => ({
-            apps: [
-                { title: 'Home', icon: 'home' },
-                { title: 'Tokens', icon: 'mdi-coins' },
-                { title: 'Voting', icon: 'mdi-vote' },
-                { title: 'Finance', icon: 'mdi-finance' },
-                { title: 'Agent', icon: 'mdi-robot' },
-            ],
-            right: null,
+            dao: null,
         }),
 
-        computed: {
-            daoAddress() {
-                return this.$route.params.daoAddress
+        mounted() {
+            this.getDaoByAddress(this.$route.params.daoAddress)
+        },
+
+        methods: {
+            async getDaoByAddress(daoAddress) {
+                await new Promise((resolve) => setTimeout(() => resolve(), 1000))
+
+                this.dao = {
+                    title: 'ДАО',
+                    address: daoAddress,
+                    apps: [
+                        { title: 'Tokens', icon: 'coins', address: '787n86n876n' },
+                        { title: 'Voting', icon: 'voteYea', address: 'gjghkjhjkhngng' },
+                        { title: 'Finance', icon: 'wallet', address: 'bnmbvnvbnvnbv' },
+                        { title: 'Agent', icon: 'robot', address: 'reewrwesddgdgfh' },
+                    ],
+                }
             },
         },
     }

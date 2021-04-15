@@ -7,11 +7,15 @@ import { library as faLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import {
+    faCoins as fasCoins,
     faHome as fasHome,
     faMoon as fasMoon,
     faPlus as fasPlus,
+    faRobot as fasRobot,
     faSun as fasSun,
     faTimes as fasTimes,
+    faVoteYea as fasVoteYea,
+    faWallet as fasWallet,
 } from '@fortawesome/free-solid-svg-icons'
 
 const makeIcon = (icon) => {
@@ -58,10 +62,14 @@ const MY_ICONS = {
     unfold: 'unfold',
     file: 'file',
     // FontAwesome
+    coins: makeIcon(fasCoins),
     home: makeIcon(fasHome),
     moon: makeIcon(fasMoon),
     plus: makeIcon(fasPlus),
+    robot: makeIcon(fasRobot),
     sun: makeIcon(fasSun),
+    voteYea: makeIcon(fasVoteYea),
+    wallet: makeIcon(fasWallet),
 }
 
 Vue.use(Vuetify)
