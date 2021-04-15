@@ -14,6 +14,11 @@
                                         <v-card-text>
                                             {{ dao.text }}
                                         </v-card-text>
+                                        <v-card-actions>
+                                            <v-btn :to="{name: 'DAOView', params:{daoAddress: 'gfdvfv89'}}">
+                                                Go To DAO
+                                            </v-btn>
+                                        </v-card-actions>
                                         <v-divider class="mx-4" />
                                         <v-card-text>
                                             <v-chip small>{{ dao.status }}</v-chip>

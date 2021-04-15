@@ -4,7 +4,12 @@ import VueRouter from 'vue-router'
 import DAONavigator from '_screens/DAO/DAONavigator'
 import DAOListScreen from '_screens/DAO/DAOListScreen'
 import DAONewScreen from '_screens/DAO/DAONewScreen'
-import DAOViewScreen from '_screens/DAO/DAOViewScreen'
+
+import DAOViewNavigator from '_screens/DAO/View/DAOViewNavigator'
+import DAOViewScreen from '_screens/DAO/View/DAOViewScreen'
+
+import DAOAppScreen from '_screens/DAO/App/DAOAppScreen'
+
 import SoftwareUpdateScreen from '_screens/SoftwareUpdate/SoftwareUpdateScreen'
 
 Vue.use(VueRouter)
@@ -13,6 +18,7 @@ const routes = [
     {
         path: '/',
         name: 'Root',
+        redirect: { name: 'DAOList' },
     },
     {
         path: '/dao',
@@ -39,14 +45,30 @@ const routes = [
                 },
             },
             {
-                path: 'view/:address',
-                name: 'DAOView',
-                component: DAOViewScreen,
-                meta: {
-                    screenOptions: {
-                        title: 'Просмотр',
+                path: 'view/:daoAddress',
+                component: DAOViewNavigator,
+                children: [
+                    {
+                        path: '',
+                        name: 'DAOView',
+                        component: DAOViewScreen,
+                        meta: {
+                            screenOptions: {
+                                title: 'Просмотр',
+                            },
+                        },
                     },
-                },
+                    {
+                        path: ':appAddress',
+                        name: 'DAOApp',
+                        component: DAOAppScreen,
+                        meta: {
+                            screenOptions: {
+                                title: 'Приложение',
+                            },
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -67,27 +89,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isBootstrap = !from.name
-    const isRootRoute = to.name === 'Root'
-
-    // Next
-    if (isBootstrap) {
-        // Application initialization. Step 1 [router] - Bootstrap
-
-        if (isRootRoute) {
-            // Application initialization. Step 3 [router] - Root route
-
-            next()
-        } else {
-            // Application initialization. Step 2 [router] - No Root route > Push to Splash Screen
-
-            next()
-        }
-    } else {
-        // Other Screen
-
-        next()
-    }
+    next()
 })
 
 export default router

@@ -7,6 +7,7 @@ import { library as faLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import {
+    faHome as fasHome,
     faMoon as fasMoon,
     faPlus as fasPlus,
     faSun as fasSun,
@@ -57,6 +58,7 @@ const MY_ICONS = {
     unfold: 'unfold',
     file: 'file',
     // FontAwesome
+    home: makeIcon(fasHome),
     moon: makeIcon(fasMoon),
     plus: makeIcon(fasPlus),
     sun: makeIcon(fasSun),
