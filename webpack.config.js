@@ -23,6 +23,22 @@ module.exports = {
                     },
                 ],
             },
+            // Images
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    'vue-loader',
+                    'vue-svg-loader',
+                ],
+            },
         ],
     },
     optimization: {

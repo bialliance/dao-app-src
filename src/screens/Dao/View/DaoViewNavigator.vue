@@ -72,10 +72,10 @@
                     title: 'ДАО',
                     address: daoAddress,
                     apps: [
-                        { title: 'Tokens', icon: 'coins', address: '787n86n876n' },
-                        { title: 'Voting', icon: 'voteYea', address: 'gjghkjhjkhngng' },
-                        { title: 'Finance', icon: 'wallet', address: 'bnmbvnvbnvnbv' },
-                        { title: 'Agent', icon: 'robot', address: 'reewrwesddgdgfh' },
+                        { title: 'Tokens', icon: 'coins', address: 'appTokens' },
+                        { title: 'Voting', icon: 'voteYea', address: 'appVoting' },
+                        { title: 'Finance', icon: 'wallet', address: 'appFinance' },
+                        { title: 'Agent', icon: 'robot', address: 'appAgent' },
                     ],
                 }
             },

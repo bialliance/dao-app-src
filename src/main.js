@@ -6,7 +6,7 @@ import store from './store'
 
 import vuetify from './services/vuetify/'
 import './sass/main.scss'
-import '@mdi/font/css/materialdesignicons.css'
+
 Vue.config.productionTip = false
 
 // TODO: Vuetify bug
