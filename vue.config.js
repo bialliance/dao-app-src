@@ -8,9 +8,8 @@ const primaryColor = '#6f56fd'
 const primaryVariantColor = '#2225c3'
 
 module.exports = {
-    lintOnSave: false,
     devServer: {
-        disableHostCheck: true
+        disableHostCheck: true,
     },
     pwa: {
         name: name,
