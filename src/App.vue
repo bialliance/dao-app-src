@@ -41,29 +41,8 @@
             isInitializing: true,
         }),
 
-        computed: {
-            isDAOListScreen() {
-                return this.$route.matched.some((route) => route.name === 'DAOList')
-            },
-        },
-
-        watch: {
-            isInitializing(isInitializing) {
-                if (!isInitializing) {
-                    this.toDAOList()
-                }
-            },
-        },
-
         created() {
-            // Application initialization. Step 4 [App] - App created
-
-            // Application initialization. Step 5 [App] - Listen Software Update
-            this.listenSoftwareUpdate()
-
-            setTimeout(() => {
-                this.isInitializing = false
-            }, 500)
+            this.bootstrap()
 
             console.log(this.$vuetify.lang.translator('key1'))
             console.log(this.$vuetify.lang.translator('key2'))
@@ -72,7 +51,14 @@
         },
 
         methods: {
-            // Application initialization. Step 5 [App] - Listen Software Update
+            async bootstrap() {
+                await this.listenSoftwareUpdate()
+
+                await new Promise((resolve) => setTimeout(() => resolve(), 500))
+
+                this.isInitializing = false
+            },
+
             listenSoftwareUpdate() {
                 if (process.env.NODE_ENV === 'production') {
                     document.addEventListener('serviceWorkerUpdated', this.onServiceWorkerUpdated, { once: true })
@@ -106,14 +92,6 @@
                         },
                     },
                 })
-            },
-
-            // -----------------------------------------------------------------
-
-            toDAOList() {
-                if (!this.isDAOListScreen) {
-                    this.$router.push({ name: 'DAOList' })
-                }
             },
         },
     }
