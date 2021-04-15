@@ -1,0 +1,19 @@
+// Bug fix for Bottom Navigation Button Height
+.v-item-group {
+    &.v-bottom-navigation {
+        .v-btn {
+            height:    inherit;
+            min-width: 80px;
+        }
+    }
+}
+
+// Bug fix for SVG
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+    &.v-icon.v-icon.v-icon--link {
+        -webkit-appearance: inherit !important;
+    }
+}

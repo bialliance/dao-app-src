@@ -1,0 +1,695 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="dark" data-react-helmet="class">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/custom.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/script.js"></script>
+  </head>
+  <body class="dark:bg-gray-900 dark:text-gray-200 antialiased min-h-screen">
+    <div id="root" class="flex flex-col h-screen">
+      <div class="min-h-screen flex flex-col">
+        <div class="relative flex-1 flex bg-gray-100 dark:bg-gray-900">
+          <div class="flex flex-col w-0 flex-1">
+            <main
+              class="flex flex-col items-center flex-1 relative z-0 pb-6 focus:outline-none md:pb-6"
+            >
+              <header class="max-w-7xl w-full px-4 py-8 sm:px-6 lg:px-8">
+                <div class="md:flex md:items-center md:justify-between">
+                  <div class="flex-1 min-w-0">
+                    <h2
+                      class="text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:text-3xl sm:truncate"
+                    >
+                      Create Your Vault
+                    </h2>
+                  </div>
+                </div>
+              </header>
+              <div class="flex-1 max-w-7xl w-full pb-12 px-4 sm:px-6 lg:px-8">
+                <div class="p-8">
+                  <form action="http://localhost:3000/samara" method="POST" target="_blank">
+                    <div class="flex flex-col md:flex-row justify-around">
+                      <div class="w-full">
+                        <div
+                          class="h-full flex flex-col justify-between w-full relative"
+                        >
+                          <div class="relative">
+                            <h3
+                              class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
+                            >
+                              Fees (optional)
+                            </h3>
+                            <div class="mt-6">
+                              <p
+                                class="mb-8 text-sm leading-5 dark:text-gray-400"
+                              >
+                                There are several types of fees that can be
+                                charged. Please read each description carefully.
+                                All fees are paid out in shares of the vault.
+                                <strong class="text-white"
+                                  >Fee settings cannot be changed after
+                                  creation.</strong
+                                >
+                              </p>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="tokens"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Management Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Tokens</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                                <div
+                                  id="token-switch-container"
+                                  style="height: auto; opacity: 1"
+                                >
+                                  <div
+                                    class="h-full flex flex-col justify-between w-full relative"
+                                  >
+                                    <div class="relative">
+                                      <h3
+                                        class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
+                                      >
+                                        Basics
+                                      </h3>
+                                      <div class="mt-6">
+                                        <p
+                                          class="mb-8 text-sm leading-5 dark:text-gray-400"
+                                        >
+                                          Basic vault settings.
+                                          <strong class="text-white"
+                                            >Basic settings cannot be changed
+                                            after creation.</strong
+                                          >
+                                        </p>
+                                        <div class="mt-6 space-y-6">
+                                          <div>
+                                            <div class="flex align-middle mb-1">
+                                              <label
+                                                for="dao"
+                                                class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                                >Dao</label
+                                              >
+                                            </div>
+                                            <div
+                                              class="flex items-stretch relative"
+                                            >
+                                              <input
+                                                autocomplete="off"
+                                                name="dao"
+                                                id="dao"
+                                                class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                                type="text"
+                                                value=""
+                                              />
+                                            </div>
+                                          </div>
+                                          <div id="token-container">
+                                            <div class="token-wrapper">
+                                              <button
+                                                class="flex-shrink-0 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition bg-violet-500 dark:bg-violet-500 active:bg-violet-500 dark:active:bg-violet-500 border-transparent font-medium opacity-50 px-4 py-2 rounded-md shadow-sm text-base text-white"
+                                                type="button"
+                                                onclick="add_token(event);"
+                                              >
+                                                <span
+                                                  class="flex-1 flex items-center justify-center space-x-2"
+                                                  >add token</span
+                                                >
+                                              </button>
+                                              <button
+                                                class="flex-shrink-0 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition bg-violet-500 dark:bg-violet-500 active:bg-violet-500 dark:active:bg-violet-500 border-transparent font-medium opacity-50 px-4 py-2 rounded-md shadow-sm text-base text-white"
+                                                type="button"
+                                                onclick="delete_token(event);"
+                                              >
+                                                <span
+                                                  class="flex-1 flex items-center justify-center space-x-2"
+                                                  >delete token</span
+                                                >
+                                              </button>
+                                              <div class="token-label">
+                                                <div class="input-wrapper">
+                                                  <div
+                                                    class="flex align-middle mb-1"
+                                                  >
+                                                    <label
+                                                      for="token"
+                                                      class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                                      >Token</label
+                                                    >
+                                                  </div>
+                                                  <div
+                                                    class="flex items-stretch relative"
+                                                  >
+                                                    <input
+                                                      autocomplete="off"
+                                                      name="token"
+                                                      id="token"
+                                                      class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                                      type="text"
+                                                      value=""
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div class="input-wrapper">
+                                                  <div
+                                                    class="flex align-middle mb-1"
+                                                  >
+                                                    <label
+                                                      for="symbol"
+                                                      class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                                      >Symbol</label
+                                                    >
+                                                  </div>
+                                                  <div
+                                                    class="flex items-stretch relative"
+                                                  >
+                                                    <input
+                                                      autocomplete="off"
+                                                      name="symbol"
+                                                      id="symbol"
+                                                      class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                                      type="text"
+                                                      value=""
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div id="holders">
+                                                <div class="holder-flex">
+                                                  <div class="holder-container">
+                                                    <button
+                                                      class="flex-shrink-0 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition bg-violet-500 dark:bg-violet-500 active:bg-violet-500 dark:active:bg-violet-500 border-transparent font-medium opacity-50 px-4 py-2 rounded-md shadow-sm text-base text-white flex-1 flex items-center justify-center space-x-2"
+                                                      type="button"
+                                                      onclick="add_holder(event);"
+                                                    >
+                                                      add holder
+                                                    </button>
+                                                    <button
+                                                      class="flex-shrink-0 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition bg-violet-500 dark:bg-violet-500 active:bg-violet-500 dark:active:bg-violet-500 border-transparent font-medium opacity-50 px-4 py-2 rounded-md shadow-sm text-base text-white"
+                                                      type="button"
+                                                      onclick="delete_holder(event);"
+                                                    >
+                                                      <span
+                                                        class="flex-1 flex items-center justify-center space-x-2"
+                                                        >delete holder</span
+                                                      >
+                                                    </button>
+                                                    <div
+                                                      class="flex items-stretch relative holder-item"
+                                                    >
+                                                      <div
+                                                        class="input-wrapper"
+                                                      >
+                                                        <div
+                                                          class="flex align-middle mb-1"
+                                                        >
+                                                          <label
+                                                            for="holder"
+                                                            class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                                            >Holder</label
+                                                          >
+                                                        </div>
+                                                        <div
+                                                          class="flex items-stretch relative holder"
+                                                        >
+                                                          <input
+                                                            autocomplete="off"
+                                                            name="holder"
+                                                            id="holder"
+                                                            class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                                            type="text"
+                                                            value=""
+                                                          />
+                                                        </div>
+                                                      </div>
+                                                      <div
+                                                        class="input-wrapper"
+                                                      >
+                                                        <div
+                                                          class="flex align-middle mb-1"
+                                                        >
+                                                          <label
+                                                            for="stake"
+                                                            class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                                            >Stake</label
+                                                          >
+                                                        </div>
+                                                        <div
+                                                          class="flex items-stretch relative stake"
+                                                        >
+                                                          <input
+                                                            autocomplete="off"
+                                                            name="stake"
+                                                            id="stake"
+                                                            class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                                            type="text"
+                                                            value=""
+                                                          />
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="voting"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Performance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Voting</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="finance"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Finance</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="addressBook"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Address book</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="reward"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Reward</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="dotVoting"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Dot voting</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="allocations"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Allocations</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="delay"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Delay</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="tokenRequest"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Token request</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                                <div
+                                  id="request-switch-container"
+                                  style="height: auto; opacity: 1"
+                                >
+                                  <div class="flex align-middle mb-1">
+                                    <label
+                                      for="stake"
+                                      class="inline-flex text-sm font-medium leading-5 text-gray-700 dark:text-gray-200"
+                                      >Token request</label
+                                    >
+                                  </div>
+                                  <div class="flex items-stretch relative">
+                                    <input
+                                      autocomplete="off"
+                                      name="t_req"
+                                      id="t_req"
+                                      class="block w-full py-2 rounded-md transition dark:bg-gray-800 disabled:opacity-25 border border-gray-700 focus:border-gray-400 focus:outline-none focus:ring-0 duration-150 ease-in-out sm:text-sm sm:leading-5 dark:text-white shadow-sm"
+                                      type="text"
+                                      value=""
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="pb-6">
+                                <div class="flex items-center pb-4">
+                                  <button
+								  id="redemptions"
+                                    aria-pressed="true"
+                                    class="flex-shrink-0 relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-500 transition switcher"
+                                    type="button" disabled
+                                  >
+                                    <span class="sr-only"
+                                      >Toggle Charge Entrance Fee</span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200 bg-violet-500 dark:bg-violet-500 switcher1"
+                                    ></span
+                                    ><span
+                                      aria-hidden="true"
+                                      class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 dark:border-gray-700 rounded-full bg-white dark:bg-gray-200 shadow transform ring-0 transition-transform ease-in-out duration-200 translate-x-5 switcher2"
+                                    ></span></button
+                                  ><button
+                                    class="ml-6 text-sm leading-5 font-medium dark:text-gray-200 focus:outline-none"
+                                    type="button"
+                                  >
+                                    Redemptions</button
+                                  ><span
+                                    class="cursor-pointer pl-2 dark:text-gray-400"
+                                    ><svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      class="h-5 w-5"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd"
+                                      ></path></svg
+                                  ></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="flex justify-end mt-8 pt-5 space-x-3">
+                            <input
+                              class="flex-shrink-0 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition bg-violet-500 dark:bg-violet-500 active:bg-violet-500 dark:active:bg-violet-500 border-transparent font-medium hover:bg-violet-600 dark:hover:bg-violet-400 px-4 py-2 rounded-md shadow-sm text-base text-white"
+                              type="submit" value="Submit"
+                            >
+                            </input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+        <div
+          class="fixed z-50 inset-0 flex flex-col items-center justify-end p-6 pointer-events-none sm:items-end sm:justify-start"
+        ></div>
+      </div>
+    </div>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
