@@ -11,9 +11,11 @@ import {
     faHome as fasHome,
     faMoon as fasMoon,
     faPlus as fasPlus,
+    faQuestionCircle as fasQuestionCircle,
     faRobot as fasRobot,
     faSun as fasSun,
     faTimes as fasTimes,
+    faTrashAlt as fasTrashAlt,
     faVoteYea as fasVoteYea,
     faWallet as fasWallet,
 } from '@fortawesome/free-solid-svg-icons'
@@ -33,7 +35,7 @@ const MY_ICONS = {
     complete: 'complete',
     cancel: 'cancel',
     close: makeIcon(fasTimes),
-    delete: 'delete', // delete (e.g. v-chip close)
+    delete: makeIcon(fasTrashAlt), // delete (e.g. v-chip close)
     clear: 'clear',
     success: 'success',
     info: 'info',
@@ -66,6 +68,7 @@ const MY_ICONS = {
     home: makeIcon(fasHome),
     moon: makeIcon(fasMoon),
     plus: makeIcon(fasPlus),
+    questionCircle: makeIcon(fasQuestionCircle),
     robot: makeIcon(fasRobot),
     sun: makeIcon(fasSun),
     voteYea: makeIcon(fasVoteYea),
