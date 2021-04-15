@@ -10,6 +10,6 @@
 
 <script>
     export default {
-        name: 'DAOAppScreen',
+        name: 'DaoAppScreen',
     }
 </script>

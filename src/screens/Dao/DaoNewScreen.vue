@@ -157,7 +157,7 @@
     import UIDaoAppSwitch from '_ui/UIDaoAppSwitch'
 
     export default {
-        name: 'DAONewScreen',
+        name: 'DaoNewScreen',
 
         components: {
             UIDaoAppSwitch,

@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import DAONavigator from '_screens/DAO/DAONavigator'
-import DAOListScreen from '_screens/DAO/DAOListScreen'
-import DAONewScreen from '_screens/DAO/DAONewScreen'
+import DaoNavigator from '_screens/Dao/DaoNavigator'
+import DaoListScreen from '_screens/Dao/DaoListScreen'
+import DaoNewScreen from '_screens/Dao/DaoNewScreen'
 
-import DAOViewNavigator from '_screens/DAO/View/DAOViewNavigator'
-import DAOViewScreen from '_screens/DAO/View/DAOViewScreen'
+import DaoViewNavigator from '_screens/Dao/View/DaoViewNavigator'
+import DaoViewScreen from '_screens/Dao/View/DaoViewScreen'
 
-import DAOAppScreen from '_screens/DAO/App/DAOAppScreen'
+import DaoAppScreen from '_screens/Dao/App/DaoAppScreen'
 
 import SoftwareUpdateScreen from '_screens/SoftwareUpdate/SoftwareUpdateScreen'
 
@@ -18,16 +18,16 @@ const routes = [
     {
         path: '/',
         name: 'Root',
-        redirect: { name: 'DAOList' },
+        redirect: { name: 'DaoList' },
     },
     {
         path: '/dao',
-        component: DAONavigator,
+        component: DaoNavigator,
         children: [
             {
                 path: '',
-                name: 'DAOList',
-                component: DAOListScreen,
+                name: 'DaoList',
+                component: DaoListScreen,
                 meta: {
                     screenOptions: {
                         title: 'Список ДАО',
@@ -36,8 +36,8 @@ const routes = [
             },
             {
                 path: 'new',
-                name: 'DAONew',
-                component: DAONewScreen,
+                name: 'DaoNew',
+                component: DaoNewScreen,
                 meta: {
                     screenOptions: {
                         title: 'Новое ДАО',
@@ -46,12 +46,12 @@ const routes = [
             },
             {
                 path: 'view/:daoAddress',
-                component: DAOViewNavigator,
+                component: DaoViewNavigator,
                 children: [
                     {
                         path: '',
-                        name: 'DAOView',
-                        component: DAOViewScreen,
+                        name: 'DaoView',
+                        component: DaoViewScreen,
                         meta: {
                             screenOptions: {
                                 title: 'Просмотр',
@@ -60,8 +60,8 @@ const routes = [
                     },
                     {
                         path: ':appAddress',
-                        name: 'DAOApp',
-                        component: DAOAppScreen,
+                        name: 'DaoApp',
+                        component: DaoAppScreen,
                         meta: {
                             screenOptions: {
                                 title: 'Приложение',

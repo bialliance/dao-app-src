@@ -14,7 +14,7 @@
             CU
         </v-toolbar-title>
 
-        <!--        <v-btn class="ml-4" color="primary" text :to="{name: 'DAOList'}">-->
+        <!--        <v-btn class="ml-4" color="primary" text :to="{name: 'DaoList'}">-->
         <!--            Список ДАО-->
         <!--        </v-btn>-->
 

@@ -23,7 +23,7 @@
                             <template v-for="app in dao.apps">
                                 <v-list-item
                                     :key="app.title"
-                                    :to="{name: 'DAOApp', params: {appAddress: app.address}}"
+                                    :to="{name: 'DaoApp', params: {appAddress: app.address}}"
                                 >
                                     <v-list-item-icon>
                                         <v-icon v-text="`$${app.icon}`" />
@@ -54,7 +54,7 @@
 
 <script>
     export default {
-        name: 'DAOViewNavigator',
+        name: 'DaoViewNavigator',
 
         data: () => ({
             dao: null,

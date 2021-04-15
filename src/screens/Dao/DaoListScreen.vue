@@ -15,7 +15,7 @@
                                             {{ dao.text }}
                                         </v-card-text>
                                         <v-card-actions>
-                                            <v-btn :to="{name: 'DAOView', params:{daoAddress: 'gfdvfv89'}}">
+                                            <v-btn :to="{name: 'DaoView', params:{daoAddress: 'gfdvfv89'}}">
                                                 Go To DAO
                                             </v-btn>
                                         </v-card-actions>
@@ -36,7 +36,7 @@
                         <v-container class="fill-height">
                             <v-row justify="center">
                                 <v-col cols="auto">
-                                    <v-btn color="primary" icon x-large @click="createDAO()">
+                                    <v-btn color="primary" icon x-large @click="createDao()">
                                         <v-icon v-text="'$plus'" />
                                     </v-btn>
                                 </v-col>
@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        name: 'DAOListScreen',
+        name: 'DaoListScreen',
 
         data: () => ({
             daoList: [],
@@ -59,12 +59,12 @@
 
         mounted() {
             setTimeout(() => {
-                this.fetchDAOList()
+                this.fetchDaoList()
             }, 1500)
         },
 
         methods: {
-            fetchDAOList() {
+            fetchDaoList() {
                 for (let i = 1; i <= 6; i++) {
                     this.daoList.push({
                         title: `Title ${i}`,
@@ -74,8 +74,8 @@
                 }
             },
 
-            createDAO() {
-                this.$router.push({ name: 'DAONew' })
+            createDao() {
+                this.$router.push({ name: 'DaoNew' })
             },
         },
     }

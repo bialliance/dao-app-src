@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: 'DAOViewScreen',
+        name: 'DaoViewScreen',
 
         components: {},
 
