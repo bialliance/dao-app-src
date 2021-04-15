@@ -12,6 +12,7 @@ module.exports = {
         disableHostCheck: true,
     },
     pwa: {
+        lintOnSave: false,
         name: name,
         // Theme
         themeColor: primaryVariantColor,
