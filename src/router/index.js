@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import DAONavigator from '_screens/DAO/DAONavigator'
 import DAOListScreen from '_screens/DAO/DAOListScreen'
 import DAONewScreen from '_screens/DAO/DAONewScreen'
+import DAOViewScreen from '_screens/DAO/DAOViewScreen'
 import SoftwareUpdateScreen from '_screens/SoftwareUpdate/SoftwareUpdateScreen'
 
 Vue.use(VueRouter)
@@ -34,6 +35,16 @@ const routes = [
                 meta: {
                     screenOptions: {
                         title: 'Новое ДАО',
+                    },
+                },
+            },
+            {
+                path: 'view/:address',
+                name: 'DAOView',
+                component: DAOViewScreen,
+                meta: {
+                    screenOptions: {
+                        title: 'Просмотр',
                     },
                 },
             },
@@ -70,7 +81,7 @@ router.beforeEach((to, from, next) => {
         } else {
             // Application initialization. Step 2 [router] - No Root route > Push to Splash Screen
 
-            next({ name: 'Root' })
+            next()
         }
     } else {
         // Other Screen
