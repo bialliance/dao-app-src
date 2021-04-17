@@ -1,6 +1,10 @@
 <template>
     <div class="table-row">
-        <div class="table-row__inner" :class="{'table-row__inner--gradient': openDesc}">
+        <div
+            class="table-row__inner"
+            :class="{'table-row__inner--gradient': openDesc}"
+            @click.prevent="openDesc = !openDesc"
+        >
             <v-row justify="start" align="center">
                 <v-col cols="4">
                     <div class="table-row__content">
@@ -17,7 +21,7 @@
                         icon
                         large
                         outlined
-                        @click="openDesc = !openDesc">
+                    >
                         <v-icon v-text="'$plus'" />
                     </v-btn>
                 </v-col>
@@ -66,7 +70,9 @@
     }
 
     .table-row {
+
         &__inner {
+            cursor:  pointer;
             padding: 30px 64px;
 
             &--gradient {
