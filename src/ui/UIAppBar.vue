@@ -6,10 +6,6 @@
         :elevate-on-scroll="!$vuetify.theme.dark"
         :light="!$vuetify.theme.dark"
     >
-        <v-btn v-if="needShowBackButton" icon @click="$router.back()">
-            <v-icon v-text="'$arrowLeft'" />
-        </v-btn>
-
         <v-toolbar-title>
             <v-img
                 v-if="$vuetify.theme.dark"
@@ -62,25 +58,6 @@
             walletConnected: false,
             accountAddress: '',
         }),
-
-        computed: {
-            needShowBackButton() {
-                return this.$route.meta?.screenOptions?.showBack
-            },
-
-            title() {
-                let title
-                _forEach(this.$route.matched, (route) => {
-                    const screenOptions = route.meta?.screenOptions
-
-                    if (screenOptions?.title) {
-                        title = screenOptions.title
-                    }
-                })
-
-                return title
-            },
-        },
 
         methods: {
             connect: async function () {

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import AboutScreen from '_screens/About/AboutScreen'
+
 import DaoNavigator from '_screens/Dao/DaoNavigator'
 import DaoListScreen from '_screens/Dao/DaoListScreen'
 import DaoNewScreen from '_screens/Dao/DaoNewScreen'
@@ -21,16 +23,27 @@ const routes = [
         redirect: { name: 'DaoList' },
     },
     {
+        path: '/about',
+        name: 'About',
+        component: AboutScreen,
+        meta: {
+            screenOptions: {
+                title: 'About Us',
+            },
+        },
+    },
+    {
         path: '/dao',
         component: DaoNavigator,
         children: [
+            // TODO: Переделать на Dao для менеджеров
             {
                 path: '',
                 name: 'DaoList',
                 component: DaoListScreen,
                 meta: {
                     screenOptions: {
-                        title: 'Список ДАО',
+                        title: 'For DAO Managers',
                     },
                 },
             },
@@ -40,7 +53,7 @@ const routes = [
                 component: DaoNewScreen,
                 meta: {
                     screenOptions: {
-                        title: 'Новое ДАО',
+                        title: 'Create DAO',
                     },
                 },
             },
@@ -54,7 +67,7 @@ const routes = [
                         component: DaoViewScreen,
                         meta: {
                             screenOptions: {
-                                title: 'Просмотр',
+                                title: 'View DAO',
                             },
                         },
                     },
@@ -64,7 +77,7 @@ const routes = [
                         component: DaoAppScreen,
                         meta: {
                             screenOptions: {
-                                title: 'Приложение',
+                                title: 'DAO App',
                             },
                         },
                     },
