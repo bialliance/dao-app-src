@@ -3,7 +3,7 @@
         <v-row :align="daoList.length ? '' : 'center'" :justify="daoList.length ? '' : 'center'">
             <template v-for="(dao, index) in daoList">
                 <v-col cols="4" :key="`dao_${index}`">
-                    <v-card class="text-center">
+                    <v-card flat class="card text-center">
                         <v-responsive :aspect-ratio="1">
                             <v-container class="fill-height">
                                 <v-row justify="center">
@@ -51,7 +51,7 @@
                 </v-col>
             </template>
             <v-col cols="4">
-                <v-card>
+                <v-card flat class="card text-center">
                     <v-responsive :aspect-ratio="1">
                         <v-container class="fill-height">
                             <v-row justify="center">
@@ -108,6 +108,12 @@
 </script>
 
 <style lang="scss" scoped>
+    .card {
+        border:        1px solid #008cb9;
+        border-radius: 20px !important;
+        padding:       36px 27px;
+    }
+
     .card__info {
         background:    linear-gradient(90.31deg, rgba(98, 128, 236, 0.2) 17.71%, rgba(190, 86, 254, 0.2) 87.81%);
         padding:       17px 25px;
@@ -115,5 +121,9 @@
         text-align:    left;
         font-size:     14px;
         line-height:   14px;
+    }
+
+    .card__number {
+        font-weight: bold;
     }
 </style>

@@ -1,6 +1,11 @@
 <template>
     <button class="button" :class="{'outlined': outlined, 'width-100': width}" @click="go">
-        <p>{{ text }}</p>
+        <template v-if="text">
+            {{ text }}
+        </template>
+        <template v-else>
+            <slot />
+        </template>
     </button>
 </template>
 

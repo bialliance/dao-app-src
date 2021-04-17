@@ -88,7 +88,7 @@ export default new Vuetify({
         values: MY_ICONS,
     },
     theme: {
-        dark: true,
+        // dark: true,
         themes: {
             light: {
                 primary: '#6f56fd',
