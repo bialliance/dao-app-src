@@ -1,5 +1,5 @@
 <template>
-    <v-container class="investors">
+    <v-container class="investors" fluid>
         <h1 class="investors__title">For Depositors</h1>
         <div class="investors__content">
             <DaoTable />

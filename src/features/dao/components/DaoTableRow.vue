@@ -1,23 +1,28 @@
 <template>
-    <div class="tablerow">
-        <v-row justify="start" align="center">
-            <v-col cols="4">
-                <div class="tablerow__content">
-                    <img :src="btcIcon" alt="btc" class="tablerow__img">
-                    <p class="name">BTC DAO</p>
-                </div>
-            </v-col>
-            <v-col cols="3"><p class="price">$20.000</p></v-col>
-            <v-col cols="3"><p class="percent">24%</p></v-col>
-            <v-col cols="2">
-                <button
-                    :class="[openDesc ? 'open-anime' : 'close-anime']"
-                    class="open-desc"
-                    @click="openDesc = !openDesc">
-                    <v-icon v-text="'$plus'" />
-                </button>
-            </v-col>
-        </v-row>
+    <div class="table-row">
+        <div class="table-row__inner" :class="{'table-row__inner--gradient': openDesc}">
+            <v-row justify="start" align="center">
+                <v-col cols="4">
+                    <div class="table-row__content">
+                        <img :src="btcIcon" alt="btc" class="table-row__img">
+                        <span class="name">BTC DAO</span>
+                    </div>
+                </v-col>
+                <v-col cols="3"><span class="price">$20.000</span></v-col>
+                <v-col cols="3"><span class="percent">24%</span></v-col>
+                <v-col cols="2">
+                    <v-btn
+                        :class="[openDesc ? 'open-anime' : 'close-anime']"
+                        class="open-desc"
+                        icon
+                        large
+                        outlined
+                        @click="openDesc = !openDesc">
+                        <v-icon v-text="'$plus'" />
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </div>
 
         <DaoTableDesc v-show="openDesc" />
     </div>
@@ -42,7 +47,7 @@
     }
 </script>
 
-<style lang='scss'>
+<style lang="scss" scoped>
     @import '@/sass/_variables.scss';
 
     .open-anime {
@@ -55,26 +60,34 @@
         transition: all .2s ease-in-out;
     }
 
-    .tablerow {
-        padding: 30px 0;
+    .open-desc {
+        background: #ffffff;
+        color:      #2f2f2f !important;
     }
 
-    .tablerow:last-child {
-        padding-bottom: 0;
-    }
+    .table-row {
+        &__inner {
+            padding: 30px 64px;
 
-    .tablerow__img {
-        width:        32px;
-        height:       32px;
-        margin-right: 28px;
-    }
+            &--gradient {
+                background-image: linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%);
+                color:            #ffffff;
+            }
+        }
 
-    .tablerow__content {
-        display:         flex;
-        justify-content: flex-start;
-        align-items:     center;
-        font-size:       $big_font;
-        line-height:     $big_height;
+        &__img {
+            width:        32px;
+            height:       32px;
+            margin-right: 28px;
+        }
+
+        &__content {
+            display:         flex;
+            justify-content: flex-start;
+            align-items:     center;
+            font-size:       $big_font;
+            line-height:     $big_height;
+        }
     }
 
     .percent, .price, .name {
@@ -87,7 +100,7 @@
             font-size:   $big_font_m;
             line-height: $big_height_m;
         }
-        .tablerow__img {
+        .table-row__img {
             margin: 15px;
         }
     }

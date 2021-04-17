@@ -102,6 +102,8 @@
 
     #app {
         font-family:             Helvetica, Avenir, Arial, sans-serif;
+        color:                   rgba(47, 47, 47, 1);
+        background:              #fbfbfb;
         -webkit-font-smoothing:  antialiased;
         -moz-osx-font-smoothing: grayscale;
         position:                relative;
