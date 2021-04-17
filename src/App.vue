@@ -96,3 +96,69 @@
         },
     }
 </script>
+
+<style lang="scss">
+    @import '@/sass/_variables.scss';
+
+    #app {
+        font-family:             Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing:  antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color:                   #2c3e50;
+        background-color:        #fbfbfb;
+        position:                relative;
+    }
+
+    .header__switcer {
+        display: flex;
+    }
+
+    .v-input__control {
+        .v-input__slot {
+            margin-bottom: 0;
+        }
+
+        .v-messages {
+            display: none;
+        }
+    }
+
+    .v-input--switch__thumb {
+        background: -webkit-linear-gradient(#6280ec, #be56fe);
+    }
+
+    .v-input--switch__track.theme--light {
+        background-color: #ffffff;
+        box-shadow:       0px 2px 12px rgba(73, 73, 73, 0.16);
+    }
+
+    .header__right button:first-child {
+        margin-right: 30px;
+    }
+
+    .header__right button:nth-child(2) {
+        margin-right: 40px;
+    }
+
+    button {
+        outline: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .nav {
+        display: none;
+    }
+
+    @media (min-width: 1300px) {
+        .nav_icon__wrapper {
+            display: none;
+        }
+        .nav {
+            display: block;
+        }
+
+    }
+</style>

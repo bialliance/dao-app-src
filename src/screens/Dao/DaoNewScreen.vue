@@ -1,233 +1,179 @@
 <template>
-    <div>
-        <v-container>
-            <v-row>
-                <v-col cols="12">
-                    <v-form>
-                        <h3 class="mb-3">Fees (optional)</h3>
-                        <p>
-                            There are several types of fees that can be charged. Please read each description carefully. All fees are paid out in shares of the vault.
-                            <strong>Fee settings cannot be changed after creation.</strong>
-                        </p>
-
+    <div class="created">
+        <div class="container">
+            <h1 class="created__title">Create DAO</h1>
+            <div class="created__content">
+                <v-row>
+                    <v-col cols="6">
+                        <h4 class="input_title">General</h4>
+                        <div class="form_group">
+                            <div class="input-wrapper d-flex justify-between align-end">
+                                <label class="label" for="name">DAO name</label>
+                                <input type="text" name="name" class="text_input">
+                            </div>
+                            <div class="input-wrapper d-flex justify-between align-end">
+                                <label class="label" for="description">DAO description</label>
+                                <input type="text" name="description" class="text_input">
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="10">
+                        <h4 class="input_title">Create 2 tokens</h4>
                         <v-row>
-                            <v-col cols="auto">
-                                <UIDaoAppSwitch
-                                    v-model="isTokens"
-                                    title="Tokens"
-                                    tooltip="Tooltip"
-                                />
-                            </v-col>
-                        </v-row>
-
-                        <h3 class="mb-3">Basics</h3>
-                        <p>
-                            Basic vault settings.
-                            <strong>Basic settings cannot be changed after creation.</strong>
-                        </p>
-                        <v-text-field
-                            v-model="title"
-                            dense
-                            label="Dao"
-                            outlined
-                        />
-
-                        <div v-for="(token, tokenIndex) in tokens" :key="`token_${tokenIndex}`">
-                            <v-divider class="my-8" />
-                            <v-row dense>
-                                <v-col cols="12">
-                                    <v-row dense>
-                                        <v-col cols="12" lg="auto">
-                                            <v-btn color="primary" icon small @click="addToken()">
-                                                <v-icon v-text="'$plus'" small />
-                                            </v-btn>
-                                        </v-col>
-                                        <v-col>
-                                            <v-row dense>
-                                                <v-col cols="12" lg="6">
-                                                    <v-text-field
-                                                        v-model="token.address"
-                                                        dense
-                                                        label="Token"
-                                                        outlined
-                                                    />
-                                                </v-col>
-                                                <v-col cols="12" lg="6">
-                                                    <v-text-field
-                                                        v-model="token.symbol"
-                                                        dense
-                                                        label="Symbol"
-                                                        outlined
-                                                    />
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col cols="12" lg="auto">
-                                            <v-btn
-                                                color="red"
-                                                :disabled="tokens.length < 2"
-                                                icon
-                                                small
-                                                @click="removeToken(tokenIndex)"
-                                            >
-                                                <v-icon v-text="'$delete'" small />
-                                            </v-btn>
-                                        </v-col>
-                                    </v-row>
-                                </v-col>
-                                <v-col cols="12">
-                                    <div class="pl-12">
-                                        <v-row
-                                            v-for="(holder, holderIndex) in token.holders"
-                                            dense
-                                            :key="`holder_${holderIndex}`"
-                                        >
-                                            <v-col cols="12" lg="auto">
-                                                <v-btn color="primary" icon small @click="addHolder(tokenIndex)">
-                                                    <v-icon v-text="'$plus'" small />
-                                                </v-btn>
-                                            </v-col>
-                                            <v-col>
-                                                <v-row dense>
-                                                    <v-col cols="12" lg="6">
-                                                        <v-text-field
-                                                            v-model="holder.holder"
-                                                            dense
-                                                            label="Holder"
-                                                            outlined
-                                                        />
-                                                    </v-col>
-                                                    <v-col cols="12" lg="6">
-                                                        <v-text-field
-                                                            v-model="holder.stake"
-                                                            dense
-                                                            label="Stake"
-                                                            outlined
-                                                        />
-                                                    </v-col>
-                                                </v-row>
-                                            </v-col>
-                                            <v-col cols="12" lg="auto">
-                                                <v-btn
-                                                    color="red"
-                                                    :disabled="token.holders.length < 2"
-                                                    icon
-                                                    small
-                                                    @click="removeHolder(tokenIndex, holderIndex)"
-                                                >
-                                                    <v-icon v-text="'$delete'" small />
-                                                </v-btn>
-                                            </v-col>
-                                        </v-row>
+                            <v-col cols="6">
+                                <p class="input__text">GP token (governance token)</p>
+                                <div class="form_group">
+                                    <div class="input-wrapper d-flex justify-between align-end">
+                                        <label class="label" for="name">Full token name</label>
+                                        <input type="text" name="name" class="text_input">
                                     </div>
-                                </v-col>
-                            </v-row>
-                        </div>
-
-                        <v-divider class="my-8" />
-
-                        <v-row v-for="app in apps" dense :key="`app_${app.address}`">
-                            <v-col cols="auto">
-                                <UIDaoAppSwitch
-                                    v-model="app.value"
-                                    :disabled="app.disabled"
-                                    :title="app.title"
-                                    :tooltip="app.tooltip"
-                                />
+                                    <div class="input-wrapper d-flex justify-between align-end">
+                                        <label class="label" for="description">Token symbol</label>
+                                        <input type="text" name="description" class="text_input">
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="6">
+                                <p class="input__text">LP token (limited partner token)</p>
+                                <div class="form_group">
+                                    <div class="input-wrapper d-flex justify-between align-end">
+                                        <label class="label" for="name">Full token name</label>
+                                        <input type="text" name="name" class="text_input">
+                                    </div>
+                                    <div class="input-wrapper d-flex justify-between align-end">
+                                        <label class="label" for="description">Token symbol</label>
+                                        <input type="text" name="description" class="text_input">
+                                    </div>
+                                </div>
                             </v-col>
                         </v-row>
-
-                        <v-divider class="my-6" />
-
-                        <div>
-                            <v-btn color="primary">
-                                Create DAO
-                            </v-btn>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="7">
+                        <h4 class="input_title">Voting</h4>
+                        <div class="form_group">
+                            <div class="input-wrapper d-flex justify-between align-end">
+                                <label class="label" for="name">Support %</label>
+                                <div class="slider_wrapper d-flex justify-start align-end">
+                                    <v-slider
+                                        v-model="ex1.val"
+                                        :color="ex1.color"
+                                    ></v-slider>
+                                    <div class="voting__percent">50%</div>
+                                </div>
+                            </div>
+                            <div class="input-wrapper d-flex justify-between align-end">
+                                <label class="label" for="description">Minimum approval %</label>
+                                <div class="slider_wrapper d-flex justify-start align-end">
+                                    <v-slider
+                                        v-model="ex1.val"
+                                        :color="ex1.color"
+                                    ></v-slider>
+                                    <div class="voting__percent">20%</div>
+                                </div>
+                            </div>
                         </div>
-                    </v-form>
-                </v-col>
-            </v-row>
-        </v-container>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="3">
+                        <UIButton text="Create DAO" />
+                    </v-col>
+                </v-row>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import { filter as _filter, find as _find } from 'lodash'
-
-    import UIDaoAppSwitch from '_ui/UIDaoAppSwitch'
+    import UIButton from '_ui/UIButton'
 
     export default {
         name: 'DaoNewScreen',
 
         components: {
-            UIDaoAppSwitch,
+            UIButton,
         },
 
         data: () => ({
-            isTokens: false,
-            title: '',
-            tokens: [
-                {
-                    token: '',
-                    symbol: '',
-                    holders: [
-                        {
-                            holder: '',
-                            stake: '',
-                        },
-                    ],
-                },
-            ],
-            apps: [
-                {
-                    address: 'gjhghjghj8678678',
-                    disabled: true,
-                    title: 'Voting',
-                    tooltip: 'Voting',
-                    value: true,
-                },
-                {
-                    address: 'dv9dv7df98d7vfd8',
-                    disabled: true,
-                    title: 'Finance',
-                    tooltip: 'Finance',
-                    value: true,
-                },
-            ],
+            ex1: { label: 'color', val: 25, color: 'orange darken-3' },
         }),
 
         methods: {
-            addToken() {
-                this.tokens.push({
-                    token: '',
-                    symbol: '',
-                    holders: [
-                        {
-                            holder: '',
-                            stake: '',
-                        },
-                    ],
-                })
-            },
-
-            removeToken(tokenIndex) {
-                this.tokens = _filter(this.tokens, (token, index) => index !== tokenIndex)
-            },
-
-            addHolder(tokenIndex) {
-                const token = _find(this.tokens, (token, index) => index === tokenIndex)
-
-                token.holders.push({
-                    holder: '',
-                    stake: '',
-                })
-            },
-
-            removeHolder(tokenIndex, holderIndex) {
-                const token = _find(this.tokens, (token, index) => index === tokenIndex)
-
-                token.holders = _filter(token.holders, (holder, index) => index !== holderIndex)
-            },
+            //
         },
     }
 </script>
+
+<style lang='scss'>
+    .created {
+        text-align: left;
+    }
+
+    .created__title {
+        font-size:     60px;
+        line-height:   60px;
+        margin-bottom: 35px;
+    }
+
+    .input_title {
+        font-size:     26px;
+        line-height:   22px;
+        margin-bottom: 16px;
+    }
+
+    .label {
+        font-size:   20px;
+        line-height: 22px;
+    }
+
+    .input-wrapper {
+        margin-bottom: 24px;
+    }
+
+    .form_group {
+        margin-bottom: 50px;
+    }
+
+    .text_input {
+        background-color:       transparent;
+        background-image:       linear-gradient(to right, #6280ec, #be56fe);
+        background-repeat:      no-repeat;
+        background-position:    0 calc(100% + 3px), 0 0;
+        background-size:        100% 3px;
+        box-shadow:             none;
+        border:                 0;
+        border-bottom:          2px solid #ff005e;
+        color:                  #000000;
+        -webkit-font-smoothing: antialiased;
+        outline:                0 none;
+        border-color:           transparent;
+        outline:                none;
+        width:                  65%;
+    }
+
+    .input__text {
+        font-size:     18px;
+        line-height:   22px;
+        margin-bottom: 25px;
+    }
+
+    .slider_wrapper {
+        width: 65%;
+    }
+
+    .voting__percent {
+        box-shadow:        0 0 6px 0 rgba(157, 96, 212, 0.5);
+        border:            solid 2px transparent;
+        background-image:  -webkit-linear-gradient(#6280ec, #be56fe), -webkit-linear-gradient(#6280ec, #be56fe);
+        background-origin: border-box;
+        background-clip:   content-box, border-box;
+        box-shadow:        1px 1000px 1px #ffffff inset;
+        outline:           none;
+        border-radius:     10px;
+        padding:           5px 14px;
+    }
+</style>

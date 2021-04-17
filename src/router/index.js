@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import AboutScreen from '_screens/About/AboutScreen'
 
 import DaoNavigator from '_screens/Dao/DaoNavigator'
-import DaoListScreen from '_screens/Dao/DaoListScreen'
+import DaoManagerScreen from '_screens/Dao/DaoManagerScreen'
 import DaoNewScreen from '_screens/Dao/DaoNewScreen'
 
 import DaoViewNavigator from '_screens/Dao/View/DaoViewNavigator'
@@ -36,11 +36,20 @@ const routes = [
         path: '/dao',
         component: DaoNavigator,
         children: [
-            // TODO: Переделать на Dao для менеджеров
+            // {
+            //     path: '',
+            //     name: 'DaoInvestor',
+            //     component: DaoInvestorScreen,
+            //     meta: {
+            //         screenOptions: {
+            //             title: 'For DAO Investors',
+            //         },
+            //     },
+            // },
             {
-                path: '',
-                name: 'DaoList',
-                component: DaoListScreen,
+                path: 'manager',
+                name: 'DaoManager',
+                component: DaoManagerScreen,
                 meta: {
                     screenOptions: {
                         title: 'For DAO Managers',

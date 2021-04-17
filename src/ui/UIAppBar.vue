@@ -6,15 +6,42 @@
         :elevate-on-scroll="!$vuetify.theme.dark"
         :light="!$vuetify.theme.dark"
     >
+        <UINavigationMobile :show="showMenu" :closeMenu="showMenu = false" />
+
         <v-toolbar-title>
-            <v-img
-                v-if="$vuetify.theme.dark"
-                :src="logoDark"
-                width="30"
-                contain
-            />
-            <v-img v-else :src="logoLight" width="30" contain />
+            <v-row align="center">
+                <v-col cols="auto">
+                    <v-img
+                        v-if="$vuetify.theme.dark"
+                        :src="logoDark"
+                        width="30"
+                        contain
+                    />
+                    <v-img v-else :src="logoLight" width="30" contain />
+                </v-col>
+                <v-col cols="auto">
+                    <v-app-bar-nav-icon @click="showMenu = !showMenu" />
+                </v-col>
+            </v-row>
         </v-toolbar-title>
+
+        <nav class="nav">
+            <ul class="list flex align-center">
+                <!--<li class="list__item">-->
+                <!--    <router-link :to="{name: 'DaoInvestors'}">For investors</router-link>-->
+                <!--</li>-->
+                <li class="list__item">
+                    <router-link :to="{name: 'DaoManager'}">For DAO Managers</router-link>
+                </li>
+                <!--<li class="list__item">-->
+                <!--    <router-link :to="{name: 'Dashboard'}">Dashboard</router-link>-->
+                <!--</li>-->
+                <li class="list__item">
+                    <router-link :to="{name: 'About'}">About Us</router-link>
+                </li>
+            </ul>
+
+        </nav>
 
         <v-spacer></v-spacer>
 
@@ -41,6 +68,7 @@
 <script>
     import logoDark from '@/assets/dark.png'
     import logoLight from '@/assets/light.png'
+    import UINavigationMobile from '_ui/UINavigationMobile'
     import Web3 from 'web3'
     import Web3Modal from 'web3modal'
     import MewConnect from '@myetherwallet/mewconnect-web-client'
@@ -50,11 +78,16 @@
     export default {
         name: 'UIAppBar',
 
+        components: {
+            UINavigationMobile,
+        },
+
         data: () => ({
             logoDark,
             logoLight,
             walletConnected: false,
             accountAddress: '',
+            showMenu: '',
         }),
 
         methods: {
@@ -146,3 +179,67 @@
         },
     }
 </script>
+
+<style lang="scss">
+    @import '@/sass/_variables.scss';
+
+    .header__switcer {
+        display: flex;
+    }
+
+    .v-input__control {
+        .v-input__slot {
+            margin-bottom: 0;
+        }
+
+        .v-messages {
+            display: none;
+        }
+    }
+
+    .v-input--switch__thumb {
+        background: -webkit-linear-gradient(#6280ec, #be56fe);
+    }
+
+    .v-input--switch__track.theme--light {
+        background-color: #ffffff;
+        box-shadow:       0px 2px 12px rgba(73, 73, 73, 0.16);
+    }
+
+    .header__right button:first-child {
+        margin-right: 30px;
+    }
+
+    .header__right button:nth-child(2) {
+        margin-right: 40px;
+    }
+
+    button {
+        outline: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .nav {
+        display: none;
+    }
+
+    @media (min-width: 1300px) {
+        .container {
+            max-width: 1300px;
+        }
+
+    }
+
+    @media (min-width: 1300px) {
+        .nav_icon__wrapper {
+            display: none;
+        }
+        .nav {
+            display: block;
+        }
+
+    }
+</style>

@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        name: 'DaoListScreen',
+        name: 'DaoManagerScreen',
 
         data: () => ({
             daoList: [],
