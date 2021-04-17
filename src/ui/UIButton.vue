@@ -2,7 +2,8 @@
     <button
         class="button"
         :class="{'outlined': outlined, 'width-100': width}"
-        @click="go">
+        @click="$emit('click')"
+        >
         <template v-if="text">
             <span :class="{'text-brand-gradient': outlined}">{{ text }}</span>
         </template>
@@ -23,11 +24,6 @@
             route: String,
         },
 
-        methods: {
-            go() {
-                this.$router.push(this.route)
-            },
-        },
     }
 </script>
 

@@ -4,7 +4,14 @@ import MewConnect from "@myetherwallet/mewconnect-web-client";
 import ethProvider from "eth-provider";
 import Authereum from "authereum";
 var Bia = {
-    connect: async function() {
+    connected: false,
+    provider: "",
+    web3: "",
+    accountAddress: "",
+    contractAddress: "",
+    contract: "",
+    daos: "",
+    connect: async function(callback) {
         if (!this.connected) {
             const vm = this;
             const providerOptions = {
@@ -43,17 +50,23 @@ var Bia = {
                             console.log(r);
                         });
                         console.log(this.accountAddress);
+                        callback({
+                            address: this.accountAddress,
+                            success: true
+                        });
                     });
                 })
-                .catch(e => console.log("Wow. Something went wrong: " + e));
+                .catch(e => {
+                    callback({ address: null, success: false });
+                });
         } else {
             this.web3.eth.net.getNetworkType().then(r => {
                 console.log(r);
             });
-            console.log(this.accountAddress);
+            callback({ address: this.accountAddress, success: true });
         }
     },
-    createDao: async function(params) {
+    createDao: async function(params, callback) {
         // params.daoName
         // params.daoDescription
         // params.gpTokenName
@@ -174,6 +187,7 @@ var Bia = {
                     (err, result) => {
                         console.log(result);
                         this.contractAddress = result;
+                        callback();
                     }
                 );
         }
@@ -192,12 +206,10 @@ var Bia = {
                 });
         }
     },
-    connected: false,
-    provider: "",
-    web3: "",
-    accountAddress: "",
-    contractAddress: "",
-    contract: "",
-    daos: ""
+    spliceAddress: function(address) {
+        return (
+            address.substr(0, 6) + "..." + address.substr(address.length - 5, 5)
+        );
+    }
 };
 export default Bia;

@@ -9,7 +9,7 @@
                 <v-col cols="4">
                     <div class="table-row__content">
                         <img :src="btcIcon" alt="btc" class="table-row__img">
-                        <span class="name">BTC DAO</span>
+                        <span class="name">{{name}}</span>
                     </div>
                 </v-col>
                 <v-col cols="3"><span class="price">$20.000</span></v-col>

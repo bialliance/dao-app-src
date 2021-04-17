@@ -7,13 +7,29 @@
                     <v-col cols="6">
                         <h4 class="input_title">General</h4>
                         <div class="form_group">
-                            <div class="input-wrapper d-flex justify-between align-end">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
                                 <label class="label" for="name">DAO name</label>
-                                <input type="text" name="name" class="text_input">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="text_input"
+                                    v-model="daoName"
+                                />
                             </div>
-                            <div class="input-wrapper d-flex justify-between align-end">
-                                <label class="label" for="description">DAO description</label>
-                                <input type="text" name="description" class="text_input">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label" for="description"
+                                    >DAO description</label
+                                >
+                                <input
+                                    type="text"
+                                    name="description"
+                                    class="text_input"
+                                    v-model="daoDescription"
+                                />
                             </div>
                         </div>
                     </v-col>
@@ -23,28 +39,68 @@
                         <h4 class="input_title">Create 2 tokens</h4>
                         <v-row>
                             <v-col cols="6">
-                                <p class="input__text">GP token (governance token)</p>
+                                <p class="input__text">
+                                    GP token (governance token)
+                                </p>
                                 <div class="form_group">
-                                    <div class="input-wrapper d-flex justify-between align-end">
-                                        <label class="label" for="name">Full token name</label>
-                                        <input type="text" name="name" class="text_input">
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label class="label" for="name"
+                                            >Full token name</label
+                                        >
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            class="text_input"
+                                            v-model="gpTokenName"
+                                        />
                                     </div>
-                                    <div class="input-wrapper d-flex justify-between align-end">
-                                        <label class="label" for="description">Token symbol</label>
-                                        <input type="text" name="description" class="text_input">
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label class="label" for="description"
+                                            >Token symbol</label
+                                        >
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            class="text_input"
+                                            v-model="gpTokenSymbol"
+                                        />
                                     </div>
                                 </div>
                             </v-col>
                             <v-col cols="6">
-                                <p class="input__text">LP token (limited partner token)</p>
+                                <p class="input__text">
+                                    LP token (limited partner token)
+                                </p>
                                 <div class="form_group">
-                                    <div class="input-wrapper d-flex justify-between align-end">
-                                        <label class="label" for="name">Full token name</label>
-                                        <input type="text" name="name" class="text_input">
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label class="label" for="name"
+                                            >Full token name</label
+                                        >
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            class="text_input"
+                                            v-model="lpTokenName"
+                                        />
                                     </div>
-                                    <div class="input-wrapper d-flex justify-between align-end">
-                                        <label class="label" for="description">Token symbol</label>
-                                        <input type="text" name="description" class="text_input">
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label class="label" for="description"
+                                            >Token symbol</label
+                                        >
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            class="text_input"
+                                            v-model="lpTokenSymbol"
+                                        />
                                     </div>
                                 </div>
                             </v-col>
@@ -55,9 +111,15 @@
                     <v-col cols="7">
                         <h4 class="input_title">Voting</h4>
                         <div class="form_group">
-                            <div class="input-wrapper d-flex justify-between align-end">
-                                <label class="label" for="name">Support %</label>
-                                <div class="slider_wrapper d-flex justify-start align-end">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label" for="name"
+                                    >Support %</label
+                                >
+                                <div
+                                    class="slider_wrapper d-flex justify-start align-end"
+                                >
                                     <v-slider
                                         v-model="ex1.val"
                                         :color="ex1.color"
@@ -65,12 +127,18 @@
                                     <div class="voting__percent">50%</div>
                                 </div>
                             </div>
-                            <div class="input-wrapper d-flex justify-between align-end">
-                                <label class="label" for="description">Minimum approval %</label>
-                                <div class="slider_wrapper d-flex justify-start align-end">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label" for="description"
+                                    >Minimum approval %</label
+                                >
+                                <div
+                                    class="slider_wrapper d-flex justify-start align-end"
+                                >
                                     <v-slider
-                                        v-model="ex1.val"
-                                        :color="ex1.color"
+                                        v-model="ex2.val"
+                                        :color="ex2.color"
                                     ></v-slider>
                                     <div class="voting__percent">20%</div>
                                 </div>
@@ -80,7 +148,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="3">
-                        <UIButton text="Create DAO" />
+                        <UIButton text="Create DAO" @click="createDao" />
                     </v-col>
                 </v-row>
             </div>
@@ -89,91 +157,125 @@
 </template>
 
 <script>
-    import UIButton from '_ui/UIButton'
+import UIButton from "_ui/UIButton";
+import Bia from "@/api/bia";
 
-    export default {
-        name: 'DaoNewScreen',
+export default {
+    name: "DaoNewScreen",
 
-        components: {
-            UIButton,
-        },
+    components: {
+        UIButton
+    },
+    data: () => ({
+        daoName: "",
+        ex1: { label: "color", val: 25, color: "orange darken-3" },
+        ex2: { label: "color", val: 25, color: "orange darken-3" }
+    }),
 
-        data: () => ({
-            ex1: { label: 'color', val: 25, color: 'orange darken-3' },
-        }),
+    methods: {
+        createDao: function() {
+            console.log(this.daoName);
+            var params = {
+                daoName: this.daoName,
+                daoDescription: this.daoDescription,
+                gpTokenName: this.gpTokenName,
+                gpTokenSymbol: this.gpTokenSymbol,
+                lpTokenName: this.lpTokenName,
+                lpTokenSymbol: this.lpTokenSymbol
+            };
+            //router.push('manager')
 
-        methods: {
-            //
-        },
+            // params.daoName
+            // params.daoDescription
+            // params.gpTokenName
+            // params.gpTokenSymbol
+            // params.lpTokenName
+            // params.lpTokenSymbol
+            // params.votingSupport*
+            // params.votingApproval*
+            console.log(params);
+            Bia.createDao(params, () => {
+                const router = new VueRouter({
+                    routes: [{ path: "/new", redirect: "/manager" }]
+                });
+            });
+        }
     }
+};
 </script>
 
-<style lang='scss'>
-    .created {
-        text-align: left;
-    }
+<style lang="scss">
+.created {
+    text-align: left;
+}
 
-    .created__title {
-        font-size:     60px;
-        line-height:   60px;
-        margin-bottom: 35px;
-    }
+.created__title {
+    font-size: 60px;
+    line-height: 60px;
+    margin-bottom: 35px;
+}
 
-    .input_title {
-        font-size:     26px;
-        line-height:   22px;
-        margin-bottom: 16px;
-    }
+.input_title {
+    font-size: 26px;
+    line-height: 22px;
+    margin-bottom: 16px;
+}
 
-    .label {
-        font-size:   20px;
-        line-height: 22px;
-    }
+.label {
+    font-size: 20px;
+    line-height: 22px;
+}
 
-    .input-wrapper {
-        margin-bottom: 24px;
-    }
+.input-wrapper {
+    margin-bottom: 24px;
+}
 
-    .form_group {
-        margin-bottom: 50px;
-    }
+.form_group {
+    margin-bottom: 50px;
+}
 
-    .text_input {
-        background-color:       transparent;
-        background-image:       linear-gradient(to right, #6280ec, #be56fe);
-        background-repeat:      no-repeat;
-        background-position:    0 calc(100% + 3px), 0 0;
-        background-size:        100% 3px;
-        box-shadow:             none;
-        border:                 0;
-        border-bottom:          2px solid #ff005e;
-        color:                  #000000;
-        -webkit-font-smoothing: antialiased;
-        outline:                0 none;
-        border-color:           transparent;
-        outline:                none;
-        width:                  65%;
-    }
+.text_input {
+    background-color: transparent;
+    background-image: linear-gradient(to right, #6280ec, #be56fe);
+    background-repeat: no-repeat;
+    background-position: 0 calc(100% + 3px), 0 0;
+    background-size: 100% 3px;
+    box-shadow: none;
+    border: 0;
+    border-bottom: 2px solid #ff005e;
+    color: #000000;
+    -webkit-font-smoothing: antialiased;
+    outline: 0 none;
+    border-color: transparent;
+    outline: none;
+    width: 65%;
+    font-size: 20px;
+    padding-left: 9px;
+    line-height: 20px;
+    height: 20px;
+    color: #565656;
+}
 
-    .input__text {
-        font-size:     18px;
-        line-height:   22px;
-        margin-bottom: 25px;
-    }
+.input__text {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 25px;
+}
 
-    .slider_wrapper {
-        width: 65%;
-    }
+.slider_wrapper {
+    width: 65%;
+}
 
-    .voting__percent {
-        box-shadow:        0 0 6px 0 rgba(157, 96, 212, 0.5);
-        border:            solid 2px transparent;
-        background-image:  -webkit-linear-gradient(#6280ec, #be56fe), -webkit-linear-gradient(#6280ec, #be56fe);
-        background-origin: border-box;
-        background-clip:   content-box, border-box;
-        box-shadow:        1px 1000px 1px #ffffff inset;
-        outline:           none;
-        border-radius:     10px;
-        padding:           5px 14px;
-    }
+.voting__percent {
+    box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+    border: solid 2px transparent;
+    background-image: -webkit-linear-gradient(#6280ec, #be56fe),
+        -webkit-linear-gradient(#6280ec, #be56fe);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 1px 1000px 1px #ffffff inset;
+    outline: none;
+    border-radius: 10px;
+    padding: 5px 14px;
+}
 </style>

@@ -2,7 +2,7 @@
     <div class="table">
         <div class="table__inner">
             <DaoTableHeader />
-            <DaoTableRow v-for="i in 5" :key="i" />
+            <DaoTableRow v-for="dao in daos" :key="dao.name" />
         </div>
     </div>
 </template>
@@ -13,7 +13,14 @@
 
     export default {
         name: 'DaoTable',
-
+        data: ()=>({
+            daos:[
+                {name:"BTC DAO", tlv: "20000", apy:"24%"},
+                {name:"BTC DAO", tlv: "20000", apy:"24%"},
+                {name:"BTC DAO", tlv: "20000", apy:"24%"},
+                {name:"FLEX", tlv: "20000", apy:"24%"} 
+            ]
+        }),
         components: {
             DaoTableHeader,
             DaoTableRow,
