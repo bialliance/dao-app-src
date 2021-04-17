@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import {
     faBars as fasBars,
+    faCaretDown as fasCaretDown,
     faCoins as fasCoins,
     faHome as fasHome,
     faMoon as fasMoon,
@@ -52,7 +53,7 @@ const MY_ICONS = {
     expand: 'expand',
     menu: makeIcon(fasBars),
     subgroup: 'subgroup',
-    dropdown: 'dropdown',
+    dropdown: makeIcon(fasCaretDown),
     radioOn: 'radioOn',
     radioOff: 'radioOff',
     edit: 'edit',

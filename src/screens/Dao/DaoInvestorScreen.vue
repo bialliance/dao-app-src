@@ -1,77 +1,34 @@
 <template>
-    <div>
-        DaoInvestorScreen
-    </div>
+    <v-container class="investors">
+        <h1 class="investors__title">For Depositors</h1>
+        <div class="investors__content">
+            <DaoTable />
+        </div>
+    </v-container>
 </template>
 
 <script>
+    import DaoTable from '_features/dao/components/DaoTable'
+
     export default {
         name: 'DaoInvestorScreen',
 
-        components: {},
-
-        directives: {},
-
-        filters: {},
-
-        extends: {},
-
-        mixins: {},
-
-        props: {},
-
-        data: () => ({
-            //
-        }),
-
-        computed: {},
-
-        watch: {},
-
-        beforeCreate() {
-
+        components: {
+            DaoTable,
         },
-
-        created() {
-
-        },
-
-        beforeMount() {
-
-        },
-
-        mounted() {
-
-        },
-
-        beforeUpdate() {
-
-        },
-
-        updated() {
-
-        },
-
-        activated() {
-
-        },
-
-        deactivated() {
-
-        },
-
-        beforeDestroy() {
-
-        },
-
-        destroyed() {
-
-        },
-
-        methods: {},
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    @import '@/sass/_variables.scss';
 
+    .investors__title {
+        text-align-last: left;
+        font-size:       $big_font;
+        line-height:     $big_height;
+        font-weight:     normal;
+        margin-top:      50px;
+        margin-bottom:   40px;
+        padding-left:    110px;
+    }
 </style>
