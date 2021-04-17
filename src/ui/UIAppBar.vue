@@ -181,9 +181,10 @@
         margin-left: 30px;
 
         a {
-            text-decoration:         none;
-            font-size:               $menu_font;
-            line-height:             $menu_height;
+            text-decoration: none;
+            font-size:       $menu_font;
+            font-weight:     700;
+            line-height:     $menu_height;
 
             &.router-link-exact-active {
                 color: #42b983;

@@ -37,6 +37,7 @@
     .button {
         text-transform:  capitalize;
         font-size:       $menu_font;
+        font-weight:     700;
         line-height:     $menu_height;
         border-radius:   20px;
         background:      linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%);
@@ -61,13 +62,6 @@
 
     .width-100 {
         width: 100%;
-    }
-
-    @media (max-width: 1460px) {
-        .button {
-            font-size:   $menu_font_m;
-            line-height: $menu_height_m;
-        }
     }
 
 </style>

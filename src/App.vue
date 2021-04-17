@@ -101,7 +101,7 @@
     @import '@/sass/_variables.scss';
 
     #app {
-        font-family:             Avenir, Helvetica, Arial, sans-serif;
+        font-family:             Helvetica, Avenir, Arial, sans-serif;
         -webkit-font-smoothing:  antialiased;
         -moz-osx-font-smoothing: grayscale;
         position:                relative;
