@@ -26,21 +26,21 @@
         </v-toolbar-title>
 
         <nav class="nav flex align-center">
-            <!--            <v-btn color="primary" text :to="{name: 'DaoInvestors'}">-->
-            <!--                For investors-->
-            <!--            </v-btn>-->
+            <v-btn color="primary" text :to="{name: 'DaoInvestor'}">
+                For investors
+            </v-btn>
             <v-btn color="primary" text :to="{name: 'DaoManager'}">
                 For DAO Managers
             </v-btn>
-            <!--            <v-btn color="primary" text :to="{name: 'Dashboard'}">-->
-            <!--                Dashboard-->
-            <!--            </v-btn>-->
+            <v-btn color="primary" text :to="{name: 'Dashboard'}">
+                Dashboard
+            </v-btn>
             <v-btn color="primary" text :to="{name: 'About'}">
                 About Us
             </v-btn>
         </nav>
 
-        <v-spacer/>
+        <v-spacer />
 
         <v-btn color="primary" text :to="{name: 'DaoNew'}">
             Create DAO
@@ -84,7 +84,7 @@
             logoLight,
             walletConnected: false,
             accountAddress: '',
-            showMenu: '',
+            showMenu: false,
         }),
 
         methods: {

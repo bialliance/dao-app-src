@@ -7,6 +7,7 @@ import { library as faLibrary } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import {
+    faBars as fasBars,
     faCoins as fasCoins,
     faHome as fasHome,
     faMoon as fasMoon,
@@ -49,7 +50,7 @@ const MY_ICONS = {
     delimiter: 'delimiter', // for carousel
     sort: 'sort',
     expand: 'expand',
-    menu: 'menu',
+    menu: makeIcon(fasBars),
     subgroup: 'subgroup',
     dropdown: 'dropdown',
     radioOn: 'radioOn',
