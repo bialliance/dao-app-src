@@ -25,25 +25,26 @@
             </v-row>
         </v-toolbar-title>
 
-        <nav class="nav">
-            <ul class="list flex align-center">
-                <!--<li class="list__item">-->
-                <!--    <router-link :to="{name: 'DaoInvestors'}">For investors</router-link>-->
-                <!--</li>-->
-                <li class="list__item">
-                    <router-link :to="{name: 'DaoManager'}">For DAO Managers</router-link>
-                </li>
-                <!--<li class="list__item">-->
-                <!--    <router-link :to="{name: 'Dashboard'}">Dashboard</router-link>-->
-                <!--</li>-->
-                <li class="list__item">
-                    <router-link :to="{name: 'About'}">About Us</router-link>
-                </li>
-            </ul>
-
+        <nav class="nav flex align-center">
+            <!--            <v-btn color="primary" text :to="{name: 'DaoInvestors'}">-->
+            <!--                For investors-->
+            <!--            </v-btn>-->
+            <v-btn color="primary" text :to="{name: 'DaoManager'}">
+                For DAO Managers
+            </v-btn>
+            <!--            <v-btn color="primary" text :to="{name: 'Dashboard'}">-->
+            <!--                Dashboard-->
+            <!--            </v-btn>-->
+            <v-btn color="primary" text :to="{name: 'About'}">
+                About Us
+            </v-btn>
         </nav>
 
-        <v-spacer></v-spacer>
+        <v-spacer/>
+
+        <v-btn color="primary" text :to="{name: 'DaoNew'}">
+            Create DAO
+        </v-btn>
 
         <v-btn v-if="!walletConnected" color="primary" @click="connect">
             Connect Wallet
@@ -51,10 +52,6 @@
         <v-btn v-else color="primary" outlined @click="disconnect">
             {{ accountAddress }}
         </v-btn>
-
-        <!--        <v-btn color="primary" text :to="{name: 'SoftwareUpdate'}">-->
-        <!--            Обновление ПО-->
-        <!--        </v-btn>-->
 
         <v-switch v-model="$vuetify.theme.dark" class="ml-5" hide-details inset>
             <template v-slot:label>
