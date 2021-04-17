@@ -84,7 +84,7 @@
 import logoDark from "@/assets/dark.png";
 import logoLight from "@/assets/light.png";
 import UIButton from "_ui/UIButton";
-import Bia from "@/api/bia";
+// import Bia from "@/api/bia";
 
 export default {
     name: "UIAppBar",
@@ -99,10 +99,10 @@ export default {
 
     methods: {
         connect: async function() {
-            Bia.connect(data => {
+            this.$bia.connect(data => {
                 console.log("bia.connect");
                 console.log(data);
-                this.accountAddress = Bia.spliceAddress(data.address);
+                this.accountAddress = this.$bia.spliceAddress(data.address);
                 this.walletConnected = data.success;
             });
         },

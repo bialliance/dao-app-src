@@ -120,11 +120,32 @@
                                 <div
                                     class="slider_wrapper d-flex justify-start align-end"
                                 >
+                                    <!-- <v-slider
+                                        v-model="ex1"
+                                        :color="orange"
+                                    ></v-slider> -->
+
                                     <v-slider
-                                        v-model="ex1.val"
-                                        :color="ex1.color"
-                                    ></v-slider>
-                                    <div class="voting__percent">50%</div>
+                                        v-model="slider"
+                                        class="align-center"
+                                        :max="max"
+                                        :min="min"
+                                        hide-details
+                                    >
+                                        <template v-slot:append>
+                                            <v-text-field
+                                                v-model="slider"
+                                                class="mt-0 pt-0"
+                                                hide-details
+                                                single-line
+                                                type="text"
+                                                style="width: 60px"
+                                                disabled
+                                            ></v-text-field>
+                                        </template>
+                                    </v-slider>
+
+                                    <!-- <div class="voting__percent">50%</div> -->
                                 </div>
                             </div>
                             <div
@@ -136,11 +157,30 @@
                                 <div
                                     class="slider_wrapper d-flex justify-start align-end"
                                 >
-                                    <v-slider
+                                    <!-- <v-slider
                                         v-model="ex2.val"
                                         :color="ex2.color"
-                                    ></v-slider>
-                                    <div class="voting__percent">20%</div>
+                                    ></v-slider> -->
+                                    <v-slider
+                                        v-model="slider"
+                                        class="align-center"
+                                        :max="max"
+                                        :min="min"
+                                        hide-details
+                                    >
+                                        <template v-slot:append>
+                                            <v-text-field
+                                                v-model="slider"
+                                                class="mt-0 pt-0"
+                                                hide-details
+                                                single-line
+                                                type="text"
+                                                style="width: 60px"
+                                                disabled
+                                            ></v-text-field>
+                                        </template>
+                                    </v-slider>
+                                    <!-- <div class="voting__percent">20%</div> -->
                                 </div>
                             </div>
                         </div>
@@ -166,15 +206,21 @@ export default {
     components: {
         UIButton
     },
-    data: () => ({
-        daoName: "",
-        ex1: { label: "color", val: 25, color: "orange darken-3" },
-        ex2: { label: "color", val: 25, color: "orange darken-3" }
-    }),
-
+    data() {
+        return {
+            min: 0,
+            max: 100,
+            slider1: 40,
+            slider2: 40
+        };
+    },
+    // data: () => ({
+    //     daoName: "",
+    //     ex1: { label: "color", val: 25, color: "orange darken-3" },
+    //     ex2: { label: "color", val: 25, color: "orange darken-3" }
+    // }),
     methods: {
         createDao: function() {
-            console.log(this.daoName);
             var params = {
                 daoName: this.daoName,
                 daoDescription: this.daoDescription,
@@ -194,10 +240,8 @@ export default {
             // params.votingSupport*
             // params.votingApproval*
             console.log(params);
-            Bia.createDao(params, () => {
-                const router = new VueRouter({
-                    routes: [{ path: "/new", redirect: "/manager" }]
-                });
+            this.$bia.createDao(params, () => {
+                this.$router.push("manager");
             });
         }
     }

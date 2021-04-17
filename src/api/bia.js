@@ -3,17 +3,127 @@ import Web3Modal from "web3modal";
 import MewConnect from "@myetherwallet/mewconnect-web-client";
 import ethProvider from "eth-provider";
 import Authereum from "authereum";
-var Bia = {
-    connected: false,
-    provider: "",
-    web3: "",
-    accountAddress: "",
-    contractAddress: "",
-    contract: "",
-    daos: "",
-    connect: async function(callback) {
+class Bia {
+    constructor() {
+        this.connected = false;
+        this.provider = "";
+        this.web3 = "";
+        this.accountAddress = "";
+        this.contractAddress = "";
+        this.contract = "";
+        this.daos = "";
+        this.chainId = "";
+    }
+    getContractAddress(chainId) {
+        switch (chainId) {
+            case 4:
+                return "0x6545d195760E4680AF5656C0a143c654EF7B0424";
+            default:
+                return "";
+        }
+    }
+    async getDaoFactoryContract() {
+        console.log(this.chainId);
+        const contractAddress = this.getContractAddress(this.chainId);
+        console.log("contract address: " + contractAddress);
+        const contract = await new this.web3.eth.Contract(
+            [
+                {
+                    inputs: [
+                        {
+                            internalType: "string",
+                            name: "nameDao",
+                            type: "string"
+                        },
+                        {
+                            internalType: "string",
+                            name: "descriptionDao",
+                            type: "string"
+                        },
+                        {
+                            internalType: "string",
+                            name: "gpTokenName",
+                            type: "string"
+                        },
+                        {
+                            internalType: "string",
+                            name: "gpTokenSymbol",
+                            type: "string"
+                        },
+                        {
+                            internalType: "string",
+                            name: "lpTokenName",
+                            type: "string"
+                        },
+                        {
+                            internalType: "string",
+                            name: "lpTokenSymbol",
+                            type: "string"
+                        }
+                    ],
+                    name: "createDao",
+                    outputs: [],
+                    stateMutability: "nonpayable",
+                    type: "function"
+                },
+                {
+                    inputs: [
+                        {
+                            internalType: "address",
+                            name: "owner",
+                            type: "address"
+                        }
+                    ],
+                    name: "getDaos",
+                    outputs: [
+                        {
+                            components: [
+                                {
+                                    internalType: "string",
+                                    name: "NameDao",
+                                    type: "string"
+                                },
+                                {
+                                    internalType: "string",
+                                    name: "DescriptionDao",
+                                    type: "string"
+                                },
+                                {
+                                    internalType: "string",
+                                    name: "GpTokenName",
+                                    type: "string"
+                                },
+                                {
+                                    internalType: "string",
+                                    name: "GpTokenSymbol",
+                                    type: "string"
+                                },
+                                {
+                                    internalType: "string",
+                                    name: "LpTokenName",
+                                    type: "string"
+                                },
+                                {
+                                    internalType: "string",
+                                    name: "LpTokenSymbol",
+                                    type: "string"
+                                }
+                            ],
+                            internalType: "struct DaoFactory.DaoInfo[]",
+                            name: "",
+                            type: "tuple[]"
+                        }
+                    ],
+                    stateMutability: "view",
+                    type: "function"
+                }
+            ],
+            contractAddress
+        );
+        return contract;
+    }
+    async connect(callback) {
         if (!this.connected) {
-            const vm = this;
             const providerOptions = {
                 mewconnect: {
                     package: MewConnect, // required
@@ -41,18 +151,18 @@ var Bia = {
             this.web3.eth.net
                 .isListening()
                 .then(() => {
-                    this.connected = true;
-                    vm.walletConnected = true;
                     this.web3.eth.getAccounts().then(e => {
-                        vm.accountAddress = e[0];
                         this.accountAddress = e[0];
-                        this.web3.eth.net.getNetworkType().then(r => {
+                        this.web3.eth.getChainId().then(r => {
+                            this.chainId = r;
+
                             console.log(r);
-                        });
-                        console.log(this.accountAddress);
-                        callback({
-                            address: this.accountAddress,
-                            success: true
+                            console.log(this.accountAddress);
+                            this.connected = true;
+                            callback({
+                                address: this.accountAddress,
+                                success: true
+                            });
                         });
                     });
                 })
@@ -60,13 +170,10 @@ var Bia = {
                     callback({ address: null, success: false });
                 });
         } else {
-            this.web3.eth.net.getNetworkType().then(r => {
-                console.log(r);
-            });
             callback({ address: this.accountAddress, success: true });
         }
-    },
-    createDao: async function(params, callback) {
+    }
+    async createDao(params, callback) {
         // params.daoName
         // params.daoDescription
         // params.gpTokenName
@@ -78,100 +185,7 @@ var Bia = {
         if (!this.connected) {
             alert("Need to connect");
         } else {
-            this.contract = await new this.web3.eth.Contract(
-                [
-                    {
-                        inputs: [
-                            {
-                                internalType: "string",
-                                name: "nameDao",
-                                type: "string"
-                            },
-                            {
-                                internalType: "string",
-                                name: "descriptionDao",
-                                type: "string"
-                            },
-                            {
-                                internalType: "string",
-                                name: "gpTokenName",
-                                type: "string"
-                            },
-                            {
-                                internalType: "string",
-                                name: "gpTokenSymbol",
-                                type: "string"
-                            },
-                            {
-                                internalType: "string",
-                                name: "lpTokenName",
-                                type: "string"
-                            },
-                            {
-                                internalType: "string",
-                                name: "lpTokenSymbol",
-                                type: "string"
-                            }
-                        ],
-                        name: "createDao",
-                        outputs: [],
-                        stateMutability: "nonpayable",
-                        type: "function"
-                    },
-                    {
-                        inputs: [
-                            {
-                                internalType: "address",
-                                name: "owner",
-                                type: "address"
-                            }
-                        ],
-                        name: "getDaos",
-                        outputs: [
-                            {
-                                components: [
-                                    {
-                                        internalType: "string",
-                                        name: "NameDao",
-                                        type: "string"
-                                    },
-                                    {
-                                        internalType: "string",
-                                        name: "DescriptionDao",
-                                        type: "string"
-                                    },
-                                    {
-                                        internalType: "string",
-                                        name: "GpTokenName",
-                                        type: "string"
-                                    },
-                                    {
-                                        internalType: "string",
-                                        name: "GpTokenSymbol",
-                                        type: "string"
-                                    },
-                                    {
-                                        internalType: "string",
-                                        name: "LpTokenName",
-                                        type: "string"
-                                    },
-                                    {
-                                        internalType: "string",
-                                        name: "LpTokenSymbol",
-                                        type: "string"
-                                    }
-                                ],
-                                internalType: "struct DaoFactory.DaoInfo[]",
-                                name: "",
-                                type: "tuple[]"
-                            }
-                        ],
-                        stateMutability: "view",
-                        type: "function"
-                    }
-                ],
-                "0x6545d195760E4680AF5656C0a143c654EF7B0424"
-            );
+            this.contract = await this.getDaoFactoryContract();
             // string memory nameDao, string memory descriptionDao, string memory gpTokenName, string memory gpTokenSymbol, string memory lpTokenName, string memory lpTokenSymbol
             this.contract.methods
                 .createDao(
@@ -182,34 +196,32 @@ var Bia = {
                     params.lpTokenName,
                     params.lpTokenSymbol
                 )
-                .send(
-                    { from: "0xEa2C787A2acd3aD60e44bf427Af568373cDe68f3" },
-                    (err, result) => {
-                        console.log(result);
-                        this.contractAddress = result;
-                        callback();
-                    }
-                );
+                .send({ from: this.accountAddress }, (err, result) => {
+                    console.log(result);
+                    this.contractAddress = result;
+                    callback();
+                });
         }
-    },
-    getDao: async function() {
+    }
+    async getDao(callback) {
         if (!this.connected) {
             alert("Need to connect");
-        } else if (!this.contractAddress) {
-            alert("Need to create contract");
         } else {
+            this.contract = await this.getDaoFactoryContract();
+            console.log(this.contract);
             this.contract.methods
-                .getDaos("0xEa2C787A2acd3aD60e44bf427Af568373cDe68f3")
+                .getDaos(this.accountAddress)
                 .call((err, result) => {
                     console.log(result);
                     this.daos = result;
+                    callback(this.daos);
                 });
         }
-    },
-    spliceAddress: function(address) {
+    }
+    spliceAddress(address) {
         return (
             address.substr(0, 6) + "..." + address.substr(address.length - 5, 5)
         );
     }
-};
+}
 export default Bia;
