@@ -39,8 +39,6 @@
 </template>
 
 <script>
-    import { forEach as _forEach } from 'lodash'
-
     import logoDark from '@/assets/dark.png'
     import logoLight from '@/assets/light.png'
     import Web3 from 'web3'
