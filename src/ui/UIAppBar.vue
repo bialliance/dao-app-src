@@ -20,7 +20,7 @@
             <div class="list d-flex align-center">
                 <div class="list__item">
                     <router-link :to="{name: 'DaoInvestor'}" class="text-brand-gradient">
-                        For investors
+                        For Depositors
                     </router-link>
                 </div>
                 <div class="list__item">
@@ -67,11 +67,7 @@
     import logoDark from '@/assets/dark.png'
     import logoLight from '@/assets/light.png'
     import UIButton from '_ui/UIButton'
-    import Web3 from 'web3'
-    import Web3Modal from 'web3modal'
-    import MewConnect from '@myetherwallet/mewconnect-web-client'
-    import ethProvider from 'eth-provider'
-    import Authereum from 'authereum'
+    import Bia from '@/api/bia'
 
     export default {
         name: 'UIAppBar',
@@ -86,85 +82,7 @@
 
         methods: {
             connect: async function () {
-                const vm = this
-
-                const providerOptions = {
-                    mewconnect: {
-                        package: MewConnect, // required
-                        options: {
-                            infuraId: '1fa62a71dee94d9ebc1fc18e82207e55', // required
-                        },
-                    },
-                    frame: {
-                        package: ethProvider, // required
-                    },
-                    authereum: {
-                        package: Authereum, // required
-                    },
-                }
-
-                const web3Modal = new Web3Modal({
-                    // network: "mainnet", // optional
-                    cacheProvider: false, // optional
-                    providerOptions, // required
-                    theme: 'dark',
-                })
-                web3Modal.clearCachedProvider()
-
-                const provider = await web3Modal.connect()
-                const web3 = new Web3(provider)
-                web3.eth.net
-                    .isListening()
-                    .then(() => {
-                        console.log('is connected')
-
-                        vm.accountAddress = 'xxxx'
-                        vm.walletConnected = true
-                        web3.eth.getAccounts().then((e) => {
-                            vm.accountAddress = e[0]
-                        })
-                        // send();
-                    })
-                    .catch((e) => console.log('Wow. Something went wrong: ' + e))
-
-                // eslint-disable-next-line no-unused-vars
-                async function send() {
-                    const contract = await new web3.eth.Contract(
-                        [
-                            {
-                                inputs: [
-                                    {
-                                        internalType: 'uint256',
-                                        name: 'num',
-                                        type: 'uint256',
-                                    },
-                                ],
-                                name: 'store',
-                                outputs: [],
-                                stateMutability: 'nonpayable',
-                                type: 'function',
-                            },
-                            {
-                                inputs: [],
-                                name: 'retrieve',
-                                outputs: [
-                                    {
-                                        internalType: 'uint256',
-                                        name: '',
-                                        type: 'uint256',
-                                    },
-                                ],
-                                stateMutability: 'view',
-                                type: 'function',
-                            },
-                        ],
-                        '0xfbbFDe3040A0B393Ef694526881955d34Fc47216',
-                    )
-                    // eslint-disable-next-line no-unused-vars,node/handle-callback-err
-                    const call = await contract.methods.retrieve().call((err, result) => {
-                        console.log(result)
-                    })
-                }
+                Bia.connect()
             },
             disconnect: function () {
                 console.log('close')
