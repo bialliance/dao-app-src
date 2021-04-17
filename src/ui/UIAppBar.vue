@@ -6,52 +6,53 @@
         :elevate-on-scroll="!$vuetify.theme.dark"
         :light="!$vuetify.theme.dark"
     >
-        <UINavigationMobile :show="showMenu" :closeMenu="showMenu = false" />
-
         <v-toolbar-title>
-            <v-row align="center">
-                <v-col cols="auto">
-                    <v-img
-                        v-if="$vuetify.theme.dark"
-                        :src="logoDark"
-                        width="30"
-                        contain
-                    />
-                    <v-img v-else :src="logoLight" width="30" contain />
-                </v-col>
-                <v-col cols="auto">
-                    <v-app-bar-nav-icon @click="showMenu = !showMenu" />
-                </v-col>
-            </v-row>
+            <v-img
+                v-if="$vuetify.theme.dark"
+                :src="logoDark"
+                width="40"
+                contain
+            />
+            <v-img v-else :src="logoLight" width="30" contain />
         </v-toolbar-title>
 
-        <nav class="nav flex align-center">
-            <v-btn color="primary" text :to="{name: 'DaoInvestor'}">
-                For investors
-            </v-btn>
-            <v-btn color="primary" text :to="{name: 'DaoManager'}">
-                For DAO Managers
-            </v-btn>
-            <v-btn color="primary" text :to="{name: 'Dashboard'}">
-                Dashboard
-            </v-btn>
-            <v-btn color="primary" text :to="{name: 'About'}">
-                About Us
-            </v-btn>
+        <nav class="nav">
+            <div class="list d-flex align-center">
+                <div class="list__item">
+                    <router-link :to="{name: 'DaoInvestor'}" class="text-brand-gradient">
+                        For investors
+                    </router-link>
+                </div>
+                <div class="list__item">
+                    <router-link :to="{name: 'DaoManager'}" class="text-brand-gradient">
+                        For DAO Managers
+                    </router-link>
+                </div>
+                <div class="list__item">
+                    <router-link :to="{name: 'Dashboard'}" class="text-brand-gradient">
+                        Dashboard
+                    </router-link>
+                </div>
+                <div class="list__item">
+                    <router-link :to="{name: 'About'}" class="text-brand-gradient">
+                        About Us
+                    </router-link>
+                </div>
+            </div>
         </nav>
 
         <v-spacer />
 
-        <v-btn color="primary" text :to="{name: 'DaoNew'}">
+        <UIButton class="mr-4" color="primary" :to="{name: 'DaoNew'}">
             Create DAO
-        </v-btn>
+        </UIButton>
 
-        <v-btn v-if="!walletConnected" color="primary" @click="connect">
+        <UIButton v-if="!walletConnected" color="primary" outlined @click="connect">
             Connect Wallet
-        </v-btn>
-        <v-btn v-else color="primary" outlined @click="disconnect">
+        </UIButton>
+        <UIButton v-else color="primary" outlined @click="disconnect">
             {{ accountAddress }}
-        </v-btn>
+        </UIButton>
 
         <v-switch v-model="$vuetify.theme.dark" class="ml-5" hide-details inset>
             <template v-slot:label>
@@ -65,7 +66,7 @@
 <script>
     import logoDark from '@/assets/dark.png'
     import logoLight from '@/assets/light.png'
-    import UINavigationMobile from '_ui/UINavigationMobile'
+    import UIButton from '_ui/UIButton'
     import Web3 from 'web3'
     import Web3Modal from 'web3modal'
     import MewConnect from '@myetherwallet/mewconnect-web-client'
@@ -74,11 +75,7 @@
 
     export default {
         name: 'UIAppBar',
-
-        components: {
-            UINavigationMobile,
-        },
-
+        components: { UIButton },
         data: () => ({
             logoDark,
             logoLight,
@@ -179,6 +176,20 @@
 
 <style lang="scss">
     @import '@/sass/_variables.scss';
+
+    .list__item {
+        margin-left: 30px;
+
+        a {
+            text-decoration:         none;
+            font-size:               $menu_font;
+            line-height:             $menu_height;
+
+            &.router-link-exact-active {
+                color: #42b983;
+            }
+        }
+    }
 
     .header__switcer {
         display: flex;

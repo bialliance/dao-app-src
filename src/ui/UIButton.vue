@@ -1,10 +1,13 @@
 <template>
-    <button class="button" :class="{'outlined': outlined, 'width-100': width}" @click="go">
+    <button
+        class="button"
+        :class="{'outlined': outlined, 'width-100': width}"
+        @click="go">
         <template v-if="text">
-            {{ text }}
+            <span :class="{'text-brand-gradient': outlined}">{{ text }}</span>
         </template>
         <template v-else>
-            <slot />
+            <span :class="{'text-brand-gradient': outlined}"><slot /></span>
         </template>
     </button>
 </template>
@@ -36,28 +39,20 @@
         font-size:       $menu_font;
         line-height:     $menu_height;
         border-radius:   20px;
-        background:      linear-gradient(90.31deg, #6280ec 17.71%, #be56fe 87.81%);
-        padding:         8px 57px;
+        background:      linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%);
         color:           white;
         height:          45px;
-        padding:         0 50px;
+        padding:         0 57px;
         display:         flex;
         align-items:     center;
         justify-content: center;
-        border:          1px solid linear-gradient(90.31deg, #6280ec 17.71%, #be56fe 87.81%);
+        border:          1px solid linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%);
     }
 
     .outlined {
-        /* background: transparent; */
-        p {
-            background:              -webkit-linear-gradient(#6280ec, #be56fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         box-shadow:        0 0 6px 0 rgba(157, 96, 212, 0.5);
         border:            solid 2px transparent;
-        background-image:  -webkit-linear-gradient(#6280ec, #be56fe), -webkit-linear-gradient(#6280ec, #be56fe);
+        background-image:  linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%), linear-gradient(90deg, #6280ec 17.71%, #be56fe 87.81%);
         background-origin: border-box;
         background-clip:   content-box, border-box;
         box-shadow:        1px 1000px 1px #ffffff inset;
@@ -72,7 +67,6 @@
         .button {
             font-size:   $menu_font_m;
             line-height: $menu_height_m;
-            padding:     0 30px;
         }
     }
 
