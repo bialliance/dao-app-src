@@ -2,27 +2,47 @@
     <v-container :class="{'fill-height': !daoList.length}">
         <v-row :align="daoList.length ? '' : 'center'" :justify="daoList.length ? '' : 'center'">
             <template v-for="(dao, index) in daoList">
-                <v-col cols="3" :key="`dao_${index}`">
+                <v-col cols="4" :key="`dao_${index}`">
                     <v-card class="text-center">
                         <v-responsive :aspect-ratio="1">
                             <v-container class="fill-height">
                                 <v-row justify="center">
                                     <v-col cols="auto">
+                                        <div>
+                                            <img
+                                                src="@/assets/img/flex.png"
+                                                alt="flex"
+                                                class="card__img"
+                                                width="90"
+                                            />
+                                        </div>
                                         <v-card-title class="justify-center">
                                             {{ dao.title }}
                                         </v-card-title>
-                                        <v-card-text>
-                                            {{ dao.text }}
-                                        </v-card-text>
-                                        <v-card-actions>
-                                            <v-btn :to="{name: 'DaoView', params:{daoAddress: 'gfdvfv89'}}">
-                                                Go To DAO
-                                            </v-btn>
-                                        </v-card-actions>
+                                        <div class="card__info mb-5">
+                                            <v-row dense>
+                                                <v-col cols="7">
+                                                    <span class="card__name">APY:</span>
+                                                </v-col>
+                                                <v-col cols="5">
+                                                    <span class="card__number">75%</span>
+                                                </v-col>
+                                                <v-col cols="7">
+                                                    <span class="card__name">Total Value Locked:</span>
+                                                </v-col>
+                                                <v-col cols="5">
+                                                    <span class="card__number">$21,555,555</span>
+                                                </v-col>
+                                            </v-row>
+                                        </div>
                                         <v-divider class="mx-4" />
-                                        <v-card-text>
-                                            <v-chip small>{{ dao.status }}</v-chip>
-                                        </v-card-text>
+                                        <div class="card__btn-wrapper">
+                                            <UIButton
+                                                width
+                                                text="Manage"
+                                                :to="{name: 'DaoView', params:{daoAddress: 'gfdvfv89'}}"
+                                            />
+                                        </div>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -30,7 +50,7 @@
                     </v-card>
                 </v-col>
             </template>
-            <v-col cols="3">
+            <v-col cols="4">
                 <v-card>
                     <v-responsive :aspect-ratio="1">
                         <v-container class="fill-height">
@@ -50,8 +70,14 @@
 </template>
 
 <script>
+    import UIButton from '_ui/UIButton'
+
     export default {
         name: 'DaoManagerScreen',
+
+        components: {
+            UIButton,
+        },
 
         data: () => ({
             daoList: [],
@@ -65,7 +91,7 @@
 
         methods: {
             fetchDaoList() {
-                for (let i = 1; i <= 6; i++) {
+                for (let i = 1; i <= 4; i++) {
                     this.daoList.push({
                         title: `Title ${i}`,
                         text: 'Lorem Ipsum',
@@ -80,3 +106,14 @@
         },
     }
 </script>
+
+<style lang="scss" scoped>
+    .card__info {
+        background:    linear-gradient(90.31deg, rgba(98, 128, 236, 0.2) 17.71%, rgba(190, 86, 254, 0.2) 87.81%);
+        padding:       17px 25px;
+        border-radius: 20px;
+        text-align:    left;
+        font-size:     14px;
+        line-height:   14px;
+    }
+</style>
