@@ -6,25 +6,25 @@
 </template>
 
 <script>
-import SvgIcon from '@/components/SvgIcon'
+    import SvgIcon from '@/components/SvgIcon'
 
-  export default {
-    props: {
-      text: String,
-      outlined: Boolean,
-      width: Boolean,
-      route: String,
-      icon: Boolean
-    },
-    components: {
-      SvgIcon
-    },
-    methods: {
-      go() {
-        this.$router.push(this.route)
-      }
+    export default {
+        components: {
+            SvgIcon,
+        },
+        props: {
+            text: String,
+            outlined: Boolean,
+            width: Boolean,
+            route: String,
+            icon: Boolean,
+        },
+        methods: {
+            go() {
+                this.$router.push(this.route)
+            },
+        },
     }
-  }
 </script>
 
 <style lang='scss'>

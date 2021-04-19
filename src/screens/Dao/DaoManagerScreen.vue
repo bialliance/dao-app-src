@@ -92,46 +92,46 @@
 </template>
 
 <script>
-import Bia from "@/api/bia";
-import UIButton from "_ui/UIButton";
+    import Bia from '@/api/bia'
+    import UIButton from '_ui/UIButton'
 
-export default {
-    name: "DaoManagerScreen",
+    export default {
+        name: 'DaoManagerScreen',
 
-    components: {
-        UIButton
-    },
-
-    data: () => ({
-        daoList: []
-    }),
-
-    mounted() {
-        setTimeout(() => {
-            this.fetchDaoList();
-        }, 1500);
-    },
-
-    methods: {
-        fetchDaoList() {
-            this.$bia.connect(account => {
-                this.$bia.getDao(daos => {
-                    for (let i in daos) {
-                        let dao = daos[i];
-                        this.daoList.push({
-                            title: dao.NameDao,
-                            text: dao.DescriptionDao
-                        });
-                    }
-                });
-            });
+        components: {
+            UIButton,
         },
 
-        createDao() {
-            this.$router.push({ name: "DaoNew" });
-        }
+        data: () => ({
+            daoList: [],
+        }),
+
+        mounted() {
+            setTimeout(() => {
+                this.fetchDaoList()
+            }, 1500)
+        },
+
+        methods: {
+            fetchDaoList() {
+                this.$bia.connect((account) => {
+                    this.$bia.getDao((daos) => {
+                        for (const i in daos) {
+                            const dao = daos[i]
+                            this.daoList.push({
+                                title: dao.NameDao,
+                                text: dao.DescriptionDao,
+                            })
+                        }
+                    })
+                })
+            },
+
+            createDao() {
+                this.$router.push({ name: 'DaoNew' })
+            },
+        },
     }
-};
 </script>
 
 <style lang="scss" scoped>

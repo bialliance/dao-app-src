@@ -89,24 +89,24 @@
 </template>
 
 <script>
-import btcIcon from "@/assets/img/btc.png";
+    import btcIcon from '@/assets/img/btc.png'
 
-import DaoTableDesc from "./DaoTableDesc";
+    import DaoTableDesc from './DaoTableDesc'
 
-export default {
-    props: ["daosData"],
+    export default {
 
-    name: "DaoTableRow",
+        name: 'DaoTableRow',
 
-    components: {
-        DaoTableDesc
-    },
+        components: {
+            DaoTableDesc,
+        },
+        props: ['daosData'],
 
-    data: () => ({
-        btcIcon,
-        openDesc: false
-    })
-};
+        data: () => ({
+            btcIcon,
+            openDesc: false,
+        }),
+    }
 </script>
 
 <style lang="scss" scoped>

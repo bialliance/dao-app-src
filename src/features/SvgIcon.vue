@@ -15,7 +15,6 @@
       <path d="M4.34652 18.3084C12.991 15.8512 16.3171 11.8671 19.9165 0.760254H38.081V103.449H4.34652V18.3084Z" fill="black"/>
     </svg>
 
-
     <svg v-if="icon === 'moon'" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M23.7445 22.3165C14.8739 22.3061 7.68501 15.1176 7.67468 6.24663C7.67083 4.43716 7.97599 2.64004 8.57679 0.933228C3.04226 4.05749 0.0702722 10.3246 1.15361 16.5871C2.23735 22.8494 7.14172 27.7542 13.4042 28.8375C19.6665 29.9209 25.9336 26.9491 29.0579 21.4143C27.3511 22.0155 25.5544 22.3205 23.7445 22.3165Z" fill="url(#paint0_linear)"/>
       <defs>
@@ -51,16 +50,15 @@
       </defs>
     </svg>
 
-    
 </div>
 </template>
 
 <script>
-  export default {
-    props: ['icon'],
-    components: {
+    export default {
+        components: {
+        },
+        props: ['icon'],
     }
-  }
 </script>
 
 <style lang='scss'>

@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import UICiz from "_ui/UICiz";
+    import UICiz from '_ui/UICiz'
 
-export default {
-    name: "DaoTableHeader",
+    export default {
+        name: 'DaoTableHeader',
 
-    components: {
-        UICiz
+        components: {
+            UICiz,
+        },
     }
-};
 </script>
 
 <style lang="scss" scoped>

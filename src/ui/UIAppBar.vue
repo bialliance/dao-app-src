@@ -156,58 +156,58 @@
 </template>
 
 <script>
-import logoDark from "@/assets/dark.png";
-import logoLight from "@/assets/light.png";
-import UIButton from "_ui/UIButton";
-// import Bia from "@/api/bia";
+    import logoDark from '@/assets/dark.png'
+    import logoLight from '@/assets/light.png'
+    import UIButton from '_ui/UIButton'
+    // import Bia from "@/api/bia";
 
-export default {
-    name: "UIAppBar",
-    components: { UIButton },
-    data: () => ({
-        logoDark,
-        logoLight,
-        networkModal: false,
-        walletConnected: false,
-        accountAddress: "",
-        showMenu: false
-    }),
+    export default {
+        name: 'UIAppBar',
+        components: { UIButton },
+        data: () => ({
+            logoDark,
+            logoLight,
+            networkModal: false,
+            walletConnected: false,
+            accountAddress: '',
+            showMenu: false,
+        }),
 
-    computed: {
-        isMainPage() {
-            return this.$route.name == "Main" ? true : false;
+        computed: {
+            isMainPage() {
+                return this.$route.name == 'Main'
+            },
+            isCreateDaoPage() {
+                return this.$route.name == 'DaoNew'
+            },
         },
-        isCreateDaoPage() {
-            return this.$route.name == "DaoNew" ? true : false;
-        }
-    },
-    methods: {
-        connect: async function() {
-            this.$bia.connect(data => {
-                console.log("bia.connect");
-                console.log(data);
-                this.accountAddress = this.$bia.spliceAddress(data.address);
-                this.walletConnected = data.success;
-            });
-        },
-        disconnect: function() {
-            console.log("close");
+        methods: {
+            connect: async function () {
+                this.$bia.connect((data) => {
+                    console.log('bia.connect')
+                    console.log(data)
+                    this.accountAddress = this.$bia.spliceAddress(data.address)
+                    this.walletConnected = data.success
+                })
+            },
+            disconnect: function () {
+                console.log('close')
             // prov.disconnect()
+            },
+            showModal: function () {
+                if (this.$bia.connected) {
+                    this.networkModal = true
+                } else {
+                    alert('connect first')
+                }
+            },
+            switchNetwork: function (chainId) {
+                this.$bia.appChainId = chainId
+                this.networkModal = false
+                console.log(this.$bia.chainId)
+            },
         },
-        showModal: function() {
-            if (this.$bia.connected) {
-                this.networkModal = true;
-            } else {
-                alert("connect first");
-            }
-        },
-        switchNetwork: function(chainId) {
-            this.$bia.appChainId = chainId;
-            this.networkModal = false;
-            console.log(this.$bia.chainId);
-        }
     }
-};
 </script>
 
 <style lang="scss">

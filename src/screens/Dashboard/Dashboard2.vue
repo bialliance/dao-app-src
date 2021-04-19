@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import SvgIcon from '@/components/SvgIcon'
-  export default {
-    components: {
-      SvgIcon
+    import SvgIcon from '@/components/SvgIcon'
+    export default {
+        components: {
+            SvgIcon,
+        },
     }
-  }
 </script>
 
 <style lang='scss'>

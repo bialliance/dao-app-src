@@ -9,54 +9,54 @@
 </template>
 
 <script>
-import btcIcon from "@/assets/img/btc.png";
-import skyflexIcon from "@/assets/img/skyflex.png";
-import binanceIcon from "@/assets/img/binance.png";
-import flexIcon from "@/assets/img/flex.png";
-import DaoTableHeader from "./DaoTableHeader";
-import DaoTableRow from "./DaoTableRow";
+    import btcIcon from '@/assets/img/btc.png'
+    import skyflexIcon from '@/assets/img/skyflex.png'
+    import binanceIcon from '@/assets/img/binance.png'
+    import flexIcon from '@/assets/img/flex.png'
+    import DaoTableHeader from './DaoTableHeader'
+    import DaoTableRow from './DaoTableRow'
 
-export default {
-    name: "DaoTable",
-    data: () => {
-        return {
-            daos: [
-                {
-                    name: "FLEX",
-                    tlv: "1.115.375",
-                    apy: "84%",
-                    icon: flexIcon,
-                    network: "BSC"
-                },
-                {
-                    name: "Binance DAO",
-                    tlv: "20.000",
-                    apy: "56%",
-                    icon: binanceIcon,
-                    network: "ETH"
-                },
-                {
-                    name: "SkyFlex DAO",
-                    tlv: "20.000",
-                    apy: "36%",
-                    icon: skyflexIcon,
-                    network: "ETH"
-                },
-                {
-                    name: "BTC DAO",
-                    tlv: "20.000",
-                    apy: "24%",
-                    icon: btcIcon,
-                    network: "BSC"
-                }
-            ]
-        };
-    },
-    components: {
-        DaoTableHeader,
-        DaoTableRow
+    export default {
+        name: 'DaoTable',
+        components: {
+            DaoTableHeader,
+            DaoTableRow,
+        },
+        data: () => {
+            return {
+                daos: [
+                    {
+                        name: 'FLEX',
+                        tlv: '1.115.375',
+                        apy: '84%',
+                        icon: flexIcon,
+                        network: 'BSC',
+                    },
+                    {
+                        name: 'Binance DAO',
+                        tlv: '20.000',
+                        apy: '56%',
+                        icon: binanceIcon,
+                        network: 'ETH',
+                    },
+                    {
+                        name: 'SkyFlex DAO',
+                        tlv: '20.000',
+                        apy: '36%',
+                        icon: skyflexIcon,
+                        network: 'ETH',
+                    },
+                    {
+                        name: 'BTC DAO',
+                        tlv: '20.000',
+                        apy: '24%',
+                        icon: btcIcon,
+                        network: 'BSC',
+                    },
+                ],
+            }
+        },
     }
-};
 </script>
 
 <style lang="scss" scoped>

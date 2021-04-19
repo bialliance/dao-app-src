@@ -280,56 +280,56 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
+    import UIButton from '_ui/UIButton'
 
-export default {
-    name: "DaoNewScreen",
+    export default {
+        name: 'DaoNewScreen',
 
-    components: {
-        UIButton
-    },
-    data() {
-        return {
-            min: 0,
-            max: 100,
-            slider1: 40,
-            slider2: 40,
-            length,
-            alert
-        };
-    },
-    // data: () => ({
-    //     daoName: "",
-    //     ex1: { label: "color", val: 25, color: "orange darken-3" },
-    //     ex2: { label: "color", val: 25, color: "orange darken-3" }
-    // }),
-    methods: {
-        createDao: function() {
-            const params = {
-                daoName: this.daoName,
-                daoDescription: this.daoDescription,
-                gpTokenName: this.gpTokenName,
-                gpTokenSymbol: this.gpTokenSymbol,
-                lpTokenName: this.lpTokenName,
-                lpTokenSymbol: this.lpTokenSymbol
-            };
-            // router.push('manager')
+        components: {
+            UIButton,
+        },
+        data() {
+            return {
+                min: 0,
+                max: 100,
+                slider1: 40,
+                slider2: 40,
+                length,
+                alert,
+            }
+        },
+        // data: () => ({
+        //     daoName: "",
+        //     ex1: { label: "color", val: 25, color: "orange darken-3" },
+        //     ex2: { label: "color", val: 25, color: "orange darken-3" }
+        // }),
+        methods: {
+            createDao: function () {
+                const params = {
+                    daoName: this.daoName,
+                    daoDescription: this.daoDescription,
+                    gpTokenName: this.gpTokenName,
+                    gpTokenSymbol: this.gpTokenSymbol,
+                    lpTokenName: this.lpTokenName,
+                    lpTokenSymbol: this.lpTokenSymbol,
+                }
+                // router.push('manager')
 
-            // params.daoName
-            // params.daoDescription
-            // params.gpTokenName
-            // params.gpTokenSymbol
-            // params.lpTokenName
-            // params.lpTokenSymbol
-            // params.votingSupport*
-            // params.votingApproval*
-            console.log(params);
-            this.$bia.createDao(params, () => {
-                this.$router.push("manager");
-            });
-        }
+                // params.daoName
+                // params.daoDescription
+                // params.gpTokenName
+                // params.gpTokenSymbol
+                // params.lpTokenName
+                // params.lpTokenSymbol
+                // params.votingSupport*
+                // params.votingApproval*
+                console.log(params)
+                this.$bia.createDao(params, () => {
+                    this.$router.push('manager')
+                })
+            },
+        },
     }
-};
 </script>
 
 <style lang="scss">
