@@ -175,10 +175,11 @@
 
         computed: {
             isMainPage() {
-                return this.$route.name == 'Main'
+                return this.$route.name === 'Main'
             },
+
             isCreateDaoPage() {
-                return this.$route.name == 'DaoNew'
+                return this.$route.name === 'DaoNew'
             },
         },
         methods: {
@@ -192,7 +193,7 @@
             },
             disconnect: function () {
                 console.log('close')
-            // prov.disconnect()
+                // prov.disconnect()
             },
             showModal: function () {
                 if (this.$bia.connected) {
@@ -211,80 +212,82 @@
 </script>
 
 <style lang="scss">
-@import "@/sass/_variables.scss";
-.v-dialog.v-dialog--active {
-    box-shadow: none;
-}
-.list__item {
-    margin-left: 30px;
+    @import "@/sass/_variables.scss";
 
-    a {
-        text-decoration: none;
-        font-size: $menu_font;
-        font-weight: 700;
-        line-height: $menu_height;
+    .v-dialog.v-dialog--active {
+        box-shadow: none;
+    }
 
-        &.router-link-exact-active {
-            color: #42b983;
+    .list__item {
+        margin-left: 30px;
+
+        a {
+            text-decoration: none;
+            font-size:       $menu_font;
+            font-weight:     700;
+            line-height:     $menu_height;
+
+            &.router-link-exact-active {
+                color: #42b983;
+            }
         }
     }
-}
 
-.header__switcer {
-    display: flex;
-}
-
-.v-input__control {
-    .v-input__slot {
-        margin-bottom: 0;
+    .header__switcer {
+        display: flex;
     }
 
-    .v-messages {
-        display: none;
+    .v-input__control {
+        .v-input__slot {
+            margin-bottom: 0;
+        }
+
+        .v-messages {
+            display: none;
+        }
     }
-}
 
-.v-input--switch__thumb {
-    background: -webkit-linear-gradient(#6280ec, #be56fe);
-}
+    .v-input--switch__thumb {
+        background: -webkit-linear-gradient(#6280ec, #be56fe);
+    }
 
-.v-input--switch__track.theme--light {
-    background-color: #ffffff;
-    box-shadow: 0px 2px 12px rgba(73, 73, 73, 0.16);
-}
+    .v-input--switch__track.theme--light {
+        background-color: #ffffff;
+        box-shadow:       0px 2px 12px rgba(73, 73, 73, 0.16);
+    }
 
-.header__right button:first-child {
-    margin-right: 30px;
-}
+    .header__right button:first-child {
+        margin-right: 30px;
+    }
 
-.header__right button:nth-child(2) {
-    margin-right: 40px;
-}
+    .header__right button:nth-child(2) {
+        margin-right: 40px;
+    }
 
-button {
-    outline: none;
-
-    &:focus {
+    button {
         outline: none;
+
+        &:focus {
+            outline: none;
+        }
     }
-}
 
-.nav {
-    display: none;
-}
-
-@media (min-width: 1300px) {
-    .container {
-        max-width: 1300px;
-    }
-}
-
-@media (min-width: 1300px) {
-    .nav_icon__wrapper {
+    .nav {
         display: none;
     }
-    .nav {
-        display: block;
+
+    @media (min-width: 1300px) {
+        .container {
+            max-width: 1300px;
+        }
     }
-}
+
+    @media (min-width: 1300px) {
+        .nav_icon__wrapper {
+            display: none;
+        }
+        .nav {
+            display: block;
+        }
+    }
 </style>

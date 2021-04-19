@@ -92,7 +92,6 @@
 </template>
 
 <script>
-    import Bia from '@/api/bia'
     import UIButton from '_ui/UIButton'
 
     export default {

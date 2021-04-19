@@ -164,6 +164,7 @@ class Bia {
                             console.log(r)
                             console.log(this.accountAddress)
                             this.connected = true
+                            // eslint-disable-next-line node/no-callback-literal
                             callback({
                                 address: this.accountAddress,
                                 success: true,
@@ -172,9 +173,11 @@ class Bia {
                     })
                 })
                 .catch((e) => {
+                    // eslint-disable-next-line node/no-callback-literal
                     callback({ address: null, success: false })
                 })
         } else {
+            // eslint-disable-next-line node/no-callback-literal
             callback({ address: this.accountAddress, success: true })
         }
     }
@@ -192,7 +195,7 @@ class Bia {
             alert('Need to connect')
         } else {
             await this.web3.eth.getChainId().then(async (r) => {
-                if (this.appChainId == r) {
+                if (this.appChainId === r) {
                     this.contract = await this.getDaoFactoryContract()
                     // string memory nameDao, string memory descriptionDao, string memory gpTokenName, string memory gpTokenSymbol, string memory lpTokenName, string memory lpTokenSymbol
                     this.contract.methods
@@ -204,6 +207,7 @@ class Bia {
                             params.lpTokenName,
                             params.lpTokenSymbol,
                         )
+                        // eslint-disable-next-line node/handle-callback-err
                         .send({ from: this.accountAddress }, (err, result) => {
                             console.log(result)
                             this.contractAddress = result
@@ -224,6 +228,7 @@ class Bia {
             console.log(this.contract)
             this.contract.methods
                 .getDaos(this.accountAddress)
+                // eslint-disable-next-line node/handle-callback-err
                 .call((err, result) => {
                     console.log(result)
                     this.daos = result
