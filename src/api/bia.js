@@ -13,6 +13,7 @@ class Bia {
         this.contract = "";
         this.daos = "";
         this.chainId = "";
+        this.appChainId = "";
     }
     getContractAddress(chainId) {
         switch (chainId) {
@@ -155,6 +156,7 @@ class Bia {
                         this.accountAddress = e[0];
                         this.web3.eth.getChainId().then(r => {
                             this.chainId = r;
+                            this.appChainId = r;
 
                             console.log(r);
                             console.log(this.accountAddress);
@@ -185,22 +187,28 @@ class Bia {
         if (!this.connected) {
             alert("Need to connect");
         } else {
-            this.contract = await this.getDaoFactoryContract();
-            // string memory nameDao, string memory descriptionDao, string memory gpTokenName, string memory gpTokenSymbol, string memory lpTokenName, string memory lpTokenSymbol
-            this.contract.methods
-                .createDao(
-                    params.daoName,
-                    params.daoDescription,
-                    params.gpTokenName,
-                    params.gpTokenSymbol,
-                    params.lpTokenName,
-                    params.lpTokenSymbol
-                )
-                .send({ from: this.accountAddress }, (err, result) => {
-                    console.log(result);
-                    this.contractAddress = result;
-                    callback();
-                });
+            await this.web3.eth.getChainId().then(async r => {
+                if (this.appChainId == r) {
+                    this.contract = await this.getDaoFactoryContract();
+                    // string memory nameDao, string memory descriptionDao, string memory gpTokenName, string memory gpTokenSymbol, string memory lpTokenName, string memory lpTokenSymbol
+                    this.contract.methods
+                        .createDao(
+                            params.daoName,
+                            params.daoDescription,
+                            params.gpTokenName,
+                            params.gpTokenSymbol,
+                            params.lpTokenName,
+                            params.lpTokenSymbol
+                        )
+                        .send({ from: this.accountAddress }, (err, result) => {
+                            console.log(result);
+                            this.contractAddress = result;
+                            callback();
+                        });
+                } else {
+                    alert("wrong network");
+                }
+            });
         }
     }
     async getDao(callback) {

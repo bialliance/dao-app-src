@@ -7,7 +7,6 @@ import store from "./store";
 import vuetify from "./services/vuetify/";
 import "./sass/main.scss";
 import Bia from "@/api/bia";
-import VueGlobalVariable from "vue-global-var";
 // import '@/api/index.js'
 
 Vue.config.productionTip = false;

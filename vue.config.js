@@ -69,7 +69,7 @@ module.exports = {
         },
     },
     publicPath: '/',
-    outputDir: process.env.NODE_ENV === 'production' ? 'dist/' : 'dist/',
+    outputDir: process.env.NODE_ENV === 'production' ? 'prod/' : 'dist/',
     transpileDependencies: [
         'vuetify',
     ],

@@ -10,7 +10,9 @@
                             <div
                                 class="input-wrapper d-flex justify-between align-end"
                             >
-                                <label class="label" for="name">DAO name</label>
+                                <label class="label first-col" for="name"
+                                    >DAO name</label
+                                >
                                 <input
                                     type="text"
                                     name="name"
@@ -21,21 +23,23 @@
                             <div
                                 class="input-wrapper d-flex justify-between align-end"
                             >
-                                <label class="label" for="description"
+                                <label class="label first-col" for="description"
                                     >DAO description</label
                                 >
-                                <input
-                                    type="text"
+                                <v-textarea
                                     name="description"
-                                    class="text_input"
+                                    class="custom"
                                     v-model="daoDescription"
+                                    rows="1"
+                                    auto-grow
+                                    hide-details
                                 />
                             </div>
                         </div>
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="10">
+                    <v-col cols="12">
                         <h4 class="input_title">Create 2 tokens</h4>
                         <v-row>
                             <v-col cols="6">
@@ -46,7 +50,9 @@
                                     <div
                                         class="input-wrapper d-flex justify-between align-end"
                                     >
-                                        <label class="label" for="name"
+                                        <label
+                                            class="label first-col"
+                                            for="name"
                                             >Full token name</label
                                         >
                                         <input
@@ -59,7 +65,9 @@
                                     <div
                                         class="input-wrapper d-flex justify-between align-end"
                                     >
-                                        <label class="label" for="description"
+                                        <label
+                                            class="label first-col"
+                                            for="description"
                                             >Token symbol</label
                                         >
                                         <input
@@ -79,7 +87,9 @@
                                     <div
                                         class="input-wrapper d-flex justify-between align-end"
                                     >
-                                        <label class="label" for="name"
+                                        <label
+                                            class="label first-col"
+                                            for="name"
                                             >Full token name</label
                                         >
                                         <input
@@ -92,7 +102,9 @@
                                     <div
                                         class="input-wrapper d-flex justify-between align-end"
                                     >
-                                        <label class="label" for="description"
+                                        <label
+                                            class="label first-col"
+                                            for="description"
                                             >Token symbol</label
                                         >
                                         <input
@@ -114,7 +126,7 @@
                             <div
                                 class="input-wrapper d-flex justify-between align-end"
                             >
-                                <label class="label" for="name"
+                                <label class="label first-col" for="name"
                                     >Support %</label
                                 >
                                 <div
@@ -126,7 +138,7 @@
                                     ></v-slider> -->
 
                                     <v-slider
-                                        v-model="slider"
+                                        v-model="slider1"
                                         class="align-center"
                                         :max="max"
                                         :min="min"
@@ -134,13 +146,13 @@
                                     >
                                         <template v-slot:append>
                                             <v-text-field
-                                                v-model="slider"
-                                                class="mt-0 pt-0"
+                                                v-model="slider1"
+                                                class="mt-0 pt-0 slider-input"
                                                 hide-details
                                                 single-line
                                                 type="text"
-                                                style="width: 60px"
-                                                disabled
+                                                suffix="%"
+                                                maxlength="3"
                                             ></v-text-field>
                                         </template>
                                     </v-slider>
@@ -151,7 +163,7 @@
                             <div
                                 class="input-wrapper d-flex justify-between align-end"
                             >
-                                <label class="label" for="description"
+                                <label class="label first-col" for="description"
                                     >Minimum approval %</label
                                 >
                                 <div
@@ -162,7 +174,7 @@
                                         :color="ex2.color"
                                     ></v-slider> -->
                                     <v-slider
-                                        v-model="slider"
+                                        v-model="slider2"
                                         class="align-center"
                                         :max="max"
                                         :min="min"
@@ -170,13 +182,13 @@
                                     >
                                         <template v-slot:append>
                                             <v-text-field
-                                                v-model="slider"
-                                                class="mt-0 pt-0"
+                                                v-model="slider2"
+                                                class="mt-0 pt-0 slider-input"
                                                 hide-details
                                                 single-line
                                                 type="text"
-                                                style="width: 60px"
-                                                disabled
+                                                suffix="%"
+                                                maxlength="3"
                                             ></v-text-field>
                                         </template>
                                     </v-slider>
@@ -187,8 +199,79 @@
                     </v-col>
                 </v-row>
                 <v-row>
+                    <v-col cols="2">
+                        <p class="input__text">
+                            Vote Duration
+                        </p>
+                        <div class="form_group">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label first-col" for="name"
+                                    >Days</label
+                                >
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="text_input"
+                                    maxlength="3"
+                                    v-model="voteDays"
+                                />
+                            </div>
+                        </div>
+                    </v-col>
+                    <v-col cols="2">
+                        <p class="input__text">
+                            |
+                        </p>
+                        <div class="form_group">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label first-col" for="name"
+                                    >Hours</label
+                                >
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="text_input"
+                                    maxlength="2"
+                                    v-model="voteHours"
+                                />
+                            </div>
+                        </div>
+                    </v-col>
+                    <v-col cols="2">
+                        <p class="input__text">
+                            |
+                        </p>
+                        <div class="form_group">
+                            <div
+                                class="input-wrapper d-flex justify-between align-end"
+                            >
+                                <label class="label first-col" for="name"
+                                    >Minutes</label
+                                >
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="text_input"
+                                    maxlength="2"
+                                    v-model="voteMinutes"
+                                />
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+                <v-row>
                     <v-col cols="3">
-                        <UIButton text="Create DAO" @click="createDao" />
+                        <UIButton
+                            class="mr-4"
+                            color="primary"
+                            @click="createDao"
+                        >
+                            Create DAO
+                        </UIButton>
                     </v-col>
                 </v-row>
             </div>
@@ -198,7 +281,6 @@
 
 <script>
 import UIButton from "_ui/UIButton";
-import Bia from "@/api/bia";
 
 export default {
     name: "DaoNewScreen",
@@ -211,7 +293,9 @@ export default {
             min: 0,
             max: 100,
             slider1: 40,
-            slider2: 40
+            slider2: 40,
+            length,
+            alert
         };
     },
     // data: () => ({
@@ -221,7 +305,7 @@ export default {
     // }),
     methods: {
         createDao: function() {
-            var params = {
+            const params = {
                 daoName: this.daoName,
                 daoDescription: this.daoDescription,
                 gpTokenName: this.gpTokenName,
@@ -229,7 +313,7 @@ export default {
                 lpTokenName: this.lpTokenName,
                 lpTokenSymbol: this.lpTokenSymbol
             };
-            //router.push('manager')
+            // router.push('manager')
 
             // params.daoName
             // params.daoDescription
@@ -249,6 +333,38 @@ export default {
 </script>
 
 <style lang="scss">
+.custom {
+    max-height: 12rem;
+    overflow: auto;
+    background-color: transparent;
+    background-image: linear-gradient(to right, #6280ec, #be56fe);
+    background-repeat: no-repeat;
+    background-position: 0 calc(100% + 3px), 0 0;
+    background-size: 100% 3px;
+    box-shadow: none;
+    border: 0;
+    border-bottom: 2px solid #ff005e;
+    color: #000000;
+    -webkit-font-smoothing: antialiased;
+    outline: 0 none;
+    border-color: transparent;
+    outline: none;
+    width: 65%;
+    font-size: 20px;
+    padding-left: 9px;
+    line-height: 20px;
+    color: #565656;
+}
+.custom.v-text-field > .v-input__control > .v-input__slot:before {
+    border-style: none;
+}
+.custom.v-text-field > .v-input__control > .v-input__slot:after {
+    border-style: none;
+}
+.slider-input {
+    width: 50px;
+    text-align: right;
+}
 .created {
     text-align: left;
 }
@@ -269,13 +385,15 @@ export default {
     font-size: 20px;
     line-height: 22px;
 }
-
+.first-col {
+    width: 200px;
+}
 .input-wrapper {
     margin-bottom: 24px;
 }
 
 .form_group {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .text_input {

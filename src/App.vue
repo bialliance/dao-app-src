@@ -63,15 +63,15 @@
                 if (process.env.NODE_ENV === 'production') {
                     document.addEventListener('serviceWorkerUpdated', this.onServiceWorkerUpdated, { once: true })
 
-                    navigator.serviceWorker.addEventListener('controllerchange', () => {
-                        if (this.$store.state.softwareUpdate.isUpdating) {
-                            return
-                        }
+                    // navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    //     if (this.$store.state.softwareUpdate.isUpdating) {
+                    //         return
+                    //     }
 
-                        this.$store.commit('softwareUpdate/setUpdating', true)
+                    //     this.$store.commit('softwareUpdate/setUpdating', true)
 
-                        window.location.reload()
-                    })
+                    //     window.location.reload()
+                    // })
                 }
             },
 

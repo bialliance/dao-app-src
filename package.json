@@ -5,6 +5,7 @@
     "serve": "vue-cli-service serve",
     "fanserver": "vue-cli-service serve --skip-plugins @vue/cli-plugin-eslint",
     "build": "vue-cli-service build",
+    "fanbuild": "vue-cli-service build --skip-plugins @vue/cli-plugin-eslint",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
