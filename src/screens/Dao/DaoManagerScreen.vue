@@ -5,7 +5,7 @@
             :justify="daoList.length ? '' : 'center'"
         >
             <template v-for="(dao, index) in daoList">
-                <v-col cols="4" :key="`dao_${index}`">
+                <v-col class="col-md-4" :key="`dao_${index}`">
                     <v-card flat class="card text-center">
                         <v-responsive :aspect-ratio="1">
                             <v-container class="fill-height">
@@ -31,7 +31,7 @@
                                                 </v-col>
                                                 <v-col cols="5">
                                                     <span class="card__number"
-                                                        >75%</span
+                                                        >-</span
                                                     >
                                                 </v-col>
                                                 <v-col cols="7">
@@ -42,7 +42,7 @@
                                                 </v-col>
                                                 <v-col cols="5">
                                                     <span class="card__number"
-                                                        >$21,555,555</span
+                                                        >-</span
                                                     >
                                                 </v-col>
                                             </v-row>
@@ -51,13 +51,14 @@
                                         <div class="card__btn-wrapper">
                                             <UIButton
                                                 width
-                                                text="Manage"
+                                                text="Votings"
                                                 :to="{
                                                     name: 'DaoView',
                                                     params: {
                                                         daoAddress: 'gfdvfv89'
                                                     }
                                                 }"
+                                                @click="redirect('vote')"
                                             />
                                         </div>
                                     </v-col>
@@ -67,7 +68,7 @@
                     </v-card>
                 </v-col>
             </template>
-            <v-col cols="4">
+            <v-col class="col-md-4">
                 <v-card flat class="card text-center">
                     <v-responsive :aspect-ratio="1">
                         <v-container class="fill-height">
@@ -92,45 +93,49 @@
 </template>
 
 <script>
-    import UIButton from '_ui/UIButton'
+import UIButton from "_ui/UIButton";
 
-    export default {
-        name: 'DaoManagerScreen',
+export default {
+    name: "DaoManagerScreen",
 
-        components: {
-            UIButton,
+    components: {
+        UIButton
+    },
+
+    data: () => ({
+        daoList: []
+    }),
+
+    mounted() {
+        setTimeout(() => {
+            this.fetchDaoList();
+        }, 1500);
+    },
+
+    methods: {
+        fetchDaoList() {
+            this.$bia.connect(account => {
+                this.$bia.getDao(daos => {
+                    for (const i in daos) {
+                        const dao = daos[i];
+                        this.daoList.push({
+                            title: dao.NameDao,
+                            text: dao.DescriptionDao
+                        });
+                    }
+                });
+            });
         },
 
-        data: () => ({
-            daoList: [],
-        }),
-
-        mounted() {
-            setTimeout(() => {
-                this.fetchDaoList()
-            }, 1500)
+        createDao() {
+            this.$router.push({ name: "DaoNew" });
         },
 
-        methods: {
-            fetchDaoList() {
-                this.$bia.connect((account) => {
-                    this.$bia.getDao((daos) => {
-                        for (const i in daos) {
-                            const dao = daos[i]
-                            this.daoList.push({
-                                title: dao.NameDao,
-                                text: dao.DescriptionDao,
-                            })
-                        }
-                    })
-                })
-            },
-
-            createDao() {
-                this.$router.push({ name: 'DaoNew' })
-            },
-        },
+        redirect(path) {
+            this.$router.push(path);
+        }
     }
+};
 </script>
 
 <style lang="scss" scoped>
