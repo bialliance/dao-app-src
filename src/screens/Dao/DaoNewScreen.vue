@@ -1,11 +1,62 @@
 <template>
     <div class="created">
         <div class="container">
-            <h1 class="created__title">Create DAO</h1>
+            <div class="d-flex align-center flex-wrap mb-5">
+                <h2 class="about__title pr-10">Create DAO</h2>
+                <!-- <UIButton class="invert-gradient">
+                    <a
+                        href="https://hackerlink.io/en/Grant/RCIS/Round/1/buidl/393"
+                        target="_blank"
+                        class="text-button-vote"
+                    >
+                        VOTE
+                    </a>
+                </UIButton> -->
+            </div>
             <div class="created__content">
                 <v-row>
+                    <v-col cols="6">
+                        <h4 class="input_title pb-5">Protocol</h4>
+                        <div class="form_group">
+                            <div class="switch-button">
+                                <span class="active"></span>
+
+                                <button
+                                    class="switch-button-case left active-case"
+                                >
+                                    <v-img
+                                        :src="oneClickDao"
+                                        width="50"
+                                        contain
+                                        class="switch-logo mb-2"
+                                    />
+                                    <span>1clickDAO</span>
+                                </button>
+
+                                <button class="switch-button-case right">
+                                    <v-img
+                                        :src="aragon"
+                                        width="50"
+                                        contain
+                                        class="switch-logo mb-2"
+                                    />
+                                    <span>Aragon</span>
+                                </button>
+
+                                <input
+                                    id="platform"
+                                    type="text"
+                                    name="platform"
+                                    value="1clickdao"
+                                    hidden
+                                />
+                            </div>
+                        </div>
+                    </v-col>
+                </v-row>
+                <v-row>
                     <v-col cols="12" sm="10" md="8" lg="6">
-                        <h4 class="input_title">General</h4>
+                        <h4 class="input_title pb-5">General</h4>
                         <div class="form_group">
                             <div
                                 class="input-wrapper d-flex justify-between align-end"
@@ -43,7 +94,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12">
-                        <h4 class="input_title">Create 2 tokens</h4>
+                        <h4 class="input_title pb-5">Create 2 tokens</h4>
                         <v-row>
                             <v-col cols="12" lg="6">
                                 <p class="input__text">
@@ -124,10 +175,10 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12" md="9" lg="7">
-                        <h4 class="input_title">Voting</h4>
+                        <h4 class="input_title pb-5">Voting</h4>
                         <div class="form_group">
                             <div
-                                class="input-wrapper d-flex justify-between align-end"
+                                class="input-wrapper d-flex justify-between align-center"
                             >
                                 <label class="label first-col" for="name">
                                     Support %
@@ -156,6 +207,8 @@
                                                 type="text"
                                                 suffix="%"
                                                 maxlength="3"
+                                                flat
+                                                solo
                                             />
                                         </template>
                                     </v-slider>
@@ -164,7 +217,7 @@
                                 </div>
                             </div>
                             <div
-                                class="input-wrapper d-flex justify-between align-end"
+                                class="input-wrapper d-flex justify-between align-center"
                             >
                                 <label
                                     class="label first-col"
@@ -195,6 +248,8 @@
                                                 type="text"
                                                 suffix="%"
                                                 maxlength="3"
+                                                flat
+                                                solo
                                             />
                                         </template>
                                     </v-slider>
@@ -205,74 +260,58 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="12" lg="2">
-                        <p class="input__text">
-                            Vote Duration
-                        </p>
-                        <div class="form_group">
-                            <div
-                                class="input-wrapper d-flex justify-between align-end"
-                            >
-                                <label class="label first-col" for="name">
-                                    Days
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="text_input"
-                                    maxlength="3"
-                                    v-model="voteDays"
-                                />
-                            </div>
-                        </div>
-                    </v-col>
-                    <v-col cols="12" lg="2">
-                        <p class="input__text stick">
-                            |
-                        </p>
-                        <div class="form_group">
-                            <div
-                                class="input-wrapper d-flex justify-between align-end"
-                            >
-                                <label class="label first-col" for="name">
-                                    Hours
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="text_input"
-                                    maxlength="2"
-                                    v-model="voteHours"
-                                />
-                            </div>
-                        </div>
-                    </v-col>
-                    <v-col cols="12" lg="2">
-                        <p class="input__text stick">
-                            |
-                        </p>
-                        <div class="form_group">
-                            <div
-                                class="input-wrapper d-flex justify-between align-end"
-                            >
-                                <label class="label first-col" for="name">
-                                    Minutes
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="text_input"
-                                    maxlength="2"
-                                    v-model="voteMinutes"
-                                />
-                            </div>
-                        </div>
+                    <v-col cols="12">
+                        <h4 class="input_title pb-5 pb-5">Vote Duration</h4>
+                        <v-row>
+                            <v-col cols="12" lg="2">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            name="name"
+                                            class="text_input vote-duration-input"
+                                            maxlength="3"
+                                            v-model="voteDays"
+                                            placeholder="Days"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="2">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="voteHours"
+                                            placeholder="Hours"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="2">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="voteMinutes"
+                                            placeholder="Minutes"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col cols="auto">
                         <UIButton
-                            class="mr-4"
+                            class="mr-4 mt-9 mb-15"
                             color="primary"
                             @click="createDao"
                         >
@@ -282,11 +321,62 @@
                 </v-row>
             </div>
         </div>
+        <div v-if="creating">
+            <v-dialog
+                v-model="creating"
+                transition="dialog-top-transition"
+                max-width="600"
+            >
+                <template v-slot:default="dialog">
+                    <v-card>
+                        <v-toolbar color="primary" dark>Info</v-toolbar>
+                        <v-card-text>
+                            <div class="text-h6 pa-12 text-center">
+                                Please wait for 3-5 minutes until DAO deployed
+                            </div>
+                        </v-card-text>
+                        <v-card-actions class="justify-end">
+                            <v-btn
+                                text
+                                @click="
+                                    dialog.value = false;
+                                    redirect('manager');
+                                "
+                                >Ok</v-btn
+                            >
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+        </div>
+        <div v-else>
+            <v-dialog
+                v-model="error"
+                transition="dialog-top-transition"
+                max-width="600"
+            >
+                <template v-slot:default="dialog">
+                    <v-card>
+                        <v-toolbar color="#ffc107" dark>Warning</v-toolbar>
+                        <v-card-text>
+                            <div class="text-h6 pa-12 text-center">
+                                {{ errorText }}
+                            </div>
+                        </v-card-text>
+                        <v-card-actions class="justify-end">
+                            <v-btn text @click="dialog.value = false">Ok</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+        </div>
     </div>
 </template>
 
 <script>
 import UIButton from "_ui/UIButton";
+import aragon from "@/assets/img/aragon.svg";
+import oneClickDao from "@/assets/img/oneClickDao.svg";
 
 export default {
     name: "DaoNewScreen",
@@ -296,6 +386,11 @@ export default {
     },
     data() {
         return {
+            aragon,
+            oneClickDao,
+            creating: false,
+            error: false,
+            errorText: "",
             min: 0,
             max: 100,
             slider1: 40,
@@ -304,41 +399,205 @@ export default {
             alert
         };
     },
-    // data: () => ({
-    //     daoName: "",
-    //     ex1: { label: "color", val: 25, color: "orange darken-3" },
-    //     ex2: { label: "color", val: 25, color: "orange darken-3" }
-    // }),
-    methods: {
-        createDao: function() {
-            const params = {
-                daoName: this.daoName,
-                daoDescription: this.daoDescription,
-                gpTokenName: this.gpTokenName,
-                gpTokenSymbol: this.gpTokenSymbol,
-                lpTokenName: this.lpTokenName,
-                lpTokenSymbol: this.lpTokenSymbol
-            };
-            // router.push('manager')
+    mounted: function() {
+        var switchButton = document.querySelector(".switch-button");
+        var switchBtnRight = document.querySelector(
+            ".switch-button-case.right"
+        );
+        var switchBtnLeft = document.querySelector(".switch-button-case.left");
+        var activeSwitch = document.querySelector(".active");
+        var platform = document.querySelector("#platform");
 
-            // params.daoName
-            // params.daoDescription
-            // params.gpTokenName
-            // params.gpTokenSymbol
-            // params.lpTokenName
-            // params.lpTokenSymbol
-            // params.votingSupport*
-            // params.votingApproval*
-            console.log(params);
-            this.$bia.createDao(params, () => {
-                this.$router.push("manager");
-            });
+        function switchLeft() {
+            switchBtnRight.classList.remove("active-case");
+            switchBtnLeft.classList.add("active-case");
+            platform.setAttribute("value", "1clickdao");
+
+            activeSwitch.style.left = "0%";
+        }
+
+        function switchRight() {
+            switchBtnRight.classList.add("active-case");
+            switchBtnLeft.classList.remove("active-case");
+            platform.setAttribute("value", "aragon");
+            activeSwitch.style.left = "50%";
+        }
+
+        switchBtnLeft.addEventListener(
+            "click",
+            function() {
+                switchLeft();
+            },
+            false
+        );
+
+        switchBtnRight.addEventListener(
+            "click",
+            function() {
+                switchRight();
+            },
+            false
+        );
+    },
+    methods: {
+        createDao: async function() {
+            if (!this.walletConnected) {
+                this.$bia.connect(async data => {
+                    console.log("bia.connect");
+                    console.log(data);
+                    this.accountAddress = this.$bia.spliceAddress(data.address);
+                    this.walletConnected = data.success;
+                    if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
+                        this.error = false;
+                        this.sendData();
+                    } else {
+                        this.errorText = await "Unsupported Metamask Network";
+                        this.error = true;
+                    }
+                });
+            } else {
+                this.$bia.setChainId(async chainId => {
+                    if ([1, 4, 56, 97].includes(chainId)) {
+                        this.$bia.appChainId = chainId;
+                        this.error = false;
+                        this.sendData();
+                    } else {
+                        this.errorText = await "Unsupported Metamask Network";
+                        this.error = true;
+                    }
+                });
+            }
+        },
+        sendData: function() {
+            if (this.$bia.appChainId == this.$bia.chainId) {
+                const params = {
+                    daoName: this.daoName || "",
+                    daoDescription: this.daoDescription || "",
+                    gpTokenName: this.gpTokenName || "",
+                    gpTokenSymbol: this.gpTokenSymbol || "",
+                    lpTokenName: this.lpTokenName || "",
+                    lpTokenSymbol: this.lpTokenSymbol || ""
+                };
+                console.log(params);
+                this.$bia.createDao(params, err => {
+                    if (err) {
+                        this.errorText = "User denied transaction";
+                        this.error = true;
+                    } else {
+                        this.creating = true;
+                    }
+                });
+            } else {
+                this.error = true;
+            }
+        },
+        redirect: function(path) {
+            this.$router.push(path);
         }
     }
 };
 </script>
 
 <style lang="scss">
+.switch-logo {
+    margin: 0 auto;
+}
+.switch-button {
+    border-radius: 20px;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    will-change: transform;
+    z-index: 197 !important;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border: 1px solid #6f56fd;
+    &-case {
+        display: inline-block;
+        background: none;
+        width: 49%;
+        height: 90%;
+        color: #151515;
+        position: relative;
+        border: none;
+        transition: 0.3s ease all;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        padding-bottom: 1px;
+        &:hover {
+            color: grey;
+            cursor: pointer;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    .active {
+        color: #fff;
+        background: linear-gradient(
+            90.31deg,
+            #6280ec 17.71%,
+            #be56fe 87.81%
+        ) !important;
+        position: absolute;
+        border-radius: 18px;
+        left: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        z-index: -1;
+        transition: 0.3s ease-out all;
+        &-case {
+            color: #fff;
+        }
+    }
+}
+
+.vote-custom {
+    margin-bottom: 0 !important;
+}
+.vote-duration-input {
+    font-size: 16px !important;
+    width: 100% !important;
+    border: 1px solid #6f56fd !important;
+    border-radius: 10px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+}
+::-webkit-input-placeholder {
+    text-align: right;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.v-application .v-slider__track-background.primary.lighten-3 {
+    background-color: #dddddd !important;
+}
+.v-application .v-slider__track-fill.primary {
+    background: linear-gradient(
+        90.31deg,
+        #6280ec 17.71%,
+        #be56fe 87.81%
+    ) !important;
+}
+.v-slider__track-background.primary.lighten-3,
+.v-slider__track-fill.primary {
+    border-radius: 20px !important;
+}
+.v-slider__thumb:before {
+    left: -8px !important;
+    top: -9px !important;
+}
+.v-slider__track-container {
+    height: 6px !important;
+}
+.v-slider__thumb.primary {
+    height: 20px !important;
+    width: 20px !important;
+    left: -12px !important;
+}
 .custom {
     max-height: 12rem;
     overflow: auto;
@@ -360,12 +619,16 @@ export default {
     padding-left: 9px;
     line-height: 20px;
     color: #565656;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .stick {
     color: #fff;
 }
-
+.v-input__control {
+    min-height: 32px !important;
+}
 .custom.v-text-field > .v-input__control > .v-input__slot:before {
     border-style: none;
 }
@@ -375,7 +638,9 @@ export default {
 }
 
 .slider-input {
-    width: 50px;
+    border: 1px solid #6f56fd;
+    border-radius: 10px;
+    width: 80px;
     text-align: right;
 }
 
@@ -433,7 +698,12 @@ export default {
     height: 20px;
     color: #565656;
 }
-
+.v-input__append-outer {
+    margin-left: 20px !important;
+    width: 72px !important;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 .input__text {
     font-size: 18px;
     line-height: 22px;

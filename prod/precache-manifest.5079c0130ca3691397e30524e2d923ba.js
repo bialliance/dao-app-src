@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d83597c00ae1bdb7ea53",
-    "url": "/css/app.fea5cfaf.css"
+    "revision": "431a092bab65ad092f32",
+    "url": "/css/app.e48fdc2e.css"
   },
   {
     "revision": "74f632b0a034a8b93175",
@@ -100,12 +100,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/skyflex.e13c9a20.png"
   },
   {
-    "revision": "754a3f914317aa7f9869efcb2f5d988b",
+    "revision": "318b4bab491806f8aa667dbbed16326d",
+    "url": "/img/startup.318b4bab.svg"
+  },
+  {
+    "revision": "1e01553169a9c585e6fe34e74392292a",
     "url": "/index.html"
   },
   {
-    "revision": "d83597c00ae1bdb7ea53",
-    "url": "/js/app.473c4c17.js"
+    "revision": "431a092bab65ad092f32",
+    "url": "/js/app.bb0a3c93.js"
   },
   {
     "revision": "74f632b0a034a8b93175",

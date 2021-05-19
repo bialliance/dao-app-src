@@ -11,10 +11,10 @@
                 <v-img
                     v-if="$vuetify.theme.dark"
                     :src="logoDark"
-                    width="40"
+                    width="50"
                     contain
                 />
-                <v-img v-else :src="logoLight" width="30" contain />
+                <v-img v-else :src="logoLight" width="50" contain />
             </div>
         </v-toolbar-title>
         <div id="navigation-icon" v-if="!isMainPage && mobileView">
@@ -54,6 +54,15 @@
                         Dashboard
                     </router-link>
                 </div>
+                <div class="list__item" @click="showNav = !showNav">
+                    <a
+                        href="https://hackerlink.io/en/Grant/RCIS/Round/1/buidl/393"
+                        target="_blank"
+                        class="text-brand-gradient"
+                    >
+                        Vote
+                    </a>
+                </div>
             </div>
         </div>
         <div v-else-if="!isMainPage && !mobileView">
@@ -91,6 +100,15 @@
                             Dashboard
                         </router-link>
                     </div>
+                    <div class="list__item">
+                        <a
+                            href="https://hackerlink.io/en/Grant/RCIS/Round/1/buidl/393"
+                            target="_blank"
+                            class="text-brand-gradient invert-gradient-bar"
+                        >
+                            Vote
+                        </a>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -101,7 +119,15 @@
             color="primary"
             @click="$router.push('/dao')"
         >
-            Launch App
+            <div class="launch-up-startup">
+                <span class="launch-up-text">Launch App</span>
+                <img
+                    src="@/assets/img/startup.svg"
+                    alt="startup"
+                    class="startup"
+                    width="30"
+                />
+            </div>
         </UIButton>
         <UIButton
             v-else-if="!isCreateDaoPage"
@@ -118,7 +144,7 @@
                 outlined
                 @click="showModal"
             >
-                Network
+                {{ network }}
             </UIButton>
             <UIButton
                 v-if="!walletConnected"
@@ -126,7 +152,7 @@
                 outlined
                 @click="connect"
             >
-                Connect
+                Connect Wallet
             </UIButton>
             <UIButton v-else color="primary" outlined @click="disconnect">
                 {{ accountAddress }}
@@ -150,8 +176,36 @@
                     <div class="sc-iCoHVE knnrxv web3modal-modal-hitbox"></div>
                     <div class="sc-fujyUd fJcXnX web3modal-modal-card">
                         <div
-                            @click="switchNetwork(2)"
-                            class="sc-eCApGN damoxS web3modal-provider-wrapper"
+                            color="primary"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                            @click="switchNetwork(1)"
+                            class="sc-eCApGN damoxS web3modal-provider-wrapper disabled"
+                        >
+                            <div
+                                class="sc-hKFyIo boNcpQ web3modal-provider-container text-center"
+                            >
+                                <div
+                                    class="sc-bdnylx jMhaxE web3modal-provider-icon"
+                                >
+                                    <img src="@/assets/img/eth.png" />
+                                </div>
+                                <div
+                                    class="sc-gtssRu bqzjdb web3modal-provider-name"
+                                >
+                                    ETH: Main network
+                                </div>
+                                <div
+                                    class="sc-dlnjPT gTeXGK web3modal-provider-description"
+                                >
+                                    Switch to ETH: Main network
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            @click="switchNetwork(56)"
+                            class="sc-eCApGN damoxS web3modal-provider-wrapper disabled"
                         >
                             <div
                                 class="sc-hKFyIo boNcpQ web3modal-provider-container text-center"
@@ -164,12 +218,12 @@
                                 <div
                                     class="sc-gtssRu bqzjdb web3modal-provider-name"
                                 >
-                                    ETH
+                                    BSC: Main network
                                 </div>
                                 <div
                                     class="sc-dlnjPT gTeXGK web3modal-provider-description"
                                 >
-                                    Switch to ETH network
+                                    Switch to BSC: Main network
                                 </div>
                             </div>
                         </div>
@@ -183,17 +237,41 @@
                                 <div
                                     class="sc-bdnylx jMhaxE web3modal-provider-icon"
                                 >
-                                    <img src="@/assets/img/flex.png" />
+                                    <img src="@/assets/img/eth.png" />
                                 </div>
                                 <div
                                     class="sc-gtssRu bqzjdb web3modal-provider-name"
                                 >
-                                    BSC
+                                    ETH: Rinkeby
                                 </div>
                                 <div
                                     class="sc-dlnjPT gTeXGK web3modal-provider-description"
                                 >
-                                    Switch to BSC network
+                                    Switch to ETH: Rinkeby test network
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            @click="switchNetwork(97)"
+                            class="sc-eCApGN damoxS web3modal-provider-wrapper"
+                        >
+                            <div
+                                class="sc-hKFyIo boNcpQ web3modal-provider-container text-center"
+                            >
+                                <div
+                                    class="sc-bdnylx jMhaxE web3modal-provider-icon"
+                                >
+                                    <img src="@/assets/img/binance.png" />
+                                </div>
+                                <div
+                                    class="sc-gtssRu bqzjdb web3modal-provider-name"
+                                >
+                                    BSC: Test
+                                </div>
+                                <div
+                                    class="sc-dlnjPT gTeXGK web3modal-provider-description"
+                                >
+                                    Switch to BSC: Test network
                                 </div>
                             </div>
                         </div>
@@ -221,7 +299,8 @@ export default {
         accountAddress: "",
         showMenu: false,
         mobileView: false,
-        showNav: false
+        showNav: false,
+        network: "Choose Network"
     }),
 
     computed: {
@@ -240,6 +319,9 @@ export default {
                 console.log(data);
                 this.accountAddress = this.$bia.spliceAddress(data.address);
                 this.walletConnected = data.success;
+                if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
+                    this.network = this.$bia.networkName;
+                }
             });
         },
         disconnect: function() {
@@ -255,8 +337,16 @@ export default {
         },
         switchNetwork: function(chainId) {
             this.$bia.appChainId = chainId;
+            this.$bia.chainLogo = this.$bia.getChainLogo(chainId);
+            // this.network = this.$bia.getNetworkName(chainId);
+            if (chainId == 4 || chainId == 1) {
+                this.network = "Rinkeby";
+            } else if (chainId == 97 || chainId == 56) {
+                this.network = "Binance";
+            }
+            console.log(this.network);
             this.networkModal = false;
-            console.log(this.$bia.chainId);
+            console.log(chainId);
         },
         handleView() {
             this.mobileView = window.innerWidth <= 1300;
@@ -270,6 +360,22 @@ export default {
 
 <style lang="scss">
 @import "@/sass/_variables.scss";
+.disabled {
+    pointer-events: none;
+    user-select: none;
+}
+.invert-gradient-bar {
+    color: linear-gradient(90.19deg, #ffb800 2.85%, #bf56fe 102.75%) !important;
+}
+.invert-gradient:hover {
+    filter: brightness(1.2) !important;
+}
+.launch-up-startup {
+    display: flex;
+}
+.launch-up-text {
+    padding-right: 13px;
+}
 .open {
     left: 0% !important;
     transition: left 0.5s linear;
