@@ -134,98 +134,107 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
+    import UIButton from '_ui/UIButton'
 
-export default {
-    name: "DaoManagerScreen",
+    export default {
+        name: 'DaoManagerScreen',
 
-    components: {
-        UIButton
-    },
-
-    data: () => ({
-        daoList: [],
-        alerted: false,
-        chainLogo: "",
-        showWarning: false
-    }),
-
-    mounted() {
-        this.fetchDaoList(err => {
-            this.smartFetchDaoList(err => {
-                if (!this.alerted) {
-                    this.alerted = true;
-                    this.showWarning = true;
-                }
-            });
-        });
-        setInterval(async () => {
-            await this.smartFetchDaoList(err => {
-                if (!this.alerted) {
-                    this.alerted = true;
-                    this.showWarning = true;
-                }
-            });
-        }, 10000);
-    },
-
-    methods: {
-        fetchDaoList(cb = () => {}) {
-            this.$bia.connect(account => {
-                this.$bia.getDao(daos => {
-                    // if (daos == undefined || this.$bia.appChainId != this.$bia.chainId)
-                    if (daos == undefined) {
-                        cb(undefined);
-                    } else {
-                        this.alerted = false;
-                        for (const i in daos) {
-                            const dao = daos[i];
-                            this.daoList.push({
-                                title: dao.NameDao,
-                                text: dao.DescriptionDao
-                            });
-                        }
-                        this.daoList.reverse();
-                        this.chainLogo = this.$bia.chainLogo;
-                    }
-                });
-            });
+        components: {
+            UIButton,
         },
 
-        smartFetchDaoList(cb) {
-            if (this.$bia.connected) {
-                this.$bia.getDao(daos => {
-                    // if (daos == undefined || this.$bia.appChainId != this.$bia.chainId)
-                    if (daos == undefined) {
-                        cb(undefined);
-                    } else {
-                        this.alerted = false;
-                        if (this.daoList.length != daos.length) {
-                            this.daoList = [];
+        data: () => ({
+            daoList: [],
+            alerted: false,
+            chainLogo: '',
+            showWarning: false,
+        }),
+
+        mounted() {
+            this.fetchDaoList((err) => {
+                if (err) {
+                    console.log(err)
+                }
+                this.smartFetchDaoList((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    if (!this.alerted) {
+                        this.alerted = true
+                        this.showWarning = true
+                    }
+                })
+            })
+            setInterval(async () => {
+                await this.smartFetchDaoList((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    if (!this.alerted) {
+                        this.alerted = true
+                        this.showWarning = true
+                    }
+                })
+            }, 10000)
+        },
+
+        methods: {
+            fetchDaoList(cb = () => {}) {
+                this.$bia.connect((account) => {
+                    this.$bia.getDao((daos) => {
+                        // if (daos == undefined || this.$bia.appChainId != this.$bia.chainId)
+                        if (daos === undefined) {
+                            cb(undefined)
+                        } else {
+                            this.alerted = false
                             for (const i in daos) {
-                                const dao = daos[i];
+                                const dao = daos[i]
                                 this.daoList.push({
                                     title: dao.NameDao,
-                                    text: dao.DescriptionDao
-                                });
+                                    text: dao.DescriptionDao,
+                                })
                             }
-                            this.daoList.reverse();
-                            this.chainLogo = this.$bia.chainLogo;
+                            this.daoList.reverse()
+                            this.chainLogo = this.$bia.chainLogo
                         }
-                    }
-                });
-            }
-        },
+                    })
+                })
+            },
 
-        createDao() {
-            this.$router.push({ name: "DaoNew" });
-        },
+            smartFetchDaoList(cb) {
+                if (this.$bia.connected) {
+                    this.$bia.getDao((daos) => {
+                        // if (daos == undefined || this.$bia.appChainId != this.$bia.chainId)
+                        if (daos === undefined) {
+                            cb(undefined)
+                        } else {
+                            this.alerted = false
+                            if (this.daoList.length !== daos.length) {
+                                this.daoList = []
+                                for (const i in daos) {
+                                    const dao = daos[i]
+                                    this.daoList.push({
+                                        title: dao.NameDao,
+                                        text: dao.DescriptionDao,
+                                    })
+                                }
+                                this.daoList.reverse()
+                                this.chainLogo = this.$bia.chainLogo
+                            }
+                        }
+                    })
+                }
+            },
 
-        redirect(path) {
-            this.$router.push(path);
-        }
+            createDao() {
+                this.$router.push({ name: 'DaoNew' })
+            },
+
+            redirect(path) {
+                this.$router.push(path)
+            },
+        },
     }
-};
 </script>
 
 <style lang="scss" scoped>

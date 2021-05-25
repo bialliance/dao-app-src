@@ -42,15 +42,15 @@
 </template>
 
 <script>
-import SvgIcon from "@/features/SvgIcon";
-import UIButton from "_ui/UIButton";
+    import SvgIcon from '@/features/SvgIcon'
+    // import UIButton from '_ui/UIButton'
 
-export default {
-    components: {
-        SvgIcon,
-        UIButton
+    export default {
+        components: {
+            SvgIcon,
+            // UIButton,
+        },
     }
-};
 </script>
 
 <style lang="scss">

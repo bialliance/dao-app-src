@@ -1,4 +1,4 @@
-﻿import Web3 from "web3";
+import Web3 from "web3";
 import Web3Modal from "web3modal";
 import MewConnect from "@myetherwallet/mewconnect-web-client";
 import ethProvider from "eth-provider";
@@ -154,7 +154,7 @@ class Bia {
         }
     }
 
-    async connect(callback) {
+    async connect(callback = () => {}) {
         if (!this.connected) {
             const providerOptions = {
                 mewconnect: {
@@ -216,7 +216,7 @@ class Bia {
         }
     }
 
-    async createDao(params, callback) {
+    async createDao(params, callback = () => {}) {
         if (!this.connected) {
             alert("Need to connect");
         } else {
@@ -259,7 +259,7 @@ class Bia {
         });
     }
 
-    async getDao(callback) {
+    async getDao(callback = () => {}) {
         if (!this.connected) {
             alert("Need to connect");
         } else {
@@ -269,6 +269,9 @@ class Bia {
                     this.contract.methods
                         .getDaos(this.accountAddress)
                         .call((err, result) => {
+                            if (err) {
+                                console.log(err);
+                            }
                             this.daos = result;
                             callback(this.daos);
                         });

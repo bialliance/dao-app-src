@@ -179,10 +179,14 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
-export default {
-    components: { UIButton }
-};
+// import UIButton from '_ui/UIButton'
+    export default {
+        name: 'AboutScreen',
+
+        components: {
+        // UIButton
+        },
+    }
 </script>
 
 <style lang="scss">

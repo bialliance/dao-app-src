@@ -12,7 +12,7 @@
             Ваш браузер не поддерживает плавающие фреймы!
         </iframe>
     </div>
-    <!-- 
+    <!--
     <v-container class="investors" fluid>
         <h1 class="investors__title">For Depositors</h1>
         <div class="investors__content">
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import DaoTable from "_features/dao/components/DaoTable";
+// import DaoTable from '_features/dao/components/DaoTable'
 
-export default {
-    name: "DaoDepositorScreen",
+    export default {
+        name: 'DaoDepositorScreen',
 
-    components: {
-        DaoTable
+        components: {
+        // DaoTable,
+        },
     }
-};
 </script>
 
 <style lang="scss">

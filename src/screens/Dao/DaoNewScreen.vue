@@ -374,128 +374,128 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
-import aragon from "@/assets/img/aragon.svg";
-import oneClickDao from "@/assets/img/oneClickDao.svg";
+    import UIButton from '_ui/UIButton'
+    import aragon from '@/assets/img/aragon.svg'
+    import oneClickDao from '@/assets/img/oneClickDao.svg'
 
-export default {
-    name: "DaoNewScreen",
+    export default {
+        name: 'DaoNewScreen',
 
-    components: {
-        UIButton
-    },
-    data() {
-        return {
-            aragon,
-            oneClickDao,
-            creating: false,
-            error: false,
-            errorText: "",
-            min: 0,
-            max: 100,
-            slider1: 40,
-            slider2: 40,
-            length,
-            alert
-        };
-    },
-    mounted: function() {
-        var switchButton = document.querySelector(".switch-button");
-        var switchBtnRight = document.querySelector(
-            ".switch-button-case.right"
-        );
-        var switchBtnLeft = document.querySelector(".switch-button-case.left");
-        var activeSwitch = document.querySelector(".active");
-        var platform = document.querySelector("#platform");
-
-        function switchLeft() {
-            switchBtnRight.classList.remove("active-case");
-            switchBtnLeft.classList.add("active-case");
-            platform.setAttribute("value", "1clickdao");
-
-            activeSwitch.style.left = "0%";
-        }
-
-        function switchRight() {
-            switchBtnRight.classList.add("active-case");
-            switchBtnLeft.classList.remove("active-case");
-            platform.setAttribute("value", "aragon");
-            activeSwitch.style.left = "50%";
-        }
-
-        switchBtnLeft.addEventListener(
-            "click",
-            function() {
-                switchLeft();
-            },
-            false
-        );
-
-        switchBtnRight.addEventListener(
-            "click",
-            function() {
-                switchRight();
-            },
-            false
-        );
-    },
-    methods: {
-        createDao: async function() {
-            if (!this.walletConnected) {
-                this.$bia.connect(async data => {
-                    console.log("bia.connect");
-                    console.log(data);
-                    this.accountAddress = this.$bia.spliceAddress(data.address);
-                    this.walletConnected = data.success;
-                    if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
-                        this.error = false;
-                        this.sendData();
-                    } else {
-                        this.errorText = await "Unsupported Metamask Network";
-                        this.error = true;
-                    }
-                });
-            } else {
-                this.$bia.setChainId(async chainId => {
-                    if ([1, 4, 56, 97].includes(chainId)) {
-                        this.$bia.appChainId = chainId;
-                        this.error = false;
-                        this.sendData();
-                    } else {
-                        this.errorText = await "Unsupported Metamask Network";
-                        this.error = true;
-                    }
-                });
+        components: {
+            UIButton,
+        },
+        data() {
+            return {
+                aragon,
+                oneClickDao,
+                creating: false,
+                error: false,
+                errorText: '',
+                min: 0,
+                max: 100,
+                slider1: 40,
+                slider2: 40,
+                length,
+                alert,
             }
         },
-        sendData: function() {
-            if (this.$bia.appChainId == this.$bia.chainId) {
-                const params = {
-                    daoName: this.daoName || "",
-                    daoDescription: this.daoDescription || "",
-                    gpTokenName: this.gpTokenName || "",
-                    gpTokenSymbol: this.gpTokenSymbol || "",
-                    lpTokenName: this.lpTokenName || "",
-                    lpTokenSymbol: this.lpTokenSymbol || ""
-                };
-                console.log(params);
-                this.$bia.createDao(params, err => {
-                    if (err) {
-                        this.errorText = "User denied transaction";
-                        this.error = true;
-                    } else {
-                        this.creating = true;
-                    }
-                });
-            } else {
-                this.error = true;
+        mounted: function () {
+            // const switchButton = document.querySelector('.switch-button')
+            const switchBtnRight = document.querySelector(
+                '.switch-button-case.right',
+            )
+            const switchBtnLeft = document.querySelector('.switch-button-case.left')
+            const activeSwitch = document.querySelector('.active')
+            const platform = document.querySelector('#platform')
+
+            function switchLeft() {
+                switchBtnRight.classList.remove('active-case')
+                switchBtnLeft.classList.add('active-case')
+                platform.setAttribute('value', '1clickdao')
+
+                activeSwitch.style.left = '0%'
             }
+
+            function switchRight() {
+                switchBtnRight.classList.add('active-case')
+                switchBtnLeft.classList.remove('active-case')
+                platform.setAttribute('value', 'aragon')
+                activeSwitch.style.left = '50%'
+            }
+
+            switchBtnLeft.addEventListener(
+                'click',
+                function () {
+                    switchLeft()
+                },
+                false,
+            )
+
+            switchBtnRight.addEventListener(
+                'click',
+                function () {
+                    switchRight()
+                },
+                false,
+            )
         },
-        redirect: function(path) {
-            this.$router.push(path);
-        }
+        methods: {
+            createDao: async function () {
+                if (!this.walletConnected) {
+                    this.$bia.connect(async (data) => {
+                        console.log('bia.connect')
+                        console.log(data)
+                        this.accountAddress = this.$bia.spliceAddress(data.address)
+                        this.walletConnected = data.success
+                        if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
+                            this.error = false
+                            this.sendData()
+                        } else {
+                            this.errorText = await 'Unsupported Metamask Network'
+                            this.error = true
+                        }
+                    })
+                } else {
+                    this.$bia.setChainId(async (chainId) => {
+                        if ([1, 4, 56, 97].includes(chainId)) {
+                            this.$bia.appChainId = chainId
+                            this.error = false
+                            this.sendData()
+                        } else {
+                            this.errorText = await 'Unsupported Metamask Network'
+                            this.error = true
+                        }
+                    })
+                }
+            },
+            sendData: function () {
+                if (this.$bia.appChainId === this.$bia.chainId) {
+                    const params = {
+                        daoName: this.daoName || '',
+                        daoDescription: this.daoDescription || '',
+                        gpTokenName: this.gpTokenName || '',
+                        gpTokenSymbol: this.gpTokenSymbol || '',
+                        lpTokenName: this.lpTokenName || '',
+                        lpTokenSymbol: this.lpTokenSymbol || '',
+                    }
+                    console.log(params)
+                    this.$bia.createDao(params, (err) => {
+                        if (err) {
+                            this.errorText = 'User denied transaction'
+                            this.error = true
+                        } else {
+                            this.creating = true
+                        }
+                    })
+                } else {
+                    this.error = true
+                }
+            },
+            redirect: function (path) {
+                this.$router.push(path)
+            },
+        },
     }
-};
 </script>
 
 <style lang="scss">

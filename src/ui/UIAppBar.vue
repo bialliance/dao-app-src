@@ -54,7 +54,7 @@
                         Dashboard
                     </router-link>
                 </div>
-                <div class="list__item" @click="showNav = !showNav">
+                <!-- <div class="list__item" @click="showNav = !showNav">
                     <a
                         href="https://hackerlink.io/en/Grant/RCIS/Round/1/buidl/393"
                         target="_blank"
@@ -62,7 +62,7 @@
                     >
                         Vote
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
         <div v-else-if="!isMainPage && !mobileView">
@@ -100,7 +100,7 @@
                             Dashboard
                         </router-link>
                     </div>
-                    <div class="list__item">
+                    <!-- <div class="list__item">
                         <a
                             href="https://hackerlink.io/en/Grant/RCIS/Round/1/buidl/393"
                             target="_blank"
@@ -108,7 +108,7 @@
                         >
                             Vote
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </nav>
         </div>
@@ -283,79 +283,79 @@
 </template>
 
 <script>
-import logoDark from "@/assets/dark.png";
-import logoLight from "@/assets/light.png";
-import UIButton from "_ui/UIButton";
-// import Bia from "@/api/bia";
+    import logoDark from '@/assets/dark.png'
+    import logoLight from '@/assets/light.png'
+    import UIButton from '_ui/UIButton'
+    // import Bia from "@/api/bia";
 
-export default {
-    name: "UIAppBar",
-    components: { UIButton },
-    data: () => ({
-        logoDark,
-        logoLight,
-        networkModal: false,
-        walletConnected: false,
-        accountAddress: "",
-        showMenu: false,
-        mobileView: false,
-        showNav: false,
-        network: "Choose Network"
-    }),
+    export default {
+        name: 'UIAppBar',
+        components: { UIButton },
+        data: () => ({
+            logoDark,
+            logoLight,
+            networkModal: false,
+            walletConnected: false,
+            accountAddress: '',
+            showMenu: false,
+            mobileView: false,
+            showNav: false,
+            network: 'Choose Network',
+        }),
 
-    computed: {
-        isMainPage() {
-            return this.$route.name === "Main";
+        computed: {
+            isMainPage() {
+                return this.$route.name === 'Main'
+            },
+
+            isCreateDaoPage() {
+                return this.$route.name === 'DaoNew'
+            },
         },
-
-        isCreateDaoPage() {
-            return this.$route.name === "DaoNew";
-        }
-    },
-    methods: {
-        connect: async function() {
-            this.$bia.connect(data => {
-                console.log("bia.connect");
-                console.log(data);
-                this.accountAddress = this.$bia.spliceAddress(data.address);
-                this.walletConnected = data.success;
-                if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
-                    this.network = this.$bia.networkName;
-                }
-            });
+        created() {
+            this.handleView()
         },
-        disconnect: function() {
-            console.log("close");
+        methods: {
+            connect: async function () {
+                this.$bia.connect((data) => {
+                    console.log('bia.connect')
+                    console.log(data)
+                    this.accountAddress = this.$bia.spliceAddress(data.address)
+                    this.walletConnected = data.success
+                    if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
+                        this.network = this.$bia.networkName
+                    }
+                })
+            },
+            disconnect: function () {
+                console.log('close')
             // prov.disconnect()
+            },
+            showModal: function () {
+                if (this.$bia.connected) {
+                    this.networkModal = true
+                } else {
+                    alert('connect first')
+                }
+            },
+            switchNetwork: function (chainId) {
+                this.$bia.appChainId = chainId
+                this.$bia.chainLogo = this.$bia.getChainLogo(chainId)
+                // this.network = this.$bia.getNetworkName(chainId);
+                if (chainId === 4 || chainId === 1) {
+                    this.network = 'Rinkeby'
+                } else if (chainId === 97 || chainId === 56) {
+                    this.network = 'Binance'
+                }
+                console.log(this.network)
+                this.networkModal = false
+                console.log(chainId)
+            },
+            handleView() {
+                this.mobileView = window.innerWidth <= 1300
+            },
         },
-        showModal: function() {
-            if (this.$bia.connected) {
-                this.networkModal = true;
-            } else {
-                alert("connect first");
-            }
-        },
-        switchNetwork: function(chainId) {
-            this.$bia.appChainId = chainId;
-            this.$bia.chainLogo = this.$bia.getChainLogo(chainId);
-            // this.network = this.$bia.getNetworkName(chainId);
-            if (chainId == 4 || chainId == 1) {
-                this.network = "Rinkeby";
-            } else if (chainId == 97 || chainId == 56) {
-                this.network = "Binance";
-            }
-            console.log(this.network);
-            this.networkModal = false;
-            console.log(chainId);
-        },
-        handleView() {
-            this.mobileView = window.innerWidth <= 1300;
-        }
-    },
-    created() {
-        this.handleView();
     }
-};
 </script>
 
 <style lang="scss">

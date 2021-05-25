@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <v-container>
         <h1 class="created__title">Voting</h1>
         <h4 class="input_title vote-title">Open votes</h4>
@@ -184,28 +184,28 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
+    // import UIButton from '_ui/UIButton'
 
-export default {
-    name: "DaoVoteScreen",
+    export default {
+        name: 'DaoVoteScreen',
 
-    components: {
-        UIButton
-    },
+        components: {
+            // UIButton,
+        },
 
-    data: () => ({
-        openVotes: [
-            { title: "openVote1" },
-            { title: "openVote2" },
-            { title: "openVote3" }
-        ],
-        closeVotes: [
-            { title: "closeVote1" },
-            { title: "closeVote2" },
-            { title: "closeVote3" }
-        ]
-    })
-};
+        data: () => ({
+            openVotes: [
+                { title: 'openVote1' },
+                { title: 'openVote2' },
+                { title: 'openVote3' },
+            ],
+            closeVotes: [
+                { title: 'closeVote1' },
+                { title: 'closeVote2' },
+                { title: 'closeVote3' },
+            ],
+        }),
+    }
 </script>
 
 <style lang="scss" scoped>

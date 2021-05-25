@@ -12,7 +12,7 @@
             Ваш браузер не поддерживает плавающие фреймы!
         </iframe>
     </div>
-    <!--         
+    <!--
     <div class="dashboard">
         <div class="container">
             <h1 class="dashboard__title">Dashboard</h1>
@@ -75,85 +75,85 @@
 </template>
 
 <script>
-export default {
-    data: () => ({
-        headers: [
-            { text: "Product", value: "product" },
-            { text: "Token", value: "token" },
-            { text: "Amount", value: "amount" },
-            { text: "Invested amoubt, USDT", value: "amoubt" },
-            { text: "AVG purchase price", value: "purchase" },
-            { text: "Token price", value: "price" },
-            { text: "Portfolio value, USDT", value: "portfolio" },
-            { text: "Profit/Loss, USDT", value: "profitusdt" },
-            { text: "Profit/Loss, %", value: "profit" },
-            { text: "APY %", value: "apy" }
-        ],
-        desserts: [
-            {
-                id: 1,
-                product: "BTC DAO",
-                token: "BDQ",
-                amount: 1000,
-                amoubt: 1000.0,
-                purchase: 1.0,
-                price: 1.01,
-                portfolio: 1010.0,
-                profitusdt: 10.0,
-                profit: 1.0,
-                apy: 12.0
+    export default {
+        data: () => ({
+            headers: [
+                { text: 'Product', value: 'product' },
+                { text: 'Token', value: 'token' },
+                { text: 'Amount', value: 'amount' },
+                { text: 'Invested amoubt, USDT', value: 'amoubt' },
+                { text: 'AVG purchase price', value: 'purchase' },
+                { text: 'Token price', value: 'price' },
+                { text: 'Portfolio value, USDT', value: 'portfolio' },
+                { text: 'Profit/Loss, USDT', value: 'profitusdt' },
+                { text: 'Profit/Loss, %', value: 'profit' },
+                { text: 'APY %', value: 'apy' },
+            ],
+            desserts: [
+                {
+                    id: 1,
+                    product: 'BTC DAO',
+                    token: 'BDQ',
+                    amount: 1000,
+                    amoubt: 1000.0,
+                    purchase: 1.0,
+                    price: 1.01,
+                    portfolio: 1010.0,
+                    profitusdt: 10.0,
+                    profit: 1.0,
+                    apy: 12.0,
+                },
+                {
+                    id: 2,
+                    product: 'FLEX',
+                    token: 'FLEX',
+                    amount: 25000,
+                    amoubt: 25500.0,
+                    purchase: 1.02,
+                    price: 1.2,
+                    portfolio: 30000.0,
+                    profitusdt: 4500.0,
+                    profit: 17.65,
+                    apy: 44.0,
+                },
+                {
+                    id: 3,
+                    product: 'Binance DAO',
+                    token: 'DYNA',
+                    amount: 5000,
+                    amoubt: 6550.0,
+                    purchase: 1.31,
+                    price: 1.9,
+                    portfolio: 9500.0,
+                    profitusdt: 2950.0,
+                    profit: 45.04,
+                    apy: 120.0,
+                },
+                {
+                    id: 4,
+                    product: 'SkyFlex',
+                    token: '-',
+                    amount: 0,
+                    amoubt: 0,
+                    purchase: 0,
+                    price: 0,
+                    portfolio: 0,
+                    profitusdt: 0,
+                    profit: 0,
+                    apy: 0,
+                },
+            ],
+        }),
+        methods: {
+            sumField(key) {
+                return (
+                    Math.round(
+                        this.desserts.reduce((a, b) => a + (b[key] || 0), 0) * 100,
+                    ) / 100
+                )
             },
-            {
-                id: 2,
-                product: "FLEX",
-                token: "FLEX",
-                amount: 25000,
-                amoubt: 25500.0,
-                purchase: 1.02,
-                price: 1.2,
-                portfolio: 30000.0,
-                profitusdt: 4500.0,
-                profit: 17.65,
-                apy: 44.0
-            },
-            {
-                id: 3,
-                product: "Binance DAO",
-                token: "DYNA",
-                amount: 5000,
-                amoubt: 6550.0,
-                purchase: 1.31,
-                price: 1.9,
-                portfolio: 9500.0,
-                profitusdt: 2950.0,
-                profit: 45.04,
-                apy: 120.0
-            },
-            {
-                id: 4,
-                product: "SkyFlex",
-                token: "-",
-                amount: 0,
-                amoubt: 0,
-                purchase: 0,
-                price: 0,
-                portfolio: 0,
-                profitusdt: 0,
-                profit: 0,
-                apy: 0
-            }
-        ]
-    }),
-    methods: {
-        sumField(key) {
-            return (
-                Math.round(
-                    this.desserts.reduce((a, b) => a + (b[key] || 0), 0) * 100
-                ) / 100
-            );
-        }
+        },
     }
-};
 </script>
 
 <style lang="scss">
