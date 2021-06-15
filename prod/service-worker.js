@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5079c0130ca3691397e30524e2d923ba.js"
+  "/precache-manifest.6206928c2e2dc15beacf985013681cd8.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "dao-app"});

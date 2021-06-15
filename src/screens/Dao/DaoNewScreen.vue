@@ -13,27 +13,36 @@
                     </a>
                 </UIButton> -->
             </div>
-            <div class="created__content">
+            <div class="created__content" :hidden="hideForm">
                 <v-row>
                     <v-col cols="6">
                         <h4 class="input_title pb-5">Protocol</h4>
                         <div class="form_group">
                             <div class="switch-button">
-                                <span class="active"></span>
+                                <!-- Disable choose -->
+                                <!-- <span class="active"></span> -->
+                                <span class="active" style="left: 50%;"></span>
+                                <!-- Disable choose -->
+                                <!-- <button class="switch-button-case left active-case"> -->
 
-                                <button
-                                    class="switch-button-case left active-case"
-                                >
+                                <span class="developing"></span>
+
+                                <button class="switch-button-case left">
                                     <v-img
                                         :src="oneClickDao"
                                         width="50"
                                         contain
                                         class="switch-logo mb-2"
                                     />
-                                    <span>1clickDAO</span>
+                                    <!-- <span>1clickDAO</span> -->
+                                    <span>Developing</span>
                                 </button>
 
-                                <button class="switch-button-case right">
+                                <!-- Disable choose -->
+                                <!-- class="switch-button-case right" -->
+                                <button
+                                    class="switch-button-case right active-case"
+                                >
                                     <v-img
                                         :src="aragon"
                                         width="50"
@@ -42,12 +51,13 @@
                                     />
                                     <span>Aragon</span>
                                 </button>
-
+                                <!-- Disable choose -->
+                                <!-- value="1clickdao" -->
                                 <input
                                     id="platform"
                                     type="text"
                                     name="platform"
-                                    value="1clickdao"
+                                    value="aragon"
                                     hidden
                                 />
                             </div>
@@ -69,6 +79,7 @@
                                     name="name"
                                     class="text_input"
                                     v-model="daoName"
+                                    @input="validateName(daoName)"
                                 />
                             </div>
                             <div
@@ -131,6 +142,22 @@
                                             v-model="gpTokenSymbol"
                                         />
                                     </div>
+
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label
+                                            class="label first-col"
+                                            for="amount"
+                                            >Amount</label
+                                        >
+                                        <input
+                                            type="number"
+                                            name="amount"
+                                            class="text_input"
+                                            v-model="gpAmount"
+                                        />
+                                    </div>
                                 </div>
                             </v-col>
                             <v-col cols="12" lg="6">
@@ -168,13 +195,29 @@
                                             v-model="lpTokenSymbol"
                                         />
                                     </div>
+
+                                    <div
+                                        class="input-wrapper d-flex justify-between align-end"
+                                    >
+                                        <label
+                                            class="label first-col"
+                                            for="amount"
+                                            >Amount</label
+                                        >
+                                        <input
+                                            type="number"
+                                            name="amount"
+                                            class="text_input"
+                                            v-model="lpAmount"
+                                        />
+                                    </div>
                                 </div>
                             </v-col>
                         </v-row>
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="12" md="9" lg="7">
+                    <v-col cols="12" md="8" lg="6">
                         <h4 class="input_title pb-5">Voting</h4>
                         <div class="form_group">
                             <div
@@ -192,7 +235,7 @@
                                     ></v-slider> -->
 
                                     <v-slider
-                                        v-model="slider1"
+                                        v-model="supportRequired"
                                         class="align-center"
                                         :max="max"
                                         :min="min"
@@ -200,7 +243,7 @@
                                     >
                                         <template v-slot:append>
                                             <v-text-field
-                                                v-model="slider1"
+                                                v-model="supportRequired"
                                                 class="mt-0 pt-0 slider-input"
                                                 hide-details
                                                 single-line
@@ -233,7 +276,7 @@
                                         :color="ex2.color"
                                     ></v-slider> -->
                                     <v-slider
-                                        v-model="slider2"
+                                        v-model="minAcceptanceQuorum"
                                         class="align-center"
                                         :max="max"
                                         :min="min"
@@ -241,7 +284,7 @@
                                     >
                                         <template v-slot:append>
                                             <v-text-field
-                                                v-model="slider2"
+                                                v-model="minAcceptanceQuorum"
                                                 class="mt-0 pt-0 slider-input"
                                                 hide-details
                                                 single-line
@@ -258,17 +301,91 @@
                             </div>
                         </div>
                     </v-col>
+                    <v-col cols="12" md="8" lg="6">
+                        <h4 class="input_title pb-5">Dot voting</h4>
+                        <div class="form_group">
+                            <div
+                                class="input-wrapper d-flex justify-between align-center"
+                            >
+                                <label class="label first-col" for="name">
+                                    Support %
+                                </label>
+                                <div
+                                    class="slider_wrapper d-flex justify-start align-end"
+                                >
+                                    <v-slider
+                                        v-model="dotSupportRequired"
+                                        class="align-center"
+                                        :max="max"
+                                        :min="min"
+                                        hide-details
+                                    >
+                                        <template v-slot:append>
+                                            <v-text-field
+                                                v-model="dotSupportRequired"
+                                                class="mt-0 pt-0 slider-input"
+                                                hide-details
+                                                single-line
+                                                type="text"
+                                                suffix="%"
+                                                maxlength="3"
+                                                flat
+                                                solo
+                                            />
+                                        </template>
+                                    </v-slider>
+                                </div>
+                            </div>
+                            <div
+                                class="input-wrapper d-flex justify-between align-center"
+                            >
+                                <label
+                                    class="label first-col"
+                                    for="description"
+                                >
+                                    Minimum approval %
+                                </label>
+                                <div
+                                    class="slider_wrapper d-flex justify-start align-end"
+                                >
+                                    <v-slider
+                                        v-model="dotMinAcceptanceQuorum"
+                                        class="align-center"
+                                        :max="max"
+                                        :min="min"
+                                        hide-details
+                                    >
+                                        <template v-slot:append>
+                                            <v-text-field
+                                                v-model="dotMinAcceptanceQuorum"
+                                                class="mt-0 pt-0 slider-input"
+                                                hide-details
+                                                single-line
+                                                type="text"
+                                                suffix="%"
+                                                maxlength="3"
+                                                flat
+                                                solo
+                                            />
+                                        </template>
+                                    </v-slider>
+                                </div>
+                            </div>
+                        </div>
+                    </v-col>
                 </v-row>
                 <v-row>
-                    <v-col cols="12">
+                    <v-col cols="6">
                         <h4 class="input_title pb-5 pb-5">Vote Duration</h4>
                         <v-row>
-                            <v-col cols="12" lg="2">
+                            <v-col cols="12" lg="3">
                                 <div class="form_group vote-custom">
                                     <div class="input-wrapper vote-custom">
                                         <input
                                             type="number"
-                                            name="name"
+                                            min="0"
+                                            step="1"
+                                            name="voteDays"
                                             class="text_input vote-duration-input"
                                             maxlength="3"
                                             v-model="voteDays"
@@ -277,12 +394,14 @@
                                     </div>
                                 </div>
                             </v-col>
-                            <v-col cols="12" lg="2">
+                            <v-col cols="12" lg="3">
                                 <div class="form_group vote-custom">
                                     <div class="input-wrapper vote-custom">
                                         <input
-                                            type="text"
-                                            name="name"
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="voteHours"
                                             class="text_input vote-duration-input"
                                             maxlength="2"
                                             v-model="voteHours"
@@ -291,12 +410,14 @@
                                     </div>
                                 </div>
                             </v-col>
-                            <v-col cols="12" lg="2">
+                            <v-col cols="12" lg="3">
                                 <div class="form_group vote-custom">
                                     <div class="input-wrapper vote-custom">
                                         <input
-                                            type="text"
-                                            name="name"
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="voteMinutes"
                                             class="text_input vote-duration-input"
                                             maxlength="2"
                                             v-model="voteMinutes"
@@ -306,6 +427,240 @@
                                 </div>
                             </v-col>
                         </v-row>
+                    </v-col>
+                    <v-col cols="6">
+                        <h4 class="input_title pb-5 pb-5">Dot Vote Duration</h4>
+                        <v-row>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="dotVoteDays"
+                                            class="text_input vote-duration-input"
+                                            maxlength="3"
+                                            v-model="dotVoteDays"
+                                            placeholder="Days"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="dotVoteHours"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="dotVoteHours"
+                                            placeholder="Hours"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="dotVoteMinutes"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="dotVoteMinutes"
+                                            placeholder="Minutes"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="6">
+                        <h4 class="input_title pb-5 pb-5 pt-5">
+                            Allocations Period
+                        </h4>
+                        <v-row>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="allocationDays"
+                                            class="text_input vote-duration-input"
+                                            maxlength="3"
+                                            v-model="allocationDays"
+                                            placeholder="Days"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="allocationHours"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="allocationHours"
+                                            placeholder="Hours"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="allocationMinutes"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="allocationMinutes"
+                                            placeholder="Minutes"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="6">
+                        <h4 class="input_title pb-5 pb-5 pt-5">
+                            Finance Budget Period
+                        </h4>
+                        <v-row>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="financeBudgetDays"
+                                            class="text_input vote-duration-input"
+                                            maxlength="3"
+                                            v-model="financeBudgetDays"
+                                            placeholder="Days"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="financeBudgetHours"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="financeBudgetHours"
+                                            placeholder="Hours"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="financeBudgetMinutes"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="financeBudgetMinutes"
+                                            placeholder="Minutes"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="6">
+                        <h4 class="input_title pb-5 pb-5 pt-5">Delay Period</h4>
+                        <v-row>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="delayDays"
+                                            class="text_input vote-duration-input"
+                                            maxlength="3"
+                                            v-model="delayDays"
+                                            placeholder="Days"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="delayHours"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="delayHours"
+                                            placeholder="Hours"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" lg="3">
+                                <div class="form_group vote-custom">
+                                    <div class="input-wrapper vote-custom">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            step="1"
+                                            name="delayMinutes"
+                                            class="text_input vote-duration-input"
+                                            maxlength="2"
+                                            v-model="delayMinutes"
+                                            placeholder="Minutes"
+                                        />
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="12" sm="10" md="8" lg="6">
+                        <h4 class="input_title pb-5 pt-5">Token request</h4>
+                        <div class="d-flex justify-between align-end">
+                            <label class="label first-col" for="tokenRequest">
+                                Address
+                            </label>
+                            <input
+                                type="text"
+                                name="tokenRequest"
+                                class="text_input"
+                                v-model="tokenRequest"
+                            />
+                        </div>
                     </v-col>
                 </v-row>
                 <v-row>
@@ -319,7 +674,25 @@
                         </UIButton>
                     </v-col>
                 </v-row>
+                <!-- <v-row>
+                    <v-col cols="auto">
+                        <UIButton
+                            class="mr-4 mt-9 mb-15"
+                            color="primary"
+                            @click="finalizeDao2"
+                        >
+                            Finalize DAO
+                        </UIButton>
+                    </v-col>
+                </v-row> -->
             </div>
+            <DaoAragonScreen
+                :hidden="!hideForm"
+                :newToken="newToken"
+                :newManager="newManager"
+                :newFinalize="newFinalize"
+                :aragonDaoLink="aragonDaoLink"
+            />
         </div>
         <div v-if="creating">
             <v-dialog
@@ -370,6 +743,48 @@
                 </template>
             </v-dialog>
         </div>
+        <div v-if="aragonDaoLink">
+            <v-dialog
+                v-model="aragonDaoLink"
+                transition="dialog-top-transition"
+                max-width="600"
+            >
+                <template v-slot:default="dialog">
+                    <v-card>
+                        <v-toolbar color="primary" dark>Info</v-toolbar>
+                        <v-card-text>
+                            <div class="text-h6 pa-12 text-center">
+                                <a :href="aragonDaoLink" target="_blank">{{
+                                    aragonDaoLink
+                                }}</a>
+                            </div>
+                        </v-card-text>
+                        <v-card-actions class="justify-end">
+                            <v-btn
+                                text
+                                @click="
+                                    dialog.value = false;
+                                    hideForm = !hideForm;
+                                    newToken = {
+                                        indeterminate: false,
+                                        value: 0
+                                    };
+                                    newManager = {
+                                        indeterminate: false,
+                                        value: 0
+                                    };
+                                    newFinalize = {
+                                        indeterminate: false,
+                                        value: 0
+                                    };
+                                "
+                                >Ok</v-btn
+                            >
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+        </div>
     </div>
 </template>
 
@@ -377,15 +792,19 @@
     import UIButton from '_ui/UIButton'
     import aragon from '@/assets/img/aragon.svg'
     import oneClickDao from '@/assets/img/oneClickDao.svg'
+    import DaoAragonScreen from '@/screens/Dao/DaoAragonScreen'
+    import axios from 'axios'
 
     export default {
         name: 'DaoNewScreen',
 
         components: {
             UIButton,
+            DaoAragonScreen,
         },
         data() {
             return {
+                daoName: '',
                 aragon,
                 oneClickDao,
                 creating: false,
@@ -393,28 +812,102 @@
                 errorText: '',
                 min: 0,
                 max: 100,
-                slider1: 40,
-                slider2: 40,
+                supportRequired: 40,
+                minAcceptanceQuorum: 40,
+                dotSupportRequired: 40,
+                dotMinAcceptanceQuorum: 40,
                 length,
                 alert,
+                hideForm: false,
+                newToken: { indeterminate: false, value: 0 },
+                newManager: { indeterminate: false, value: 0 },
+                newFinalize: { indeterminate: false, value: 0 },
+                aragonDaoLink: '',
+                installStep: 0,
+                params: {},
+                voteDays: 0,
+                voteHours: 0,
+                voteMinutes: 0,
+                dotVoteDays: 0,
+                dotVoteHours: 0,
+                dotVoteMinutes: 0,
+                allocationDays: 0,
+                allocationHours: 0,
+                allocationMinutes: 0,
+                delayDays: 0,
+                delayHours: 0,
+                delayMinutes: 0,
+                tokenRequest: 0,
+                financeBudgetDays: 0,
+                financeBudgetHours: 0,
+                financeBudgetMinutes: 0,
             }
         },
-        mounted: function () {
+        mounted: async function () {
+            // LOCAL STORAGE
+
+            // console.log(localStorage.installStep);
+            // console.log(localStorage.params);
+            // if (localStorage.installStep == 1) {
+            //     this.newToken = { indeterminate: false, value: 100 };
+            //     await this.$bia.connect(() => {
+            //         this.hideForm = true;
+            //         this.sendTokenManager(JSON.parse(localStorage.params)).then(
+            //             async (res, err) => {
+            //                 if (err) {
+            //                     console.log(err);
+            //                 } else {
+            //                     this.installStep = 2;
+            //                     this.finalizeDao(
+            //                         JSON.parse(localStorage.params)
+            //                     ).then(async (res, err) => {
+            //                         if (err) {
+            //                             console.log(err);
+            //                         } else {
+            //                             this.installStep = 0;
+            //                             this.aragonDaoLink = res;
+            //                         }
+            //                     });
+            //                 }
+            //             }
+            //         );
+            //     });
+            // } else if (localStorage.installStep == 2) {
+            //     this.newToken = { indeterminate: false, value: 100 };
+            //     this.newManager = { indeterminate: false, value: 100 };
+            //     await this.$bia.connect(() => {
+            //         this.hideForm = true;
+            //         this.finalizeDao(JSON.parse(localStorage.params)).then(
+            //             async (res, err) => {
+            //                 if (err) {
+            //                     console.log(err);
+            //                 } else {
+            //                     this.installStep = 0;
+            //                     this.aragonDaoLink = res;
+            //                 }
+            //             }
+            //         );
+            //     });
+            // }
+
+            // LOCAL STORAGE
+
             // const switchButton = document.querySelector('.switch-button')
             const switchBtnRight = document.querySelector(
                 '.switch-button-case.right',
             )
-            const switchBtnLeft = document.querySelector('.switch-button-case.left')
+            const switchBtnLeft = document.querySelector(
+                '.switch-button-case.left',
+            )
             const activeSwitch = document.querySelector('.active')
             const platform = document.querySelector('#platform')
 
-            function switchLeft() {
-                switchBtnRight.classList.remove('active-case')
-                switchBtnLeft.classList.add('active-case')
-                platform.setAttribute('value', '1clickdao')
-
-                activeSwitch.style.left = '0%'
-            }
+            // function switchLeft() {
+            //     switchBtnRight.classList.remove('active-case')
+            //     switchBtnLeft.classList.add('active-case')
+            //     platform.setAttribute('value', '1clickdao')
+            //     activeSwitch.style.left = '0%'
+            // }
 
             function switchRight() {
                 switchBtnRight.classList.add('active-case')
@@ -426,7 +919,8 @@
             switchBtnLeft.addEventListener(
                 'click',
                 function () {
-                    switchLeft()
+                // Disable choose
+                // switchLeft();
                 },
                 false,
             )
@@ -440,6 +934,13 @@
             )
         },
         methods: {
+            format: function (days = 0, hours = 0, minutes = 0) {
+                return (
+                    Number(minutes) * 60 +
+                    Number(hours) * 60 * 60 +
+                    Number(days) * 24 * 60 * 60
+                )
+            },
             createDao: async function () {
                 if (!this.walletConnected) {
                     this.$bia.connect(async (data) => {
@@ -468,37 +969,286 @@
                     })
                 }
             },
-            sendData: function () {
+            sendData: async function () {
                 if (this.$bia.appChainId === this.$bia.chainId) {
-                    const params = {
+                    this.params = {
+                        platform: document.querySelector('#platform').value || '',
                         daoName: this.daoName || '',
                         daoDescription: this.daoDescription || '',
                         gpTokenName: this.gpTokenName || '',
                         gpTokenSymbol: this.gpTokenSymbol || '',
+                        gpAmount:
+                            String(this.gpAmount) + '000000000000000000' || '',
                         lpTokenName: this.lpTokenName || '',
                         lpTokenSymbol: this.lpTokenSymbol || '',
+                        lpAmount:
+                            String(this.lpAmount) + '000000000000000000' || '',
+                        votingSettings: [
+                            String(this.supportRequired) + '0000000000000000' ||
+                                '0',
+                            String(this.minAcceptanceQuorum) + '0000000000000000' ||
+                                '0',
+                            this.format(
+                                this.voteDays,
+                                this.voteHours,
+                                this.voteMinutes,
+                            ),
+                        ],
+                        dotVotingSettings: [
+                            String(this.dotSupportRequired) + '0000000000000000' ||
+                                '0',
+                            String(this.dotMinAcceptanceQuorum) +
+                                '0000000000000000' || '0',
+                            this.format(
+                                this.dotVoteDays,
+                                this.dotVoteHours,
+                                this.dotVoteMinutes,
+                            ),
+                        ],
+                        appSettings: [
+                            this.format(
+                                this.allocationDays,
+                                this.allocationHours,
+                                this.allocationMinutes,
+                            ),
+                            this.format(
+                                this.financeBudgetDays,
+                                this.financeBudgetHours,
+                                this.financeBudgetMinutes,
+                            ),
+                            this.format(
+                                this.delayDays,
+                                this.delayHours,
+                                this.delayMinutes,
+                            ),
+                        ],
+                        tokenRequest: this.tokenRequest,
                     }
-                    console.log(params)
-                    this.$bia.createDao(params, (err) => {
-                        if (err) {
-                            this.errorText = 'User denied transaction'
-                            this.error = true
-                        } else {
-                            this.creating = true
-                        }
-                    })
+                    console.log(this.params)
+                    if (this.params.platform === '1clickdao') {
+                        this.$bia.createDao(this.params, (err) => {
+                            if (err) {
+                                this.errorText = 'User denied transaction'
+                                this.error = true
+                            } else {
+                                this.creating = true
+                            }
+                        })
+                    } else {
+                        this.hideForm = true
+                        this.installStep = 0
+                        this.sendDataAragon(this.params)
+                            .then(async (res, err) => {
+                                if (err) {
+                                    console.log(`wait error: ${err}`)
+                                    console.log(err)
+                                } else {
+                                    this.installStep = 1
+                                    this.sendTokenManager(this.params).then(
+                                        async (res, err) => {
+                                            if (err) {
+                                                console.log(`wait error: ${err}`)
+                                                console.log(err)
+                                            } else {
+                                                this.installStep = 2
+                                                this.finalizeDao(this.params).then(
+                                                    async (res, err) => {
+                                                        if (err) {
+                                                            console.log(
+                                                                `wait error: ${err}`,
+                                                            )
+                                                            console.log(err)
+                                                        } else {
+                                                            this.installStep = 0
+                                                            this.aragonDaoLink = res
+                                                        }
+                                                    },
+                                                )
+                                            }
+                                        },
+                                    )
+                                }
+                            })
+                            .catch((e) => {
+                                console.log(e)
+                            })
+                    }
                 } else {
                     this.error = true
                 }
             },
+            writeDaoFile: function (params) {
+                axios
+                    .post('http://localhost:3080/', params)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            console.log('Dao file is memorized')
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+            },
+            finalizeDao: function (params) {
+                return new Promise((resolve, reject) => {
+                    this.newFinalize.indeterminate = true
+                    if (this.$bia.appChainId === this.$bia.chainId) {
+                        this.$bia.getNetworkName()
+                        console.log(params)
+                        this.$bia.finalizeDao(params, (err) => {
+                            if (err) {
+                                this.errorText = 'User denied transaction'
+                                this.error = true
+                                reject(err)
+                            }
+                            this.newFinalize.value = 100
+                            this.newFinalize.indeterminate = false
+                            console.log('finalize')
+                            const daoAddress = `https://${this.$bia.networkName}.client.aragon.org/#/${params.daoName}.aragonid.eth`
+                            // this.writeDaoFile({
+                            //     accountAddress: this.$bia.accountAddress,
+                            //     daoAddress: daoAddress
+                            // });
+                            localStorage.removeItem('installStep')
+                            localStorage.removeItem('params')
+                            localStorage.removeItem('hash')
+                            resolve(daoAddress)
+                        })
+                    }
+                })
+            },
+            // finalizeDao2: function () {
+            //     this.params = {
+            //         platform: document.querySelector('#platform').value || '',
+            //         daoName: this.daoName || '',
+            //         daoDescription: this.daoDescription || '',
+            //         gpTokenName: this.gpTokenName || '',
+            //         gpTokenSymbol: this.gpTokenSymbol || '',
+            //         gpAmount: String(this.gpAmount) + '000000000000000000' || '',
+            //         lpTokenName: this.lpTokenName || '',
+            //         lpTokenSymbol: this.lpTokenSymbol || '',
+            //         lpAmount: String(this.lpAmount) + '000000000000000000' || '',
+            //         votingSettings: [
+            //             String(this.supportRequired) + '0000000000000000' || '0',
+            //             String(this.minAcceptanceQuorum) + '0000000000000000' ||
+            //                 '0',
+            //             this.format(this.voteDays, this.voteHours, this.voteMinutes),
+            //         ],
+            //         dotVotingSettings: [
+            //             String(this.dotSupportRequired) + '0000000000000000' || '0',
+            //             String(this.dotMinAcceptanceQuorum) + '0000000000000000' ||
+            //                 '0',
+            //             this.format(
+            //                 this.dotVoteDays,
+            //                 this.dotVoteHours,
+            //                 this.dotVoteMinutes,
+            //             ),
+            //         ],
+            //         appSettings: [
+            //             this.format(
+            //                 this.allocationDays,
+            //                 this.allocationHours,
+            //                 this.allocationMinutes,
+            //             ),
+            //             this.format(
+            //                 this.financeBudgetDays,
+            //                 this.financeBudgetHours,
+            //                 this.financeBudgetMinutes,
+            //             ),
+            //             this.format(
+            //                 this.delayDays,
+            //                 this.delayHours,
+            //                 this.delayMinutes,
+            //             ),
+            //         ],
+            //         tokenRequest: this.tokenRequest,
+            //     }
+            //     this.finalizeDao(this.params).then(async (res, err) => {
+            //         if (err) {
+            //             console.log(err)
+            //         } else {
+            //             this.installStep = 0
+            //             this.aragonDaoLink = res
+            //         }
+            //     })
+            // },
+            sendTokenManager: function (params) {
+                return new Promise((resolve, reject) => {
+                    this.newManager.indeterminate = true
+                    if (this.$bia.appChainId === this.$bia.chainId) {
+                        console.log(params)
+                        this.$bia.sendTokenManager(params, (err) => {
+                            if (err) {
+                                this.errorText = 'User denied transaction'
+                                this.error = true
+                                reject(err)
+                            }
+                            this.newManager.value = 100
+                            this.newManager.indeterminate = false
+                            console.log('manager')
+                            resolve()
+                        })
+                    }
+                })
+            },
+            sendDataAragon: function (params) {
+                return new Promise((resolve, reject) => {
+                    this.newToken.indeterminate = true
+                    if (this.$bia.appChainId === this.$bia.chainId) {
+                        console.log(params)
+                        this.$bia.createDao(params, (err) => {
+                            if (err) {
+                                this.errorText = 'User denied transaction'
+                                this.error = true
+                                reject(err)
+                            }
+                            this.newToken.value = 100
+                            this.newToken.indeterminate = false
+                            console.log('token')
+                            resolve()
+                        })
+                    } else {
+                        this.error = true
+                    }
+                })
+            },
             redirect: function (path) {
                 this.$router.push(path)
             },
+            validateName: function (name) {
+                this.daoName = name
+                    .toLowerCase()
+                    // eslint-disable-next-line no-useless-escape
+                    .replace(/[&\/\\#,+()$~%.'":*?<>{}!@^_|=`]/g, '')
+                    // eslint-disable-next-line no-control-regex
+                    .replace(/[^\x00-\x7F]+/g, '')
+            },
         },
+
+    // LOCAL STORAGE
+
+    // watch: {
+    //     installStep: function(newInstallStep) {
+    //         localStorage.installStep = newInstallStep;
+    //     },
+    //     params: function(newParams) {
+    //         localStorage.params = JSON.stringify(newParams);
+    //     }
+    // }
+
+    // LOCAL STORAGE
     }
 </script>
 
 <style lang="scss">
+.developing {
+    width: 50%;
+    height: 100%;
+    background: gray;
+    position: absolute;
+    left: 0;
+    border-radius: 18px;
+}
 .switch-logo {
     margin: 0 auto;
 }

@@ -174,19 +174,46 @@
                     </div>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col cols="10">
+                    <div class="contact__content">
+                        <div class="d-flex flex-column">
+                            <div class="contact">Contacts</div>
+                            <div class="ceo">CEO</div>
+                            <div class="thref">
+                                <a href="https://t.me/aleksdor" target="_blank"
+                                    >@aleksdor</a
+                                >
+                            </div>
+                            <div class="email">
+                                E-mail:
+                                <a href="mailto:doronin@bialliance.io"
+                                    >doronin@bialliance.io</a
+                                >
+                            </div>
+                            <div class="tel">
+                                Tel.:
+                                <a href="tel:7-922-266-15-50"
+                                    >+7 922 266 15 50</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </v-col>
+            </v-row>
         </div>
     </div>
 </template>
 
 <script>
 // import UIButton from '_ui/UIButton'
-    export default {
-        name: 'AboutScreen',
+export default {
+    name: "AboutScreen",
 
-        components: {
+    components: {
         // UIButton
-        },
     }
+};
 </script>
 
 <style lang="scss">

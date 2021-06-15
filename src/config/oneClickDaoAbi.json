@@ -1,0 +1,93 @@
+﻿{
+  "oneClickDaoAbi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "nameDao",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "descriptionDao",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "gpTokenName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "gpTokenSymbol",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "lpTokenName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "lpTokenSymbol",
+          "type": "string"
+        }
+      ],
+      "name": "createDao",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "getDaos",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "NameDao",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "DescriptionDao",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "GpTokenName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "GpTokenSymbol",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "LpTokenName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "LpTokenSymbol",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct DaoFactory.DaoInfo[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
