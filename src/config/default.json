@@ -1,3 +1,13 @@
 ﻿{
-  "proxyBotUrl": "https://proxybot.1clickdao.com"
+  "proxyBot": {
+    "url": {
+      "main": "https://proxybot.1clickdao.com",
+      "rinkeby": "https://proxybotrinkeby.1clickdao.com"
+    },
+    "address": "0x4332aB2aB4b00903EA0c3C40f37280dF7Df3d63A",
+    "tokenRequest": {
+      "main": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "rinkeby": "0xeb8f08a975ab53e34d8a0330e0d34de942c95926"
+    }
+  }
 }

@@ -9,6 +9,7 @@ import { oneClickDaoAbi } from '@/config/oneClickDaoAbi.json'
 import { aragonDaoAbi } from '@/config/aragonDaoAbi.json'
 import { checkNameAbi } from '@/config/checkNameAbi.json'
 import { hash } from 'eth-ens-namehash'
+import { proxyBot } from '@/config/default.json'
 
 // const ONE_DAY = 60 * 60 * 24
 // const ONE_WEEK = ONE_DAY * 7
@@ -44,7 +45,9 @@ class Bia {
         this.networkName = ''
         this.appChainId = ''
         this.canChangeNetwork = false
-        this.proxyBotAddress = '0x4592A45c1d364Ac99f023bd111C7Ed65Cd356a40'
+        this.proxyBotAddress = proxyBot.address
+        this.tokenRequestAddress = proxyBot.tokenRequest.main
+        this.proxyBotUrl = proxyBot.url.main
     }
 
     async getNetworkName() {
@@ -184,6 +187,8 @@ class Bia {
                             this.canChangeNetwork = true
                             this.chainLogo = this.getChainLogo(this.chainId)
                             this.networkName = await this.web3.eth.net.getNetworkType()
+                            this.proxyBotUrl = proxyBot.url[this.networkName]
+                            this.tokenRequestAddress = proxyBot.tokenRequest[this.networkName]
                             callback({
                                 address: this.accountAddress,
                                 success: true,

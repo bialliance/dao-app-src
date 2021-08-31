@@ -651,7 +651,7 @@
                         </v-row>
                     </v-col>
                 </v-row>
-                <v-row>
+                <!-- <v-row>
                     <v-col cols="12" sm="10" md="8" lg="6">
                         <h4 class="input_title pb-5 pt-5">Token request</h4>
                         <div class="d-flex justify-between align-end">
@@ -666,7 +666,7 @@
                             />
                         </div>
                     </v-col>
-                </v-row>
+                </v-row> -->
                 <v-row>
                     <v-col cols="auto">
                         <UIButton
@@ -681,9 +681,7 @@
             </div>
             <DaoAragonScreen
                 :hidden="!hideForm"
-                :newToken="newToken"
-                :newManager="newManager"
-                :newFinalize="newFinalize"
+                :newDao="newDao"
                 :aragonDaoLink="aragonDaoLink"
             />
         </div>
@@ -758,15 +756,7 @@
                                 @click="
                                     dialog.value = false;
                                     hideForm = !hideForm;
-                                    newToken = {
-                                        indeterminate: false,
-                                        value: 0
-                                    };
-                                    newManager = {
-                                        indeterminate: false,
-                                        value: 0
-                                    };
-                                    newFinalize = {
+                                    newDao = {
                                         indeterminate: false,
                                         value: 0
                                     };
@@ -786,7 +776,6 @@
     import aragon from '@/assets/img/aragon.svg'
     import oneClickDao from '@/assets/img/oneClickDao.svg'
     import DaoAragonScreen from '@/screens/Dao/DaoAragonScreen'
-    import { proxyBotUrl } from '@/config/default'
     import axios from 'axios'
 
     export default {
@@ -813,9 +802,7 @@
                 length,
                 alert,
                 hideForm: false,
-                newToken: { indeterminate: false, value: 0 },
-                newManager: { indeterminate: false, value: 0 },
-                newFinalize: { indeterminate: false, value: 0 },
+                newDao: { indeterminate: false, value: 0 },
                 aragonDaoLink: '',
                 installStep: 0,
                 gpAmount: 30000,
@@ -882,6 +869,7 @@
             },
             sendData: async function () {
                 if (this.$bia.appChainId === this.$bia.chainId) {
+                    this.newDao.indeterminate = true
                     this.params = {
                         platform: document.querySelector('#platform').value || '',
                         daoName: this.daoName || '',
@@ -946,27 +934,59 @@
                         dotVotingSettings: this.params.dotVotingSettings,
                         gpAmount: this.params.gpAmount,
                         lpAmount: this.params.lpAmount,
-                        tokenRequest: this.params.tokenRequest,
+                        tokenRequest: this.$bia.tokenRequestAddress,
                         appSettings: this.params.appSettings,
                     }
-                    this.$bia.web3.eth
-                        .sendTransaction({
-                            to: this.$bia.proxyBotAddress,
-                            from: this.$bia.accountAddress,
-                            value: this.$bia.web3.utils.toWei('1.5', 'ether'),
+                    console.log(
+                        '------------------ PROXY BOT DATA ------------------',
+                    )
+                    console.log(this.$bia.proxyBotUrl)
+                    console.log(this.$bia.proxyBotAddress)
+                    console.log(this.$bia.tokenRequestAddress)
+                    console.log(
+                        '------------------ PROXY BOT DATA ------------------',
+                    )
+                    axios
+                        .get(`${this.$bia.proxyBotUrl}/status`)
+                        .then((res) => {
+                            if (res.data.success) {
+                                this.$bia.web3.eth
+                                    .sendTransaction({
+                                        to: this.$bia.proxyBotAddress,
+                                        from: this.$bia.accountAddress,
+                                        value: this.$bia.web3.utils.toWei(
+                                            '1.5',
+                                            'ether',
+                                        ),
+                                    })
+                                    .then((hash) => {
+                                        console.log(hash.transactionHash)
+                                        console.log(proxyBotParams)
+                                        axios
+                                            .post(
+                                                `${this.$bia.proxyBotUrl}/requests`,
+                                                {
+                                                    tx_hash: hash.transactionHash,
+                                                    params: proxyBotParams,
+                                                },
+                                            )
+                                            .then((res) => {
+                                                this.newDao.value = 100
+                                                this.newDao.indeterminate = false
+                                                this.$router.push({
+                                                    name: 'DaoManager',
+                                                })
+                                            })
+                                    })
+                            } else {
+                                this.errorText = 'Proxy Bot is dead'
+                                this.error = true
+                            }
                         })
-                        .then((hash) => {
-                            console.log(hash.transactionHash)
-                            console.log(proxyBotParams)
-                            axios
-                                .post(`${proxyBotUrl}/requests`, {
-                                    tx_hash: hash.transactionHash,
-                                    params: proxyBotParams,
-                                })
-                                .then((res) => {
-                                    console.log(res)
-                                    this.$router.push({ name: 'DaoManager' })
-                                })
+                        .catch((e) => {
+                            this.errorText = 'Proxy Bot is dead'
+                            this.error = true
+                            console.log(e)
                         })
                 } else {
                     this.error = true

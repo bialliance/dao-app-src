@@ -128,133 +128,132 @@
 </template>
 
 <script>
-import UIButton from "_ui/UIButton";
-import axios from "axios";
-import { proxyBotUrl } from "@/config/default";
+    import UIButton from '_ui/UIButton'
+    import axios from 'axios'
 
-export default {
-    name: "DaoManagerScreen",
+    export default {
+        name: 'DaoManagerScreen',
 
-    components: {
-        UIButton
-    },
-
-    data: () => ({
-        daoList: [],
-        alerted: false,
-        chainLogo: "",
-        showWarning: false
-    }),
-
-    mounted() {
-        this.fetchDaoList(err => {
-            if (err) {
-                console.log(err);
-            }
-            this.smartFetchDaoList(err => {
-                if (err) {
-                    console.log(err);
-                }
-                if (!this.alerted) {
-                    this.alerted = true;
-                    this.showWarning = true;
-                }
-            });
-        });
-        setInterval(async () => {
-            await this.smartFetchDaoList(err => {
-                if (err) {
-                    console.log(err);
-                }
-                if (!this.alerted) {
-                    this.alerted = true;
-                    this.showWarning = true;
-                }
-            });
-        }, 10000);
-    },
-
-    methods: {
-        fetchDaoList(cb = () => {}) {
-            this.$bia.connect(account => {
-                axios
-                    .get(
-                        `${proxyBotUrl}/users/${this.$bia.accountAddress}/daos`
-                    )
-                    .then(daos => {
-                        const {
-                            data: { data }
-                        } = daos;
-                        if (data === undefined) {
-                            cb(undefined);
-                        } else {
-                            this.alerted = false;
-                            for (const i in data) {
-                                const dao = data[i];
-                                if (dao.broken) continue;
-                                this.daoList.push({
-                                    title: dao.params.daoName,
-                                    status: dao.status
-                                });
-                            }
-                            this.daoList.reverse();
-                            this.chainLogo = this.$bia.chainLogo;
-                        }
-                    });
-            });
+        components: {
+            UIButton,
         },
 
-        smartFetchDaoList(cb) {
-            if (this.$bia.connected) {
-                axios
-                    .get(
-                        `${proxyBotUrl}/users/${this.$bia.accountAddress}/daos`
-                    )
-                    .then(daos => {
-                        const {
-                            data: { data }
-                        } = daos;
-                        if (data === undefined) {
-                            cb(undefined);
-                        } else {
-                            this.alerted = false;
-                            if (this.daoList.length !== data.length) {
-                                this.daoList = [];
+        data: () => ({
+            daoList: [],
+            alerted: false,
+            chainLogo: '',
+            showWarning: false,
+        }),
+
+        mounted() {
+            this.fetchDaoList((err) => {
+                if (err) {
+                    console.log(err)
+                }
+                this.smartFetchDaoList((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    if (!this.alerted) {
+                        this.alerted = true
+                        this.showWarning = true
+                    }
+                })
+            })
+            setInterval(async () => {
+                await this.smartFetchDaoList((err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    if (!this.alerted) {
+                        this.alerted = true
+                        this.showWarning = true
+                    }
+                })
+            }, 10000)
+        },
+
+        methods: {
+            fetchDaoList(cb = () => {}) {
+                this.$bia.connect((account) => {
+                    axios
+                        .get(
+                            `${this.$bia.proxyBotUrl}/users/${this.$bia.accountAddress}/daos`,
+                        )
+                        .then((daos) => {
+                            const {
+                                data: { data },
+                            } = daos
+                            if (data === undefined) {
+                                cb(undefined)
+                            } else {
+                                this.alerted = false
                                 for (const i in data) {
-                                    const dao = data[i];
-                                    if (dao.broken) continue;
+                                    const dao = data[i]
+                                    if (dao.broken) continue
                                     this.daoList.push({
                                         title: dao.params.daoName,
-                                        status: dao.status
-                                    });
+                                        status: dao.status,
+                                    })
                                 }
-                                this.daoList.reverse();
-                                this.chainLogo = this.$bia.chainLogo;
+                                this.daoList.reverse()
+                                this.chainLogo = this.$bia.chainLogo
                             }
-                        }
-                    });
-            }
-        },
+                        })
+                })
+            },
 
-        redirectToAragon(dao) {
-            if (dao.status === "Done") {
-                let daoAddress = `https://${this.$bia.networkName}.client.aragon.org/#/${dao.title}.aragonid.eth`;
-                if (this.$bia.networkName === "mainnet") {
-                    daoAddress = `https://client.aragon.org/#/${dao.title}.aragonid.eth`;
+            smartFetchDaoList(cb) {
+                if (this.$bia.connected) {
+                    axios
+                        .get(
+                            `${this.$bia.proxyBotUrl}/users/${this.$bia.accountAddress}/daos`,
+                        )
+                        .then((daos) => {
+                            const {
+                                data: { data },
+                            } = daos
+                            if (data === undefined) {
+                                cb(undefined)
+                            } else {
+                                this.alerted = false
+                                if (this.daoList.length !== data.length) {
+                                    this.daoList = []
+                                    for (const i in data) {
+                                        const dao = data[i]
+                                        if (dao.broken) continue
+                                        this.daoList.push({
+                                            title: dao.params.daoName,
+                                            status: dao.status,
+                                        })
+                                    }
+                                    this.daoList.reverse()
+                                    this.chainLogo = this.$bia.chainLogo
+                                }
+                            }
+                        })
                 }
-                window.open(daoAddress, "_blank");
-            }
-        },
+            },
 
-        createDao() {
-            this.$router.push({ name: "DaoNew" });
-        },
+            redirectToAragon(dao) {
+                if (dao.status === 'Done') {
+                    let daoAddress = `https://${this.$bia.networkName}.client.aragon.org/#/${dao.title}.aragonid.eth`
+                    if (this.$bia.networkName === 'mainnet') {
+                        daoAddress = `https://client.aragon.org/#/${dao.title}.aragonid.eth`
+                    }
+                    window.open(daoAddress, '_blank')
+                }
+            },
 
-        redirect(path) {
-            this.$router.push(path);
-        }
+            createDao() {
+                this.$router.push({ name: 'DaoNew' })
+            },
+
+            redirect(path) {
+                this.$router.push(path)
+            },
+        },
     }
-};
 </script>
 
 <style lang="scss" scoped>
