@@ -17,6 +17,7 @@ import DaoViewScreen from "_screens/Dao/View/DaoViewScreen";
 import DaoAppScreen from "_screens/Dao/App/DaoAppScreen";
 
 import SoftwareUpdateScreen from "_screens/SoftwareUpdate/SoftwareUpdateScreen";
+import createDaoEth from "_screens/Dao/createDaoEth";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,16 @@ const routes = [
         meta: {
             screenOptions: {
                 title: "Main page"
+            }
+        }
+    },
+    {
+        path: "/createDaoEth",
+        name: "createDaoEth",
+        component: createDaoEth,
+        meta: {
+            screenOptions: {
+                title: "createDaoEth"
             }
         }
     },

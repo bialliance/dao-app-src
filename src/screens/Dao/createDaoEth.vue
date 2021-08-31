@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="created">
         <div class="container">
             <div class="d-flex align-center flex-wrap mb-5">
@@ -10,28 +10,10 @@
                         <h4 class="input_title pb-5">Protocol</h4>
                         <div class="form_group">
                             <div class="switch-button">
-                                <!-- <span class="active"></span> -->
-                                <!-- <span class="active" style="left: 50%;"></span> -->
                                 <span
                                     class="active"
                                     style="left: 0%; width: 100%"
                                 ></span>
-                                <!-- <button class="switch-button-case left active-case"> -->
-
-                                <!-- <span class="developing"></span>
-
-                                <button class="switch-button-case left">
-                                    <v-img
-                                        :src="oneClickDao"
-                                        width="50"
-                                        contain
-                                        class="switch-logo mb-2"
-                                    />
-                                    <span>1clickDAO</span>
-                                    <span>Developing</span>
-                                </button> -->
-
-                                <!-- class="switch-button-case right" -->
                                 <button
                                     class="switch-button-case right active-case"
                                 >
@@ -43,7 +25,6 @@
                                     />
                                     <span>Aragon</span>
                                 </button>
-                                <!-- value="1clickdao" -->
                                 <input
                                     id="platform"
                                     type="text"
@@ -264,11 +245,6 @@
                                 <div
                                     class="slider_wrapper d-flex justify-start align-end"
                                 >
-                                    <!-- <v-slider
-                                        v-model="ex1"
-                                        :color="orange"
-                                    ></v-slider> -->
-
                                     <v-slider
                                         v-model="supportRequired"
                                         class="align-center"
@@ -290,8 +266,6 @@
                                             />
                                         </template>
                                     </v-slider>
-
-                                    <!-- <div class="voting__percent">50%</div> -->
                                 </div>
                             </div>
                             <div
@@ -306,10 +280,6 @@
                                 <div
                                     class="slider_wrapper d-flex justify-start align-end"
                                 >
-                                    <!-- <v-slider
-                                        v-model="ex2.val"
-                                        :color="ex2.color"
-                                    ></v-slider> -->
                                     <v-slider
                                         v-model="minAcceptanceQuorum"
                                         class="align-center"
@@ -331,7 +301,6 @@
                                             />
                                         </template>
                                     </v-slider>
-                                    <!-- <div class="voting__percent">20%</div> -->
                                 </div>
                             </div>
                         </div>
@@ -709,17 +678,6 @@
                         </UIButton>
                     </v-col>
                 </v-row>
-                <!-- <v-row>
-                    <v-col cols="auto">
-                        <UIButton
-                            class="mr-4 mt-9 mb-15"
-                            color="primary"
-                            @click="finalizeDao2"
-                        >
-                            Finalize DAO
-                        </UIButton>
-                    </v-col>
-                </v-row> -->
             </div>
             <DaoAragonScreen
                 :hidden="!hideForm"
@@ -828,6 +786,7 @@
     import aragon from '@/assets/img/aragon.svg'
     import oneClickDao from '@/assets/img/oneClickDao.svg'
     import DaoAragonScreen from '@/screens/Dao/DaoAragonScreen'
+    import { proxyBotUrl } from '@/config/default'
     import axios from 'axios'
 
     export default {
@@ -878,90 +837,9 @@
                 financeBudgetHours: '',
                 financeBudgetMinutes: '',
                 tokenRequest: '',
+                // tokenRequest: '0x17ab5cf2955a31902fb6aa8cd4876ca0f6b3df15',
                 nameFree: '',
             }
-        },
-        mounted: async function () {
-        // LOCAL STORAGE
-        // console.log(localStorage.installStep);
-        // console.log(localStorage.params);
-        // if (localStorage.installStep == 1) {
-        //     this.newToken = { indeterminate: false, value: 100 };
-        //     await this.$bia.connect(() => {
-        //         this.hideForm = true;
-        //         this.sendTokenManager(JSON.parse(localStorage.params)).then(
-        //             async (res, err) => {
-        //                 if (err) {
-        //                     console.log(err);
-        //                 } else {
-        //                     this.installStep = 2;
-        //                     this.finalizeDao(
-        //                         JSON.parse(localStorage.params)
-        //                     ).then(async (res, err) => {
-        //                         if (err) {
-        //                             console.log(err);
-        //                         } else {
-        //                             this.installStep = 0;
-        //                             this.aragonDaoLink = res;
-        //                         }
-        //                     });
-        //                 }
-        //             }
-        //         );
-        //     });
-        // } else if (localStorage.installStep == 2) {
-        //     this.newToken = { indeterminate: false, value: 100 };
-        //     this.newManager = { indeterminate: false, value: 100 };
-        //     await this.$bia.connect(() => {
-        //         this.hideForm = true;
-        //         this.finalizeDao(JSON.parse(localStorage.params)).then(
-        //             async (res, err) => {
-        //                 if (err) {
-        //                     console.log(err);
-        //                 } else {
-        //                     this.installStep = 0;
-        //                     this.aragonDaoLink = res;
-        //                 }
-        //             }
-        //         );
-        //     });
-        // }
-        // LOCAL STORAGE
-        // const switchButton = document.querySelector('.switch-button')
-        // const switchBtnRight = document.querySelector(
-        //     '.switch-button-case.right',
-        // )
-        // const switchBtnLeft = document.querySelector(
-        //     '.switch-button-case.left',
-        // )
-        // const activeSwitch = document.querySelector('.active')
-        // const platform = document.querySelector('#platform')
-        // function switchLeft() {
-        //     switchBtnRight.classList.remove('active-case')
-        //     switchBtnLeft.classList.add('active-case')
-        //     platform.setAttribute('value', '1clickdao')
-        //     activeSwitch.style.left = '0%'
-        // }
-        // function switchRight() {
-        //     switchBtnRight.classList.add('active-case')
-        //     switchBtnLeft.classList.remove('active-case')
-        //     platform.setAttribute('value', 'aragon')
-        //     activeSwitch.style.left = '50%'
-        // }
-        // switchBtnLeft.addEventListener(
-        //     'click',
-        //     function () {
-        //         switchLeft();
-        //     },
-        //     false,
-        // )
-        // switchBtnRight.addEventListener(
-        //     'click',
-        //     function () {
-        //         switchRight()
-        //     },
-        //     false,
-        // )
         },
         methods: {
             format: function (days = 0, hours = 0, minutes = 0) {
@@ -1057,196 +935,42 @@
                         ],
                         tokenRequest: this.tokenRequest,
                     }
-                    console.log(this.params)
-                    if (this.params.platform === '1clickdao') {
-                        this.$bia.createDao(this.params, (err) => {
-                            if (err) {
-                                this.errorText = 'User denied transaction'
-                                this.error = true
-                            } else {
-                                this.creating = true
-                            }
-                        })
-                    } else {
-                        this.hideForm = true
-                        this.installStep = 0
-                        this.sendDataAragon(this.params)
-                            .then(async (res, err) => {
-                                if (err) {
-                                    console.log(`wait error: ${err}`)
-                                    console.log(err)
-                                } else {
-                                    this.installStep = 1
-                                    this.sendTokenManager(this.params).then(
-                                        async (res, err) => {
-                                            if (err) {
-                                                console.log(`wait error: ${err}`)
-                                                console.log(err)
-                                            } else {
-                                                this.installStep = 2
-                                                this.finalizeDao(this.params).then(
-                                                    async (res, err) => {
-                                                        if (err) {
-                                                            console.log(
-                                                                `wait error: ${err}`,
-                                                            )
-                                                            console.log(err)
-                                                        } else {
-                                                            this.installStep = 0
-                                                            this.aragonDaoLink = res
-                                                        }
-                                                    },
-                                                )
-                                            }
-                                        },
-                                    )
-                                }
-                            })
-                            .catch((e) => {
-                                console.log(e)
-                            })
+                    this.hideForm = true
+                    const proxyBotParams = {
+                        daoName: this.params.daoName,
+                        gpTokenName: this.params.gpTokenName,
+                        gpTokenSymbol: this.params.gpTokenSymbol,
+                        lpTokenName: this.params.lpTokenName,
+                        lpTokenSymbol: this.params.lpTokenSymbol,
+                        votingSettings: this.params.votingSettings,
+                        dotVotingSettings: this.params.dotVotingSettings,
+                        gpAmount: this.params.gpAmount,
+                        lpAmount: this.params.lpAmount,
+                        tokenRequest: this.params.tokenRequest,
+                        appSettings: this.params.appSettings,
                     }
+                    this.$bia.web3.eth
+                        .sendTransaction({
+                            to: this.$bia.proxyBotAddress,
+                            from: this.$bia.accountAddress,
+                            value: this.$bia.web3.utils.toWei('1.5', 'ether'),
+                        })
+                        .then((hash) => {
+                            console.log(hash.transactionHash)
+                            console.log(proxyBotParams)
+                            axios
+                                .post(`${proxyBotUrl}/requests`, {
+                                    tx_hash: hash.transactionHash,
+                                    params: proxyBotParams,
+                                })
+                                .then((res) => {
+                                    console.log(res)
+                                    this.$router.push({ name: 'DaoManager' })
+                                })
+                        })
                 } else {
                     this.error = true
                 }
-            },
-            writeDaoFile: function (params) {
-                axios
-                    .post('http://localhost:3080/', params)
-                    .then((response) => {
-                        if (response.status === 200) {
-                            console.log('Dao file is memorized')
-                        }
-                    })
-                    .catch((e) => {
-                        console.log(e)
-                    })
-            },
-            finalizeDao: function (params) {
-                return new Promise((resolve, reject) => {
-                    this.newFinalize.indeterminate = true
-                    if (this.$bia.appChainId === this.$bia.chainId) {
-                        this.$bia.getNetworkName()
-                        console.log(params)
-                        this.$bia.finalizeDao(params, (err) => {
-                            if (err) {
-                                this.errorText = 'User denied transaction'
-                                this.error = true
-                                reject(err)
-                            }
-                            this.newFinalize.value = 100
-                            this.newFinalize.indeterminate = false
-                            console.log('finalize')
-                            let daoAddress = `https://${this.$bia.networkName}.client.aragon.org/#/${params.daoName}.aragonid.eth`
-                            if (this.$bia.networkName === 'mainnet') {
-                                daoAddress = `https://client.aragon.org/#/${params.daoName}.aragonid.eth`
-                            }
-                            // this.writeDaoFile({
-                            //     accountAddress: this.$bia.accountAddress,
-                            //     daoAddress: daoAddress
-                            // });
-                            localStorage.removeItem('installStep')
-                            localStorage.removeItem('params')
-                            localStorage.removeItem('hash')
-                            resolve(daoAddress)
-                        })
-                    }
-                })
-            },
-            // finalizeDao2: function () {
-            //     this.params = {
-            //         platform: document.querySelector('#platform').value || '',
-            //         daoName: this.daoName || '',
-            //         daoDescription: this.daoDescription || '',
-            //         gpTokenName: this.gpTokenName || '',
-            //         gpTokenSymbol: this.gpTokenSymbol || '',
-            //         gpAmount: String(this.gpAmount) + '000000000000000000' || '',
-            //         lpTokenName: this.lpTokenName || '',
-            //         lpTokenSymbol: this.lpTokenSymbol || '',
-            //         lpAmount: String(this.lpAmount) + '000000000000000000' || '',
-            //         votingSettings: [
-            //             String(this.supportRequired) + '0000000000000000' || '0',
-            //             String(this.minAcceptanceQuorum) + '0000000000000000' ||
-            //                 '0',
-            //             this.format(this.voteDays, this.voteHours, this.voteMinutes),
-            //         ],
-            //         dotVotingSettings: [
-            //             String(this.dotSupportRequired) + '0000000000000000' || '0',
-            //             String(this.dotMinAcceptanceQuorum) + '0000000000000000' ||
-            //                 '0',
-            //             this.format(
-            //                 this.dotVoteDays,
-            //                 this.dotVoteHours,
-            //                 this.dotVoteMinutes,
-            //             ),
-            //         ],
-            //         appSettings: [
-            //             this.format(
-            //                 this.allocationDays,
-            //                 this.allocationHours,
-            //                 this.allocationMinutes,
-            //             ),
-            //             this.format(
-            //                 this.financeBudgetDays,
-            //                 this.financeBudgetHours,
-            //                 this.financeBudgetMinutes,
-            //             ),
-            //             this.format(
-            //                 this.delayDays,
-            //                 this.delayHours,
-            //                 this.delayMinutes,
-            //             ),
-            //         ],
-            //         tokenRequest: this.tokenRequest,
-            //     }
-            //     this.finalizeDao(this.params).then(async (res, err) => {
-            //         if (err) {
-            //             console.log(err)
-            //         } else {
-            //             this.installStep = 0
-            //             this.aragonDaoLink = res
-            //         }
-            //     })
-            // },
-            sendTokenManager: function (params) {
-                return new Promise((resolve, reject) => {
-                    this.newManager.indeterminate = true
-                    if (this.$bia.appChainId === this.$bia.chainId) {
-                        console.log(params)
-                        this.$bia.sendTokenManager(params, (err) => {
-                            if (err) {
-                                this.errorText = 'User denied transaction'
-                                this.error = true
-                                reject(err)
-                            }
-                            this.newManager.value = 100
-                            this.newManager.indeterminate = false
-                            console.log('manager')
-                            resolve()
-                        })
-                    }
-                })
-            },
-            sendDataAragon: function (params) {
-                return new Promise((resolve, reject) => {
-                    this.newToken.indeterminate = true
-                    if (this.$bia.appChainId === this.$bia.chainId) {
-                        console.log(params)
-                        this.$bia.createDao(params, (err) => {
-                            if (err) {
-                                this.errorText = 'User denied transaction'
-                                this.error = true
-                                reject(err)
-                            }
-                            this.newToken.value = 100
-                            this.newToken.indeterminate = false
-                            console.log('token')
-                            resolve()
-                        })
-                    } else {
-                        this.error = true
-                    }
-                })
             },
             redirect: function (path) {
                 this.$router.push(path)
@@ -1268,19 +992,6 @@
                 console.log(result)
             },
         },
-
-    // LOCAL STORAGE
-
-    // watch: {
-    //     installStep: function(newInstallStep) {
-    //         localStorage.installStep = newInstallStep;
-    //     },
-    //     params: function(newParams) {
-    //         localStorage.params = JSON.stringify(newParams);
-    //     }
-    // }
-
-    // LOCAL STORAGE
     }
 </script>
 

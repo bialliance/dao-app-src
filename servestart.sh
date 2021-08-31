@@ -1,1 +1,1 @@
-serve prod --spa
+serve prod

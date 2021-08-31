@@ -192,9 +192,15 @@
                                 >
                             </div>
                             <div class="tel">
-                                Tel.:
+                                Tel:
                                 <a href="tel:7-922-266-15-50"
                                     >+7 922 266 15 50</a
+                                >
+                            </div>
+                            <div class="tg">
+                                Tg:
+                                <a href="https://t.me/OneClickDAO"
+                                    >https://t.me/OneClickDAO</a
                                 >
                             </div>
                         </div>
@@ -207,13 +213,13 @@
 
 <script>
 // import UIButton from '_ui/UIButton'
-export default {
-    name: "AboutScreen",
+    export default {
+        name: 'AboutScreen',
 
-    components: {
+        components: {
         // UIButton
+        },
     }
-};
 </script>
 
 <style lang="scss">

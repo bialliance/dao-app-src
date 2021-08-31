@@ -7,6 +7,8 @@ import logoETH from '@/assets/img/eth.png'
 import logoBSC from '@/assets/img/binance.png'
 import { oneClickDaoAbi } from '@/config/oneClickDaoAbi.json'
 import { aragonDaoAbi } from '@/config/aragonDaoAbi.json'
+import { checkNameAbi } from '@/config/checkNameAbi.json'
+import { hash } from 'eth-ens-namehash'
 
 // const ONE_DAY = 60 * 60 * 24
 // const ONE_WEEK = ONE_DAY * 7
@@ -42,6 +44,7 @@ class Bia {
         this.networkName = ''
         this.appChainId = ''
         this.canChangeNetwork = false
+        this.proxyBotAddress = '0x4592A45c1d364Ac99f023bd111C7Ed65Cd356a40'
     }
 
     async getNetworkName() {
@@ -75,6 +78,21 @@ class Bia {
                 return ''
             case 1:
                 return '0x3907be053a97ee13fe97503a6ecc4633e6472c98'
+            case 56:
+                return ''
+            default:
+                return ''
+        }
+    }
+
+    getENSContractAddress(chainId) {
+        switch (chainId) {
+            case 4:
+                return '0x98df287b6c145399aaa709692c8d308357bc085d'
+            case 97:
+                return ''
+            case 1:
+                return '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
             case 56:
                 return ''
             default:
@@ -128,7 +146,7 @@ class Bia {
         }
     }
 
-    async connect(callback = () => {}) {
+    async connect(callback = () => { }) {
         if (!this.connected) {
             const providerOptions = {
                 mewconnect: {
@@ -210,8 +228,32 @@ class Bia {
         })
     }
 
+    async checkName(name) {
+        return new Promise((resolve, reject) => {
+            this.connect(() => {
+                const contractAddress = this.getENSContractAddress(this.chainId)
+                const contract = new this.web3.eth.Contract(
+                    checkNameAbi.abi,
+                    contractAddress,
+                )
+                const nameHased = hash(`${name}.aragonid.eth`)
+                console.log(name)
+                console.log(nameHased)
+                contract.methods
+                    .resolver(nameHased)
+                    .call((err, result) => {
+                        if (err) {
+                            console.log(err)
+                            reject(err)
+                        }
+                        resolve(result)
+                    })
+            })
+        })
+    }
+
     // TODO: Это нужно?
-    async sendTokenManager(params, callback = () => {}) {
+    async sendTokenManager(params, callback = () => { }) {
         if (!this.connected) {
             alert('Need to connect')
         } else {
@@ -249,7 +291,7 @@ class Bia {
         }
     }
 
-    async finalizeDao(params, callback = () => {}) {
+    async finalizeDao(params, callback = () => { }) {
         if (!this.connected) {
             alert('Need to connect')
         } else {
@@ -286,7 +328,7 @@ class Bia {
         }
     }
 
-    async createDao(params, callback = () => {}) {
+    async createDao(params, callback = () => { }) {
         if (!this.connected) {
             alert('Need to connect')
         } else {
@@ -356,14 +398,14 @@ class Bia {
         }
     }
 
-    setChainId(cb = () => {}) {
+    setChainId(cb = () => { }) {
         this.web3.eth.getChainId().then(async (r) => {
             this.chainId = r
             cb(r)
         })
     }
 
-    async getDao(callback = () => {}) {
+    async getDao(callback = () => { }) {
         if (!this.connected) {
             alert('Need to connect')
         } else {

@@ -133,7 +133,10 @@
             v-else-if="!isCreateDaoPage"
             class="mr-4"
             color="primary"
-            @click="$router.push('/dao/new')"
+            @click="() => {
+                connect();
+                $router.push('/dao/new')
+            }"
         >
             Create DAO
         </UIButton>
@@ -283,96 +286,96 @@
 </template>
 
 <script>
-import logoDark from "@/assets/dark.png";
-import logoLight from "@/assets/light.svg";
-import UIButton from "_ui/UIButton";
-// import Bia from "@/api/bia";
+    import logoDark from '@/assets/dark.png'
+    import logoLight from '@/assets/light.svg'
+    import UIButton from '_ui/UIButton'
+    // import Bia from "@/api/bia";
 
-export default {
-    name: "UIAppBar",
-    components: { UIButton },
-    data: () => ({
-        logoDark,
-        logoLight,
-        networkModal: false,
-        walletConnected: false,
-        accountAddress: "",
-        showMenu: false,
-        mobileView: false,
-        showNav: false,
-        network: "Choose Network"
-    }),
+    export default {
+        name: 'UIAppBar',
+        components: { UIButton },
+        data: () => ({
+            logoDark,
+            logoLight,
+            networkModal: false,
+            walletConnected: false,
+            accountAddress: '',
+            showMenu: false,
+            mobileView: false,
+            showNav: false,
+            network: 'Choose Network',
+        }),
 
-    computed: {
-        isMainPage() {
-            return this.$route.name === "Main";
+        computed: {
+            isMainPage() {
+                return this.$route.name === 'Main'
+            },
+
+            isCreateDaoPage() {
+                return this.$route.name === 'DaoNew'
+            },
         },
-
-        isCreateDaoPage() {
-            return this.$route.name === "DaoNew";
-        }
-    },
-    created() {
-        this.handleView();
-    },
-    methods: {
-        connect: async function() {
-            this.$bia.connect(data => {
-                console.log("bia.connect");
-                console.log(data);
-                this.accountAddress = this.$bia.spliceAddress(data.address);
-                this.walletConnected = data.success;
-                if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
-                    this.network = this.$bia.networkName;
-                }
-            });
+        created() {
+            this.handleView()
         },
-        disconnect: function() {
-            console.log("close");
+        methods: {
+            connect: async function () {
+                this.$bia.connect((data) => {
+                    console.log('bia.connect')
+                    console.log(data)
+                    this.accountAddress = this.$bia.spliceAddress(data.address)
+                    this.walletConnected = data.success
+                    if ([1, 4, 56, 97].includes(this.$bia.chainId)) {
+                        this.network = this.$bia.networkName
+                    }
+                })
+            },
+            disconnect: function () {
+                console.log('close')
             // prov.disconnect()
+            },
+            showModal: function () {
+                if (this.$bia.connected) {
+                    this.networkModal = true
+                } else {
+                    alert('connect first')
+                }
+            },
+            switchNetwork: function (chainId) {
+                this.$bia.appChainId = chainId
+                this.$bia.chainLogo = this.$bia.getChainLogo(chainId)
+                // this.network = this.$bia.getNetworkName(chainId);
+                switch (chainId) {
+                    case 4:
+                        this.network = 'Rinkeby'
+                        break
+                    case 1:
+                        this.network = 'Mainnet'
+                        break
+                    case 97:
+                        this.network = 'Binance'
+                        break
+                    case 56:
+                        this.network = 'Binance'
+                        break
+                    default:
+                        this.network = 'Choose network'
+                        break
+                }
+                // if (chainId === 4 || chainId === 1) {
+                //     this.network = "Rinkeby";
+                // } else if (chainId === 97 || chainId === 56) {
+                //     this.network = "Binance";
+                // }
+                console.log(this.network)
+                this.networkModal = false
+                console.log(chainId)
+            },
+            handleView() {
+                this.mobileView = window.innerWidth <= 1300
+            },
         },
-        showModal: function() {
-            if (this.$bia.connected) {
-                this.networkModal = true;
-            } else {
-                alert("connect first");
-            }
-        },
-        switchNetwork: function(chainId) {
-            this.$bia.appChainId = chainId;
-            this.$bia.chainLogo = this.$bia.getChainLogo(chainId);
-            // this.network = this.$bia.getNetworkName(chainId);
-            switch (chainId) {
-                case 4:
-                    this.network = "Rinkeby";
-                    break;
-                case 1:
-                    this.network = "Mainnet";
-                    break;
-                case 97:
-                    this.network = "Binance";
-                    break;
-                case 56:
-                    this.network = "Binance";
-                    break;
-                default:
-                    this.network = "Choose network";
-                    break;
-            }
-            // if (chainId === 4 || chainId === 1) {
-            //     this.network = "Rinkeby";
-            // } else if (chainId === 97 || chainId === 56) {
-            //     this.network = "Binance";
-            // }
-            console.log(this.network);
-            this.networkModal = false;
-            console.log(chainId);
-        },
-        handleView() {
-            this.mobileView = window.innerWidth <= 1300;
-        }
     }
-};
 </script>
 
 <style lang="scss">
